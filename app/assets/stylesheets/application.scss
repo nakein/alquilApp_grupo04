@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+ @import "bootstrap";
+
+ .formContainer{
+    position: absolute;
+    top: 10%;
+}

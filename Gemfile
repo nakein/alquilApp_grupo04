@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
+#Agregado bootstrap
+gem 'bootstrap', '~> 5.2.2'
+
 #Agregada gema devise para login y registro
 gem "devise"
 
