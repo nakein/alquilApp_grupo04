@@ -7,25 +7,45 @@
     <h2>Registro</h2>
 
     <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.label :fullname, "Nombre completo" %><br />
+      <%= f.text_field :fullname, autofocus: true, autocomplete: "fullname", class: "form-control my-2"%>
     </div>
 
     <div class="field">
-      <%= f.label :contraseña %>
+      <%= f.label :dni, "Documento" %><br />
+      <%= f.number_field :dni, autofocus: true, autocomplete: "dni", class: "form-control mb-2"%>
+    </div>
+
+    <div class="field">
+      <%= f.label :birthdate, "Fecha de nacimiento" %><br />
+      <%= f.date_field :birthdate, autofocus: true, autocomplete: "birthdate", class: "form-control mb-2"%>
+    </div>
+
+    <div class="field">
+      <%= f.label :license, "Licencia de conducir" %><br />
+      <%= f.file_field :license, autofocus: true, autocomplete: "license", class: "form-control mb-2"%>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control mb-2"%>
+    </div>
+
+    <div class="field">
+      <%= f.label :password, "Contraseña" %>
       <% if @minimum_password_length %>
       <em>(Al menos <%= @minimum_password_length %> caracteres)</em>
       <% end %><br />
-      <%= f.password_field :contraseña, autocomplete: "nueva-contraseña" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control mb-2" %>
     </div>
 
     <div class="field">
-      <%= f.label :confirmar_contraseña %><br />
-      <%= f.password_field :confirmar_contraseña, autocomplete: "nueva-contraseña" %>
+      <%= f.label :password_confirmation, "Confirmar contraseña" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control mb-2" %>
     </div>
 
     <div class="actions">
-      <%= f.submit "Registrarse" %>
+      <%= f.submit "Registrarse", :class=>"btn btn-outline-warning my-4"%>
     </div>
 
     <%= render "devise/shared/links" %>
