@@ -3,6 +3,7 @@
 
 <% if cliente_signed_in? %>
     <%= button_to "Cerrar sesion", destroy_cliente_session_path, method: :delete  %>
+    <%= image_tag current_cliente.license, class: "img-thumbnail", style: "max-width: 48px" if current_cliente.license.attached?%>
 <%else %>
     <%= button_to "Ingresar", new_cliente_session_path, method: :get %>
 <% end %>

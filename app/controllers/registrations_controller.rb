@@ -17,9 +17,6 @@ class RegistrationsController < Devise::RegistrationsController
     
         if @cliente.update(register_params)
           redirect_to clientes_path, notice: "El cliente fue actualizado"
-        else
-          render :edit
-        end
     end
     
     def create
@@ -27,9 +24,6 @@ class RegistrationsController < Devise::RegistrationsController
     
         if @cliente.save
           redirect_to @cliente, notice: "Cliente agregado"
-        else
-          render :new
-        end
     end
 
     private
