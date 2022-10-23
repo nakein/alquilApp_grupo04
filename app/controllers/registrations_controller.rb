@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
     
     def show
         @cliente = Cliente.find(params[:id])
-     end
+    end
     
     def edit
         @cliente = Cliente.find(params[:id])
@@ -17,6 +17,7 @@ class RegistrationsController < Devise::RegistrationsController
     
         if @cliente.update(register_params)
           redirect_to clientes_path, notice: "El cliente fue actualizado"
+        end
     end
     
     def create
@@ -24,6 +25,7 @@ class RegistrationsController < Devise::RegistrationsController
     
         if @cliente.save
           redirect_to @cliente, notice: "Cliente agregado"
+        end
     end
 
     private
