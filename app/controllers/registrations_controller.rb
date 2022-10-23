@@ -1,37 +1,37 @@
 class RegistrationsController < Devise::RegistrationsController
 
     def index
-        @clientes = Cliente.all
+        @usuarios = Usuario.all
     end
     
     def show
-        @cliente = Cliente.find(params[:id])
+        @usuario = Usuario.find(params[:id])
     end
     
     def edit
-        @cliente = Cliente.find(params[:id])
+        @usuario = Usuario.find(params[:id])
     end
     
     def update
-        @cliente = Cliente.find(params[:id])
+        @usuario = Usuario.find(params[:id])
     
-        if @cliente.update(register_params)
-          redirect_to clientes_path, notice: "El cliente fue actualizado"
+        if @usuario.update(register_params)
+          redirect_to root_path, notice: "El usuario fue actualizado"
         end
     end
     
     def create
-        @cliente = Cliente.new(register_params)
+        @usuario = Usuario.new(register_params)
     
-        if @cliente.save
-          redirect_to @cliente, notice: "Cliente agregado"
+        if @usuario.save
+          redirect_to root_path, notice: "Usuario agregado"
         end
     end
 
     private
 
         def register_params
-            params.require(:cliente).permit(:fullname, :dni, :birthdate, :license, :email, :password, :password_confirmation);
+            params.require(:usuario).permit(:fullname, :dni, :birthdate, :license, :email, :password, :password_confirmation);
         end
 
 end

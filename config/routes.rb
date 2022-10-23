@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :clientes, :controllers => {registrations: 'registrations'}
-  resources :clientes
+  devise_for :usuarios, :controllers => {registrations: 'registrations'}
+  resources :usuarios
   root "main#home"
 end

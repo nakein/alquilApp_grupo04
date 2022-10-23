@@ -1,11 +1,11 @@
 <h1>Alquilapp</h1>
 <p>Ingrese para ver todas las funcionalidades</p>
 
-<% if cliente_signed_in? %>
-    <%= button_to "Cerrar sesion", destroy_cliente_session_path, method: :delete  %>
-    <%= image_tag current_cliente.license, class: "img-thumbnail", style: "max-width: 48px" if current_cliente.license.attached?%>
+<% if usuario_signed_in? %>
+    <%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete  %>
+    <%= image_tag current_usuario.license, class: "img-thumbnail", style: "max-width: 48px" if current_usuario.license.attached?%>
 <%else %>
-    <%= button_to "Ingresar", new_cliente_session_path, method: :get %>
+    <%= button_to "Ingresar", new_usuario_session_path, method: :get %>
 <% end %>
 
 
