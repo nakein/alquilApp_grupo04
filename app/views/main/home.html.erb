@@ -3,6 +3,9 @@
 
 <% if usuario_signed_in? %>
     <%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete  %>
+    <%= button_to "Ver Billetera", destroy_usuario_session_path, method: :delete  %>
+    <%=  current_usuario.fullname %>
+    <%=  current_usuario.billetera.saldo %>
     <%= image_tag current_usuario.license, class: "img-thumbnail", style: "max-width: 48px" if current_usuario.license.attached?%>
 <%else %>
     <%= button_to "Ingresar", new_usuario_session_path, method: :get %>
