@@ -24,7 +24,9 @@ class RegistrationsController < Devise::RegistrationsController
         @usuario = Usuario.new(register_params)
     
         if @usuario.save
-          redirect_to root_path, notice: "Usuario agregado"
+            redirect_to root_path, notice: "Usuario agregado"
+        else
+            render 'new'
         end
     end
 
