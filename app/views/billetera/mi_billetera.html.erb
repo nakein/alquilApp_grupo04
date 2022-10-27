@@ -1,0 +1,22 @@
+<h1>Bienvenido a tu billetera </h1><%= current_usuario.fullname %>
+
+<%= Billetera.find(current_usuario.id).saldo %>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Medios de pago</label>
+  </div>
+  <select class="custom-select" id="inputGroupSelect01">
+    <option selected>Elegir...</option>
+    <option value="1">Mercado pago</option>
+    <option value="2">Uala</option>
+    <option value="3">Cuenta DNI</option>
+  </select>
+</div>
+
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Monto en pesos" aria-label="Monto en pesos" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button">Cargar créditos</button>
+  </div>
+</div>

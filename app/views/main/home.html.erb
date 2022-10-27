@@ -23,9 +23,10 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><%=  current_usuario.fullname %></a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item">Mi perfil</a></li>
-                        <li><%= button_to "Ver Billetera", destroy_usuario_session_path, method: :delete, :class => 'dropdown-item'  %><%=  current_usuario.billetera.saldo %></li>
+                        <li><%= button_to "Ver Billetera", destroy_usuario_session_path , method: :delete, :class => 'dropdown-item'  %><%=  current_usuario.billetera.saldo %></li>
                         <li><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'dropdown-item'  %></li>
                     </ul>
+                    <%= link_to "Ver mi billetera", "/billetera/mi_billetera" %>
                 </li>
             <%else %>
                 <li class="nav-item">
