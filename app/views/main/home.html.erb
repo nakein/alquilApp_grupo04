@@ -2,7 +2,6 @@
     <p>Soy admin 😎</p>
     <%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %>
 <%else %>
-<<<<<<< HEAD
     <nav class="navbar navbar-expand-md bg-white navbar-light p-3">
         <div class="site-logo">
             <img src="../../../assets/AlquilappLogo.svg" alt="Logo">
@@ -24,10 +23,9 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><%=  current_usuario.fullname %></a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item">Mi perfil</a></li>
-                        <li><%= button_to "Ver Billetera", destroy_usuario_session_path , method: :delete, :class => 'dropdown-item'  %><%=  current_usuario.billetera.saldo %></li>
+                        <li><%= link_to "Ver mi billetera", "/billetera/mi_billetera",:class => 'dropdown-item' %></li>
                         <li><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'dropdown-item'  %></li>
                     </ul>
-                    <%= link_to "Ver mi billetera", "/billetera/mi_billetera" %>
                 </li>
             <%else %>
                 <li class="nav-item">
@@ -37,9 +35,7 @@
             </ul>
         </div>
     </nav>
-=======
     <p>Mapa con autos</p>
->>>>>>> c813dedfaf4e1e33eb87ee7a451ffc4bcdfa1988
-<% end %>
+    <% end %>
 
 
