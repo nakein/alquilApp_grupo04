@@ -1,6 +1,6 @@
 <h1>Bienvenido a tu billetera </h1><%= current_usuario.fullname %>
 
-<%= Billetera.find(current_usuario.id).saldo %>
+<%= current_usuario.billetera.saldo %>
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
