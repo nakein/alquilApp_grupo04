@@ -1,0 +1,41 @@
+<div class="formContainer w-100 p-4 d-flex justify-content-left">
+    <%= form_for current_usuario, html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
+
+        <h2 class="mb-4">Mi perfil</h2>
+        <%= render "devise/shared/error_messages", resource: current_usuario %>
+
+        <div class="field">
+            <%= f.label :fullname, "Nombre completo" %>
+            <%= f.text_field :fullname, class: "form-control my-2", :readonly => true %>
+        </div>
+
+        <div class="field">
+            <%= f.label :dni, "Documento" %>
+            <%= f.number_field :dni, class: "form-control mb-2", :readonly => true%>
+        </div>
+
+        <div class="field">
+            <%= f.label :birthdate, "Fecha de nacimiento" %>
+            <%= f.date_field :birthdate, class: "form-control mb-2", :readonly => true%>
+        </div>
+
+        <div class="field">
+            <%= f.label :email %>
+            <%= f.email_field :email, class: "form-control mb-2", :readonly => true %>
+        </div>
+
+        <div class="field">
+            <%= f.label :license, "Licencia de conducir" %>
+            <%= image_tag current_usuario.license, class: "img-thumbnail", style: "max-width: 48px" if current_usuario.license.attached?%>
+            <p>¿Desea actualizar su licencia de conducir?</p>
+            <%= f.file_field :license, autofocus: true, autocomplete: "license", required: true, class: "form-control mb-2"%>
+        </div>
+
+        <p class="notice"><%= notice %></p>
+
+        <div class="actions">
+            <%= f.submit "Guardar cambios", :class=>"btn btn-outline-warning my-4"%>
+        </div>
+
+    <% end %>
+</div>

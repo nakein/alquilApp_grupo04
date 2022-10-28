@@ -8,27 +8,27 @@
 
     <div class="field">
       <%= f.label :fullname, "Nombre completo" %>
-      <%= f.text_field :fullname, autofocus: true, autocomplete: "fullname", class: "form-control my-2"%>
+      <%= f.text_field :fullname, autofocus: true, autocomplete: "fullname", required: true, class: "form-control my-2"%>
     </div>
 
     <div class="field">
       <%= f.label :dni, "Documento" %>
-      <%= f.number_field :dni, autofocus: true, autocomplete: "dni", class: "form-control mb-2"%>
+      <%= f.number_field :dni, autofocus: true, autocomplete: "dni", required: true, class: "form-control mb-2"%>
     </div>
 
     <div class="field">
       <%= f.label :birthdate, "Fecha de nacimiento" %>
-      <%= f.date_field :birthdate, autofocus: true, autocomplete: "birthdate", class: "form-control mb-2"%>
+      <%= f.date_field :birthdate, autofocus: true, autocomplete: "birthdate", required: true, class: "form-control mb-2"%>
     </div>
 
     <div class="field">
       <%= f.label :license, "Licencia de conducir" %>
-      <%= f.file_field :license, autofocus: true, autocomplete: "license", class: "form-control mb-2"%>
+      <%= f.file_field :license, autofocus: true, autocomplete: "license", required: true, class: "form-control mb-2"%>
     </div>
 
     <div class="field">
       <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control mb-2"%>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: "form-control mb-2"%>
     </div>
 
     <div class="field">
@@ -36,12 +36,12 @@
       <% if @minimum_password_length %>
       <em>(Al menos <%= @minimum_password_length %> caracteres)</em>
       <% end %>
-      <%= f.password_field :password, autocomplete: "new-password", class: "form-control mb-2" %>
+      <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control mb-2" %>
     </div>
 
     <div class="field">
       <%= f.label :password_confirmation, "Confirmar contraseña" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control mb-2" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control mb-2" %>
     </div>
 
     <div class="actions">

@@ -15,6 +15,43 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>-->
 
+    <!-- Navbar que aparece en todas las paginas excepto la de admin
+    (habrá que implementar mas logica luego) -->
+    <% if !(usuario_signed_in? && current_usuario.administrador?) %>
+      <nav class="navbar navbar-expand-md bg-white navbar-light p-3">
+        <div class="site-logo">
+            <img src="../../../assets/AlquilappLogo.svg" alt="Logo">
+        </div>
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="toggler-icon top-bar"></span>
+            <span class="toggler-icon middle-bar"></span>
+            <span class="toggler-icon bottom-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
+            <div class="togglerPadding pt-4"></div>
+            <ul class="nav align-items-center justify-content-center">
+            <li class="nav-item">
+                <%= link_to "Inicio", root_path, class: "nav-link"  %>
+            </li>
+            <% if usuario_signed_in? %>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><%=  current_usuario.fullname %></a>
+                    <ul class="dropdown-menu">
+                        <li><%= link_to "Mi perfil", perfil_mi_perfil_path, class: "dropdown-item" %></li>
+                        <li><%= button_to "Ver Billetera", destroy_usuario_session_path, method: :delete, :class => 'dropdown-item'  %></li>
+                        <li><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'dropdown-item'  %></li>
+                    </ul>
+                </li>
+            <%else %>
+                <li class="nav-item">
+                    <%= button_to "Ingresar", new_usuario_session_path, method: :get, :class => 'btn btn-warning'   %>
+                </li>
+            <% end %>
+            </ul>
+        </div>
+      </nav>
+    <% end %>
+
     <%= yield %>
     
   </body>
