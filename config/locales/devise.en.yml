@@ -61,7 +61,5 @@ en:
       not_found: "no encontrado"
       not_locked: "no ha sido bloqueada"
       not_saved:
-        #one: "1 error no le permitió registrarse"
-        #other: "%{count} errores no le permitieron registrarse"
-        one: "Asegurese de completar todos los campos"
-        other: "Asegurese de completar todos los campos"
+        one: "Ocurrió un error"
+        other: "Ocurrieron %{count} errores"

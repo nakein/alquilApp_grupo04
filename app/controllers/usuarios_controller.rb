@@ -2,11 +2,10 @@ class UsuariosController < ApplicationController
 
     def update
         @usuario = current_usuario
-  
         if @usuario.update(profile_params)
           redirect_to perfil_mi_perfil_path, notice: "La licencia fue actualizada"
         else
-          render :edit
+          render "perfil/mi_perfil"
         end
     end
 

@@ -36,7 +36,7 @@
             <% if usuario_signed_in? %>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><%=  current_usuario.fullname %></a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         <li><%= link_to "Mi perfil", perfil_mi_perfil_path, class: "dropdown-item" %></li>
                         <li><%= link_to "Ver mi billetera", billetera_mi_billetera_path,:class => 'dropdown-item' %></li>
                         <li><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'dropdown-item'  %></li>
