@@ -2,9 +2,9 @@
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), 
   html: {class:"col-12 col-md-5 p-5 rounded-2 shadow"}) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
 
     <h2>Registro</h2>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="field">
       <%= f.label :fullname, "Nombre completo" %>
@@ -12,13 +12,13 @@
     </div>
 
     <div class="field">
-      <%= f.label :dni, "Documento" %>
+      <%= f.label :dni, "Dni" %>
       <%= f.number_field :dni, autofocus: true, autocomplete: "dni", required: true, class: "form-control mb-2"%>
     </div>
 
     <div class="field">
       <%= f.label :birthdate, "Fecha de nacimiento" %>
-      <%= f.date_field :birthdate, autofocus: true, autocomplete: "birthdate", required: true, class: "form-control mb-2"%>
+      <%= f.date_field :birthdate, selected: Date.today, max: Date.today, min: Date.new(Date.today.year-100, Date.today.month, Date.today.day), autofocus: true, autocomplete: "birthdate", required: true, class: "form-control mb-2"%>
     </div>
 
     <div class="field">
@@ -40,7 +40,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation, "Confirmar contraseña" %><br />
+      <%= f.label :password_confirmation, "Confirmar contraseña" %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control mb-2" %>
     </div>
 

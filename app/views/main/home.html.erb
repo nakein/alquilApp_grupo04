@@ -1,3 +1,6 @@
+<% if notice == "Cuenta creada satisfactoriamente" %>
+    <p class="notice alert alert-warning"><%= notice %></p>
+<% end %>
 <% if usuario_signed_in? && current_usuario.administrador? %>
     <p>Soy admin 😎</p>
     <%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %>

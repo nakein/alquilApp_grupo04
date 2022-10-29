@@ -7,23 +7,23 @@
 
     <div class="field">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control my-2" %>
+      <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email", class: "form-control my-2" %>
     </div>
 
     <div class="field">
       <%= f.label :password, "Contraseña" %><br />
-      <%= f.password_field :password, autocomplete: "current-password", class: "form-control mb-2" %>
+      <%= f.password_field :password, autocomplete: "current-password", required: true, class: "form-control mb-2" %>
     </div>
 
     <p style="color:red;"><%= notice %></p>
     <p style="color:red;"><%= alert %></p>
 
-    <% if devise_mapping.rememberable? %>
+    <!--<% if devise_mapping.rememberable? %>
       <div class="field">
         <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+        <%= f.label :remember_me, "Recuérdame" %>
       </div>
-    <% end %>
+    <% end %>-->
 
     <div class="actions">
       <%= f.submit "Iniciar sesión", :class=>"btn btn-outline-warning my-4" %>

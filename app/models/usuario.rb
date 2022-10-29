@@ -4,7 +4,10 @@ class Usuario < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :fullname, :dni, :birthdate, presence: true
+  validates :birthdate, presence: true
+  validates :dni, uniqueness: true, presence: true
+  validates :fullname, presence: true, format: { with: /\A[a-z A-Zñ]+\z/,
+    message: "solo admite letras" }
   validate :correct_license_type
 
   has_one_attached :license
