@@ -7,9 +7,8 @@ class BilleteraController < ApplicationController
     end
 
     def cargar_creditos
-         billeteraActual = current_usuario.billetera
-         billeteraActual.saldo = billeteraActual.saldo + 10.0
-         billeteraActual.save
+         current_usuario.billetera.saldo = current_usuario.billetera.saldo + 10.0
+         current_usuario.billetera.save
          render "mi_billetera"
     end
 
