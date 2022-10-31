@@ -9,7 +9,7 @@ class BilleteraController < ApplicationController
     def cargar_creditos
          current_usuario.billetera.saldo = current_usuario.billetera.saldo + 10.0
          current_usuario.billetera.save
-         render "mi_billetera"
+         redirect_to '/billetera/mi_billetera' and return
     end
 
     def show
