@@ -23,4 +23,5 @@ Things you may want to cover:
 
 * ...
 
+Texto agregado por Joaco
 Texto modificado por Braii sss
