@@ -2,7 +2,7 @@ class Usuario < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :lockable
 
   validates :birthdate, presence: true
   validates :dni, uniqueness: true, presence: true
