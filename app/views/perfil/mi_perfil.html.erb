@@ -25,13 +25,13 @@
         </div>
 
         <div class="field">
-            <%= f.label :license, "Licencia de conducir" %>
-            <%= image_tag current_usuario.license, class: "img-thumbnail", style: "max-width: 48px" if current_usuario.license.attached?%>
+            <%= f.label :license, "Licencia de conducir", class: " col-12"%>
+            <%= image_tag current_usuario.license, class: "img-thumbnail col-12" if current_usuario.license.attached?%>
             <p>¿Desea actualizar su licencia de conducir?</p>
             <%= f.file_field :license, autofocus: true, autocomplete: "license", required: true, class: "form-control mb-2"%>
         </div>
 
-        <p class="notice"><%= notice %></p>
+        <p class="notice", style="color:#F5BF69;"><%= notice %></p>
 
         <div class="actions">
             <%= f.submit "Guardar cambios", :class=>"btn btn-outline-warning my-4" %>
