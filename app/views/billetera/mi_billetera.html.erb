@@ -15,12 +15,11 @@
     </select>
   </div>
 
-  <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Monto en pesos" aria-label="Monto en pesos" aria-describedby="basic-addon2">
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button">Cargar créditos</button>
-      <%= button_to 'Cargue creditos', billetera_cargar_creditos_path, method: :patch %>
-    </div>
-  </div>
+  <%= form_with url: '/billetera/cargar_creditos', method: :patch do |form| %>
+    <%= form.select :medio_de_pago, ["Elegir...", "Mercado Pago", "Uala", "Cuenta DNI"] %>
+    <%= form.text_field :datos_cuenta %>
+    <%= form.number_field :monto %>
+    <%= form.submit "Cargar creditos" %>
+  <% end %>  
 
 </div>
