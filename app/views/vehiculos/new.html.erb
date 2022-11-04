@@ -1,0 +1,48 @@
+<div class="formContainer w-100 p-4 d-flex justify-content-left">
+    <%= form_for :vehiculo, html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
+
+        <h2 class="mb-4">Agregar un nuevo vehículo</h2>
+
+        <div class="field">
+            <%= f.label :image, "Imagen del auto" %>
+            <%= f.file_field :image, autofocus: true, autocomplete: "license", required: true, class: "form-control mb-2"%>
+        </div>
+
+        <div class="field">
+            <%= f.label :brand, "Marca" %>
+            <%= f.text_field :brand, autofocus: true, required: true, class: "form-control my-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :model, "Modelo" %>
+            <%= f.text_field :model, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :color, "Color" %>
+            <%= f.text_field :color, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :fuel_type, "Tipo de combustible" %>
+            <%= f.text_field :fuel_type, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :capacity, "Capacidad" %>
+            <%= f.number_field :capacity, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :transmission, "Tipo de transmisión" %>
+            <%= f.text_field :transmission, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+
+        <!--<p class="notice", style="color:#F5BF69;"><%= notice %></p>-->
+
+        <div class="actions">
+            <%= f.submit "Agregar vehículo", :class=>"btn btn-outline-warning my-4" %>
+        </div>
+    <% end %>
+</div>
