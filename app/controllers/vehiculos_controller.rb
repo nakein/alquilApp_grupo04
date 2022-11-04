@@ -1,11 +1,23 @@
 class VehiculosController < ApplicationController
   def index
+    @vehiculos = Vehiculo.all
   end
 
   def new
   end
 
   def show
+    @vehiculo = Vehiculo.find(params[:id])
+  end
+
+  def update
+    @vehiculo = Vehiculo.find(params[:id])
+
+    if @vehiculo.update(vehicle_params)
+      redirect_to vehiculos_path, notice: "El vehiculo fue actualizado"
+    else
+      render :edit
+    end
   end
 
   def create

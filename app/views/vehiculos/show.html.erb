@@ -1,1 +1,40 @@
-<h1>Vehiculo a mostrar<h1>
+<div class="formContainer w-100 p-4 d-flex justify-content-left">
+    <%= form_for @vehiculo, url: vehiculo_path(@vehiculo), html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
+
+        <h2 class="mb-4">Detalles del vehículo</h2>
+
+        <div class="field">
+            <%= image_tag @vehiculo.image, class: "img-thumbnail col-12" if @vehiculo.image.attached?%>
+        </div>
+
+        <div class="field">
+            <%= f.label :brand, "Marca" %>
+            <%= f.text_field :brand, class: "form-control mb-2", :readonly => true%>
+        </div>
+
+        <div class="field">
+            <%= f.label :model, "Modelo" %>
+            <%= f.text_field :model, class: "form-control mb-2", :readonly => true%>
+        </div>
+
+        <div class="field">
+            <%= f.label :color, "Color" %>
+            <%= f.text_field :color, class: "form-control mb-2", :readonly => true %>
+        </div>
+
+        <div class="field">
+            <%= f.label :fuel_type, "Tipo de combustible" %>
+            <%= f.text_field :fuel_type, class: "form-control mb-2", :readonly => true %>
+        </div>
+
+        <div class="field">
+            <%= f.label :capacity, "Capacidad" %>
+            <%= f.number_field :capacity, class: "form-control mb-2", :readonly => true %>
+        </div>
+
+        <div class="field">
+            <%= f.label :transmission, "Tipo de transmision" %>
+            <%= f.text_field :transmission, class: "form-control mb-2", :readonly => true %>
+        </div>
+    <% end %>
+</div>

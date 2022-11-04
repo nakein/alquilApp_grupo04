@@ -9,7 +9,21 @@
         <p>Soy supervisor</p>
     <% end %>
 <%else %>
-    <p>Mapa con autos</p>
+    <!-- Usuario cliente o invitado -->
+    <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
+        <% @vehiculos.each do |vehiculo| %>     
+            <div class="col">
+                <div class="card h-100">
+                    <%= image_tag vehiculo.image, class: "img-thumbnail col-12" if vehiculo.image.attached?%>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= vehiculo.brand %> <%= vehiculo.model %></h5>
+                        <p class="card-text">Capacidad: <%= vehiculo.capacity %></p>
+                        <%= link_to "Ver en detalle", vehiculo_path(vehiculo), :class => 'btn btn-warning'  %>
+                    </div>
+                </div>
+            </div>   
+        <% end %>
+    </div>
 <% end %>
 
 
