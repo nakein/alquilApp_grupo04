@@ -47,6 +47,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_141635) do
     t.index ["usuario_id"], name: "index_billeteras_on_usuario_id"
   end
 
+  create_table "compras", force: :cascade do |t|
+    t.string "medio_de_pago"
+    t.string "datos_cuenta"
+    t.float "monto", default: 0.0, null: false
+    t.integer "billetera_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billetera_id"], name: "index_compras_on_billetera_id"
+  end
+
   create_table "usuarios", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -61,8 +71,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_141635) do
     t.date "birthdate"
     t.integer "failed_attempts", default: 0, null: false
     t.datetime "locked_at"
+    t.string "unlock_token"
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_usuarios_on_unlock_token", unique: true
   end
 
   create_table "vehiculos", force: :cascade do |t|
