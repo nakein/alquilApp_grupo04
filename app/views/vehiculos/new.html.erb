@@ -1,5 +1,5 @@
 <div class="formContainer w-100 p-4 d-flex justify-content-left">
-    <%= form_for :vehiculo, html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
+    <%= form_with @vehiculo, url: vehiculos_path, html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
 
         <h2 class="mb-4">Agregar un nuevo vehículo</h2>
 

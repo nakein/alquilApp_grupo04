@@ -5,4 +5,14 @@ class VehiculosControllerTest < ActionDispatch::IntegrationTest
     get vehiculos_index_url
     assert_response :success
   end
+
+  test "should get new" do
+    get vehiculos_new_url
+    assert_response :success
+  end
+
+  test "should get show" do
+    get vehiculos_show_url
+    assert_response :success
+  end
 end
