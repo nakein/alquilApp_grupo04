@@ -1,1 +1,7 @@
-
+<% if notice == "Vehiculo agregado satisfactoriamente" %>
+    <p class="notice alert alert-warning"><%= notice %></p>
+<% end %>
+<div class="p-4">
+    <h2 class="mb-4">Vehículos</h2>
+    <%= link_to "Agregar nuevo vehículo", new_vehiculo_path, :class => 'btn btn-warning'  %>
+</div>

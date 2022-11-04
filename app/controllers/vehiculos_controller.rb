@@ -12,7 +12,7 @@ class VehiculosController < ApplicationController
     @vehiculo = Vehiculo.new(vehicle_params)
 
     if @vehiculo.save
-      redirect_to @vehiculo, notice: "Monstruo agregado"
+      redirect_to vehiculos_path, notice: "Vehiculo agregado satisfactoriamente"
     else
       render :new
     end
