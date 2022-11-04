@@ -44,7 +44,7 @@
                     </ul>
                 </li>
               <% else %>
-                <li class="nav-item"><%= link_to "Vehículos", vehiculos_index_path, class: "nav-link"  %></li>
+                <li class="nav-item"><%= link_to "Vehículos", vehiculos_show_path, class: "nav-link"  %></li>
                 <li class="nav-item"><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %></li>
               <% end %>
             <%else %>
