@@ -1,0 +1,7 @@
+<% if notice == "Supervisor agregado satisfactoriamente" %>
+    <p class="notice alert alert-warning"><%= notice %></p>
+<% end %>
+<div class="p-4">
+    <h2 class="mb-4">Supervisores</h2>
+    <%= link_to "Agregar nuevo supervisor", new_supervisor_path, :class => 'btn btn-warning'  %>
+</div>

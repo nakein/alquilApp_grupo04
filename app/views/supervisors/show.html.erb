@@ -1,0 +1,26 @@
+<div class="formContainer w-100 p-4 d-flex justify-content-left">
+    <%= form_for @supervisor, url: supervisor_path(@supervisor), html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
+
+        <h2 class="mb-4">Detalles del supervisor</h2>
+
+        <div class="field">
+            <%= f.label :fullname, "Nombre completo" %>
+            <%= f.text_field :fullname, class: "form-control mb-2", :readonly => true%>
+        </div>
+
+        <div class="field">
+            <%= f.label :dni, "DNI" %>
+            <%= f.text_field :dni, class: "form-control mb-2", :readonly => true%>
+        </div>
+
+        <div class="field">
+            <%= f.label :birthdate, "Fecha de nacimiento" %>
+            <%= f.text_field :birthdate, class: "form-control mb-2", :readonly => true %>
+        </div>
+
+        <div class="field">
+            <%= f.label :email, "Email" %>
+            <%= f.text_field :email, class: "form-control mb-2", :readonly => true %>
+        </div>
+    <% end %>
+</div>

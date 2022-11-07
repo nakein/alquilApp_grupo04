@@ -1,0 +1,32 @@
+<div class="formContainer w-100 p-4 d-flex justify-content-left">
+    <%= form_for :usuario, url: supervisors_path, html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
+
+        <h2 class="mb-4">Agregar un nuevo supervisor</h2>
+
+        <div class="field">
+            <%= f.label :fullname, "Nombre completo" %>
+            <%= f.text_field :fullname, autofocus: true, required: true, class: "form-control my-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :dni, "DNI" %>
+            <%= f.text_field :dni, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :birthdate, "Fecha de nacimiento" %>    
+            <%= f.text_field :birthdate, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :email, "Email" %>
+            <%= f.text_field :email, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+        <!--<p class="notice", style="color:#F5BF69;"><%= notice %></p>-->
+
+        <div class="actions">
+            <%= f.submit "Agregar supervisor", :class=>"btn btn-outline-warning my-4" %>
+        </div>
+    <% end %>
+</div>

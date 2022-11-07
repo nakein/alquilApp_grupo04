@@ -15,9 +15,6 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>-->
 
-    <!-- Navbar que aparece en todas las paginas excepto la de admin
-    (habrá que implementar mas logica luego) -->
-    <% if !(usuario_signed_in? && (current_usuario.administrador?)) %>
       <nav class="navbar navbar-expand-md bg-white navbar-light p-3">
         <div class="site-logo">
             <img src="../../../assets/AlquilappLogo.svg" alt="Logo">
@@ -33,8 +30,8 @@
             <li class="nav-item">
                 <%= link_to "Inicio", root_path, class: "nav-link"  %>
             </li>
-            <% if usuario_signed_in? %>
-              <% if !current_usuario.supervisor? %>
+            <% if (usuario_signed_in?)%>
+              <% if (current_usuario.cliente?) %>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><%=  current_usuario.fullname %></a>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -44,18 +41,25 @@
                     </ul>
                 </li>
               <% else %>
-                <li class="nav-item"><%= link_to "Vehículos", vehiculos_path, class: "nav-link"  %></li>
-                <li class="nav-item"><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %></li>
+                <% if (current_usuario.supervisor?) %>
+                  <li class="nav-item"><%= link_to "Vehículos", vehiculos_path, class: "nav-link"  %></li>
+                  <li class="nav-item"><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %></li>
+                <% else %>
+                  <li class="nav-item"><%= link_to "Supervisores", supervisors_path, class: "nav-link"  %></li>
+                  <li class="nav-item"><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %></li>
+                <% end %>
               <% end %>
-            <%else %>
-                <li class="nav-item">
-                    <%= button_to "Ingresar", new_usuario_session_path, method: :get, :class => 'btn btn-warning'   %>
-                </li>
-            <% end %>
             </ul>
+            <%else %>
+              <li class="nav-item">
+                <%= button_to "Ingresar", new_usuario_session_path, method: :get, :class => 'btn btn-warning'   %>
+              </li>
+            <% end %>
+        
+            </div>
         </div>
       </nav>
-    <% end %>
+    
 
     <%= yield %>
     

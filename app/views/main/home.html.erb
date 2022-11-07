@@ -3,10 +3,29 @@
 <% end %>
 <% if usuario_signed_in? && (current_usuario.administrador? || current_usuario.supervisor?) %>
     <% if current_usuario.administrador? %>
-        <p>Soy admin 😎</p>
-        <%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %>
+        <div class="generico">
+            <p>Soy admin 😎</p>
+            <% @supervisors=Usuario.where(role:1) %>
+            <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
+                <% @supervisors.each do |supervisor| %>     
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= supervisor.fullname %></h5>
+                                <p class="card-text">DNI: <%= supervisor.dni %></p>
+                                <%= link_to "Ver en detalle", supervisor_path(supervisor), :class => 'btn btn-warning'  %>
+                            </div>
+                        </div>
+                    </div>   
+                <% end %>
+            </div>
+            <%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %>
+        </div>
     <% else %>
         <p>Soy supervisor</p>
+        <div class="generico">
+            <%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %>
+        </div>
     <% end %>
 <%else %>
     <!-- Usuario cliente o invitado -->
