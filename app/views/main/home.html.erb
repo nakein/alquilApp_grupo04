@@ -30,10 +30,10 @@
             Ordenar por
         </a>
         <ul class="dropdown-menu">
-            <li><%= link_to "Menor capacidad", root_path, :sort => "capacity", :value => "less", class: "dropdown-item"%></li>
-            <li><%= link_to "Mayor capacidad", root_path, :sort => "capacity", :value => "more", class: "dropdown-item"%></li>
-            <li><%= link_to "Menor distancia", root_path, :sort => "proximity", :value => "less", class: "dropdown-item"%></li>
-            <li><%= link_to "Mayor distancia", root_path, :sort => "proximity", :value => "more", class: "dropdown-item"%></li>
+            <li><%= link_to "Menor capacidad", root_path(sort:"capacity", value: "less"), class: "dropdown-item"%></li>
+            <li><%= link_to "Mayor capacidad", root_path(sort:"capacity", value: "more"), class: "dropdown-item"%></li>
+            <li><%= link_to "Menor distancia", root_path(sort:"proximity", value: "less"), class: "dropdown-item"%></li>
+            <li><%= link_to "Mayor distancia", root_path(sort:"proximity", value: "more"), class: "dropdown-item"%></li>
         </ul>
     </div>
     <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
