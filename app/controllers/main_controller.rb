@@ -2,6 +2,7 @@ class MainController < ApplicationController
   #before_action :authenticate_usuario!
 
   def home
+    @usuarios = Usuario.all
     if params[:value] == "less"
       @vehiculos = Vehiculo.order(params[:sort])
     elsif params[:value] == "more"
