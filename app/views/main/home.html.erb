@@ -6,17 +6,20 @@
         <p>Soy admin 😎</p>
         <%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %>
     <% else %>
+        <!-- Supervisor -->
         <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
-            <% @usuarios.each do |usuario| %>     
-                <div class="col">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title"><%= usuario.fullname %></h5>
-                            <p class="card-text mb-0">DNI <%= usuario.dni %></p>
-                            <%= link_to "Ver en detalle", usuario_path(usuario), :class => 'btn btn-warning mt-3'  %>
+            <% @usuarios.each do |usuario| %>   
+                <% if !(usuario.administrador? || usuario.supervisor?) %>  
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= usuario.fullname %></h5>
+                                <p class="card-text mb-0">DNI <%= usuario.dni %></p>
+                                <%= link_to "Ver en detalle", usuario_path(usuario), :class => 'btn btn-warning mt-3'  %>
+                            </div>
                         </div>
-                    </div>
-                </div>   
+                    </div>   
+                <% end %>
             <% end %>
         </div>
     <% end %>
