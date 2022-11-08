@@ -1,12 +1,12 @@
-<% if ((notice == "Cuenta creada satisfactoriamente")||(notice == "El supervisor fue eliminado")) %>
+<% if ((notice == "Cuenta creada satisfactoriamente")||(notice == "El supervisor fue eliminado")||(notice == "El supervisor fue actualizado")) %>
     <p class="notice alert alert-warning"><%= notice %></p>
 <% end %>
 <% if usuario_signed_in? && (current_usuario.administrador? || current_usuario.supervisor?) %>
     <% if current_usuario.administrador? %>
-        <div class="generico">
-            <p>Soy admin 😎</p>
+        <div class="g-4 p-5">
             <% @supervisors=Usuario.where(role:1) %>
-            <h1>Tabla de supervisores</h1>
+            <h2>Tabla de supervisores</h2>
+            <%= link_to "Agregar supervisor", new_supervisor_path, :class => 'btn btn-warning my-3'  %>
                 <table class="table">
                 <thead>
                     <tr>
@@ -27,15 +27,13 @@
                     <% end %>
                 </tbody>
             </table>
-            <%= link_to "Agregar supervisor", new_supervisor_path, :class => 'btn btn-warning'  %>
-            <%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %>
         </div>
     <% else %>
         <!-- Supervisor -->
-        <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
+        <div class="row row-cols-1 row-cols-md-5 g-0 p-2 mb-5">
             <% @usuarios.each do |usuario| %>   
                 <% if !(usuario.administrador? || usuario.supervisor?) %>  
-                    <div class="col">
+                    <div class="col g-4">
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title"><%= usuario.fullname %></h5>

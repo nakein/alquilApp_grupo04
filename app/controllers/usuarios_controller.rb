@@ -1,7 +1,7 @@
 class UsuariosController < ApplicationController
 
     def update
-      if (current_usuario.role=0)
+      if (current_usuario.cliente?)
         @usuario = current_usuario
         copy = @usuario.dup
         copy.license.attach(@usuario.license.blob)
@@ -12,9 +12,14 @@ class UsuariosController < ApplicationController
           render "perfil/mi_perfil"
         end
       else
-        if(current_usuario.role=2)
+        if(current_usuario.administrador?)
           @usuario = Usuario.find(params[:id])
-          render "supervisors/show"
+    
+          if @usuario.update(supervisor_profile_params)
+            redirect_to root_path, notice: "El supervisor fue actualizado"
+          else
+              render "supervisors/edit"
+          end
         end
       end
     end
@@ -28,4 +33,8 @@ class UsuariosController < ApplicationController
         def profile_params
             params.require(:usuario).permit(:fullname, :dni, :birthdate, :license, :email);
         end
+
+        def supervisor_profile_params
+          params.require(:usuario).permit(:fullname, :dni, :birthdate, :email);
+      end
 end

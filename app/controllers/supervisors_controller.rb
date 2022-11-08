@@ -18,8 +18,10 @@ class SupervisorsController < ApplicationController
     def update
         @usuario = Usuario.find(params[:id])
     
-        if @usuario.update(register_params)
+        if @usuario.update(supervisor_profile_params)
           redirect_to root_path, notice: "El supervisor fue actualizado"
+        else
+            render :edit
         end
     end
     
@@ -28,7 +30,7 @@ class SupervisorsController < ApplicationController
         @usuario.role=1
         
         if @usuario.save
-            redirect_to root_path, notice: "Supervisor creada satisfactoriamente"
+            redirect_to root_path, notice: "Supervisor creado satisfactoriamente"
         else
             render 'new'
         end
@@ -44,5 +46,9 @@ class SupervisorsController < ApplicationController
 
         def register_params
             params.require(:usuario).permit(:fullname, :dni, :birthdate, :email, :password, :password_confirmation);
+        end
+
+        def supervisor_profile_params
+            params.require(:usuario).permit(:fullname, :dni, :birthdate, :email);
         end
 end
