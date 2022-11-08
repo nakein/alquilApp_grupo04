@@ -1,22 +1,22 @@
 <div class="formContainer w-100 p-4 d-flex justify-content-left">
-    <%= form_for usuario, html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
+    <%= form_for @usuario, html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
 
-        <h2 class="mb-4">Mi perfil</h2>
+        <h2 class="mb-4">Editar supervisor</h2>
         <%= render "devise/shared/error_messages", resource: current_usuario %>
 
         <div class="field">
             <%= f.label :fullname, "Nombre completo" %>
-            <%= f.text_field :fullname, class: "form-control my-2", :readonly => true %>
+            <%= f.text_field :fullname, class: "form-control my-2" %>
         </div>
 
         <div class="field">
             <%= f.label :dni, "Documento" %>
-            <%= f.number_field :dni, class: "form-control mb-2", :readonly => true%>
+            <%= f.number_field :dni, class: "form-control mb-2" %>
         </div>
 
         <div class="field">
             <%= f.label :birthdate, "Fecha de nacimiento" %>
-            <%= f.date_field :birthdate, class: "form-control mb-2", :readonly => true%>
+            <%= f.date_field :birthdate, class: "form-control mb-2" %>
         </div>
 
         <div class="field">

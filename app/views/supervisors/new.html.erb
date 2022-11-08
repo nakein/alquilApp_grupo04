@@ -14,8 +14,8 @@
         </div>
 
         <div class="field">
-            <%= f.label :birthdate, "Fecha de nacimiento" %>    
-            <%= f.text_field :birthdate, autofocus: true, required: true, class: "form-control mb-2" %>
+        <%= f.label :birthdate, "Fecha de nacimiento" %>
+        <%= f.date_field :birthdate, selected: Date.today, max: Date.today, min: Date.new(Date.today.year-100, Date.today.month, Date.today.day), autofocus: true, autocomplete: "birthdate", required: true, class: "form-control mb-2"%>
         </div>
 
         <div class="field">
@@ -23,6 +23,19 @@
             <%= f.text_field :email, autofocus: true, required: true, class: "form-control mb-2" %>
         </div>
 
+        <div class="field">
+            <%= f.label :password, "Contraseña" %>
+            <% if @minimum_password_length %>
+                <em>(Al menos <%= @minimum_password_length %> caracteres)</em>
+            <% end %>
+            <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control mb-2" %>
+      </div>
+  
+      <div class="field">
+        <%= f.label :password_confirmation, "Confirmar contraseña" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control mb-2" %>
+      </div>
+  
         <!--<p class="notice", style="color:#F5BF69;"><%= notice %></p>-->
 
         <div class="actions">

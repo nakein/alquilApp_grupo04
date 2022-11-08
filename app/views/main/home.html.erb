@@ -1,4 +1,4 @@
-<% if notice == "Cuenta creada satisfactoriamente" %>
+<% if ((notice == "Cuenta creada satisfactoriamente")||(notice == "El supervisor fue eliminado")) %>
     <p class="notice alert alert-warning"><%= notice %></p>
 <% end %>
 <% if usuario_signed_in? && (current_usuario.administrador? || current_usuario.supervisor?) %>
@@ -20,14 +20,14 @@
                     <% @supervisors.each do |supervisor| %>
                         <tr>
                             <td><%= supervisor.fullname %></td>
-                            <td><%= link_to "Perfil", supervisor, class: "btn btn-warning" %></td>
-                            <td><%= link_to "Editar", edit_usuario_path(supervisor), method: :update, class: "btn btn-dark" %></td>
-                            <td><%= link_to "Eliminar",supervisor, class: "btn btn-danger" %></td>
+                            <td><%= link_to "Perfil", supervisor_path(supervisor), class: "btn btn-warning" %></td>
+                            <td><%= link_to "Editar", edit_supervisor_path(supervisor), class: "btn btn-dark" %></td>
+                            <td><%= button_to "Eliminar",supervisor_path(supervisor), method: :delete, class: "btn btn-danger" %></td>
                         </tr>
                     <% end %>
                 </tbody>
             </table>
-            <%= button_to "Agregar supervisor", usuario_path, method: :create, :class => 'btn btn-warning'  %>
+            <%= link_to "Agregar supervisor", new_supervisor_path, :class => 'btn btn-warning'  %>
             <%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %>
         </div>
     <% else %>
