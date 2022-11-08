@@ -35,6 +35,8 @@ gem "jbuilder"
 
 gem "mercadopago-sdk"
 
+gem "mercadopago"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

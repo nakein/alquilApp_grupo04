@@ -59,6 +59,9 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  #Configuracion del host para poseer dominio publico
+  config.hosts << "d92f-190-191-119-247.sa.ngrok.io"
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
