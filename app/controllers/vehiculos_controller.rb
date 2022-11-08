@@ -10,6 +10,10 @@ class VehiculosController < ApplicationController
     @vehiculo = Vehiculo.find(params[:id])
   end
 
+  def edit
+    @vehiculo = Vehiculo.find(params[:id])
+  end
+
   def update
     @vehiculo = Vehiculo.find(params[:id])
 
@@ -28,6 +32,12 @@ class VehiculosController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+      @vehiculo = Vehiculo.find(params[:id])
+      @vehiculo.destroy
+      redirect_to vehiculos_path, notice: "Vehiculo eliminado satisfactoriamente"
   end
 
   private
