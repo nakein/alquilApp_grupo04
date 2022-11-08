@@ -6,19 +6,28 @@
         <div class="generico">
             <p>Soy admin 😎</p>
             <% @supervisors=Usuario.where(role:1) %>
-            <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
-                <% @supervisors.each do |supervisor| %>     
-                    <div class="col">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title"><%= supervisor.fullname %></h5>
-                                <p class="card-text">DNI: <%= supervisor.dni %></p>
-                                <%= link_to "Ver en detalle", supervisor_path(supervisor), :class => 'btn btn-warning'  %>
-                            </div>
-                        </div>
-                    </div>   
-                <% end %>
-            </div>
+            <h1>Tabla de supervisores</h1>
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Ver detalles</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @supervisors.each do |supervisor| %>
+                        <tr>
+                            <td><%= supervisor.fullname %></td>
+                            <td><%= link_to "Perfil", supervisor, class: "btn btn-warning" %></td>
+                            <td><%= link_to "Editar", edit_usuario_path(supervisor), method: :update, class: "btn btn-dark" %></td>
+                            <td><%= link_to "Eliminar",supervisor, class: "btn btn-danger" %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <%= button_to "Agregar supervisor", usuario_path, method: :create, :class => 'btn btn-warning'  %>
             <%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %>
         </div>
     <% else %>
