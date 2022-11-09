@@ -11,7 +11,7 @@
 
         <div class="field">
             <%= f.label :dni, "Documento" %>
-            <%= f.number_field :dni, class: "form-control mb-2" %>
+            <%= f.number_field :dni, min: 1, max: 80000000, class: "form-control mb-2" %>
         </div>
 
         <div class="field">
