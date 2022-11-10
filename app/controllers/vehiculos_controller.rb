@@ -26,6 +26,7 @@ class VehiculosController < ApplicationController
 
   def create
     @vehiculo = Vehiculo.new(vehicle_params)
+    @vehiculo.proximity = 100
 
     if @vehiculo.save
       redirect_to vehiculos_path, notice: "Vehiculo agregado satisfactoriamente"
