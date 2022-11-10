@@ -1,4 +1,4 @@
-<% if ((notice == "Cuenta creada satisfactoriamente")||(notice == "El supervisor fue eliminado")||(notice == "El supervisor fue actualizado")) %>
+<% if ((notice == "Cuenta creada satisfactoriamente")||(notice == "Supervisor creado satisfactoriamente")||(notice == "El supervisor fue eliminado")||(notice == "El supervisor fue actualizado")) %>
     <p class="notice alert alert-warning"><%= notice %></p>
 <% end %>
 <% if usuario_signed_in? && (current_usuario.administrador? || current_usuario.supervisor?) %>
@@ -22,16 +22,16 @@
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                 <%= link_to "Ver", supervisor_path(supervisor), class: "btn btn-success" %>
                                 <%= link_to "Editar", edit_supervisor_path(supervisor), class: "btn btn-warning" %>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal_<%=supervisor.id%>">Eliminar</button>
                             </div>
                             </td>
                         </tr>
 
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal_<%=supervisor.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar a <%= supervisor.fullname %></h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar a <%= Usuario.find(supervisor.id).fullname %></h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                    <%= button_to "Eliminar",supervisor_path(supervisor), method: :delete, class: "btn btn-danger" %>
+                                    <%= button_to "Eliminar",supervisor_path(Usuario.find(supervisor.id)), method: :delete, class: "btn btn-danger" %>
                                 </div>
                                 </div>
                             </div>

@@ -28,6 +28,13 @@ class UsuariosController < ApplicationController
       @usuario = Usuario.find(params[:id])
     end
 
+    def license_validated
+      usuario = Usuario.find(params[:id]) 
+      usuario.valid_license = !usuario.valid_license
+      usuario.save
+      redirect_to usuario_path(usuario)
+    end
+
     private
 
         def profile_params

@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   patch 'billetera/cargar_creditos'
   delete 'vehiculos/destroy/:id', to: 'vehiculos#destroy'
   devise_for :usuarios, :controllers => {registrations: 'registrations'}
-  resources :usuarios
+  resources :usuarios do
+    member do
+      get :license_validated
+    end
+  end
   resources :vehiculos
   resources :supervisors
   delete '/supervisors/:id', to:'supervisors#destroy'
