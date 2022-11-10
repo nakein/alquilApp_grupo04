@@ -11,18 +11,21 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Ver detalles</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% @supervisors.each do |supervisor| %>
                         <tr>
                             <td><%= supervisor.fullname %></td>
-                            <td><%= link_to "Perfil", supervisor_path(supervisor), class: "btn btn-warning" %></td>
-                            <td><%= link_to "Editar", edit_supervisor_path(supervisor), class: "btn btn-dark" %></td>
-                            <td><%= button_to "Eliminar",supervisor_path(supervisor), method: :delete, class: "btn btn-danger" %></td>
+                            <td>
+                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+
+                            <%= link_to "Ver", supervisor_path(supervisor), class: "btn btn-success" %>
+                            <%= link_to "Editar", edit_supervisor_path(supervisor), class: "btn btn-warning" %>
+                            <%= button_to "Eliminar",supervisor_path(supervisor), method: :delete, data: { confirm: "¿Estás seguro que deseas eliminar este supervisor?" }, class: "btn btn-danger" %>
+                            </div>
+                            </td>
                         </tr>
                     <% end %>
                 </tbody>
