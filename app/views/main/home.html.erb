@@ -7,23 +7,43 @@
             <% @supervisors=Usuario.where(role:1) %>
             <h2>Tabla de supervisores</h2>
             <%= link_to "Agregar supervisor", new_supervisor_path, :class => 'btn btn-warning my-3'  %>
-                <table class="table">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Ver detalles</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% @supervisors.each do |supervisor| %>
                         <tr>
                             <td><%= supervisor.fullname %></td>
-                            <td><%= link_to "Perfil", supervisor_path(supervisor), class: "btn btn-warning" %></td>
-                            <td><%= link_to "Editar", edit_supervisor_path(supervisor), class: "btn btn-dark" %></td>
-                            <td><%= button_to "Eliminar",supervisor_path(supervisor), method: :delete, class: "btn btn-danger" %></td>
+                            <td>
+                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                <%= link_to "Ver", supervisor_path(supervisor), class: "btn btn-success" %>
+                                <%= link_to "Editar", edit_supervisor_path(supervisor), class: "btn btn-warning" %>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</button>
+                            </div>
+                            </td>
                         </tr>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar a <%= supervisor.fullname %></h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Esta seguro que desea eliminar este supervisor?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <%= button_to "Eliminar",supervisor_path(supervisor), method: :delete, class: "btn btn-danger" %>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                     <% end %>
                 </tbody>
             </table>
