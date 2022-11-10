@@ -1,16 +1,59 @@
-<% if notice == "Cuenta creada satisfactoriamente" %>
+<% if ((notice == "Cuenta creada satisfactoriamente")||(notice == "Supervisor creado satisfactoriamente")||(notice == "El supervisor fue eliminado")||(notice == "El supervisor fue actualizado")) %>
     <p class="notice alert alert-warning"><%= notice %></p>
 <% end %>
 <% if usuario_signed_in? && (current_usuario.administrador? || current_usuario.supervisor?) %>
     <% if current_usuario.administrador? %>
-        <p>Soy admin 😎</p>
-        <%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %>
+        <div class="g-4 p-5">
+            <% @supervisors=Usuario.where(role:1) %>
+            <h2>Tabla de supervisores</h2>
+            <%= link_to "Agregar supervisor", new_supervisor_path, :class => 'btn btn-warning my-3'  %>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @supervisors.each do |supervisor| %>
+                        <tr>
+                            <td><%= supervisor.fullname %></td>
+                            <td>
+                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                <%= link_to "Ver", supervisor_path(supervisor), class: "btn btn-success" %>
+                                <%= link_to "Editar", edit_supervisor_path(supervisor), class: "btn btn-warning" %>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal_<%=supervisor.id%>">Eliminar</button>
+                            </div>
+                            </td>
+                        </tr>
+
+                        <div class="modal fade" id="exampleModal_<%=supervisor.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar a <%= Usuario.find(supervisor.id).fullname %></h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Esta seguro que desea eliminar este supervisor?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <%= button_to "Eliminar",supervisor_path(Usuario.find(supervisor.id)), method: :delete, class: "btn btn-danger" %>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
     <% else %>
         <!-- Supervisor -->
-        <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
+        <div class="row row-cols-1 row-cols-md-5 g-0 p-2 mb-5">
             <% @usuarios.each do |usuario| %>   
                 <% if !(usuario.administrador? || usuario.supervisor?) %>  
-                    <div class="col">
+                    <div class="col g-4">
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title"><%= usuario.fullname %></h5>

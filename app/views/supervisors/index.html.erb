@@ -1,0 +1,23 @@
+<% if notice == "Supervisor agregado satisfactoriamente" %>
+    <p class="notice alert alert-warning"><%= notice %></p>
+<% end %>
+
+<h1>Tabla de supervisores</h1>
+<table class="table">
+<thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Detalles</th>
+        <th>Eliminar</th>
+    </tr>
+</thead>
+<tbody>
+    <% @usuarios.each do |usuario| %>
+        <tr>
+            <td><%= usuario.name %></td>
+            <td><%= link_to "Perfil", usuario, class: "btn btn-dark" %></td>
+            <td><%= link_to "Eliminar",usuario, class: "btn btn-danger" %></td>
+        </tr>
+    <% end %>
+</tbody>
+</table>
