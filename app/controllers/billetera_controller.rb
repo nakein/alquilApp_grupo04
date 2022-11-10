@@ -5,6 +5,24 @@ class BilleteraController < ApplicationController
     end
 
     def mi_billetera
+        sdk = Mercadopago::SDK.new('TEST-2607182082531809-110514-4e42d4f234e94ea6cbf7101fa2c74ff2-686347249')
+
+            # Crea un objeto de preferencia
+            preference_data = {
+            items: [
+                {
+                title: 'Mi producto',
+                unit_price: 10,
+                quantity: 1
+                }
+            ],
+            purpose: 'wallet_purchase'
+            }
+            preference_response = sdk.preference.create(preference_data)
+            preference = preference_response[:response]
+
+            # Este valor substituirá a la string "<%= @preference_id %>" en tu HTML
+            @preference_id = preference['id']
     end
 
     def get
@@ -23,10 +41,10 @@ class BilleteraController < ApplicationController
 
 
             #Se carga el Access Token de la aplicacion
-            sdk = Mercadopago::SDK.new('APP_USR-2607182082531809-110514-d7f351aaede87c03c0b222130279be1f-686347249')
+            sdk = Mercadopago::SDK.new('TEST-2607182082531809-110514-4e42d4f234e94ea6cbf7101fa2c74ff2-686347249')
 
             customer_request = {
-            email: 'john@yourdomain.com'
+            email: current_usuario.email
             }
             customer_response = sdk.customer.create(customer_request)
             customer = customer_response[:response]
@@ -36,23 +54,9 @@ class BilleteraController < ApplicationController
             issuer_id: '3245612',
             payment_method_id: 'debit_card'
             }
+
             card_response = sdk.card.create(customer['id'], card_request)
             card = card_response[:response]
-
-            payment_data = {
-            transaction_amount: @compra.monto,
-            token: card_response,
-            description: 'Payment description',
-            payment_method_id: 'visa',
-            installments: 1,
-            payer: {
-                email: 'joaquin.stella@alu.ing.unlp.edu.ar'
-           }
-           }
-            result = sdk.payment.create(payment_data)
-            payment = result[:response]
-
-        puts payment
         
      #   end
          current_usuario.billetera.saldo = current_usuario.billetera.saldo + @compra.monto
