@@ -42,6 +42,7 @@ en:
         license: "Licencia"
         password_confirmation: "Confirmar contraseña"
         fullname: "Nombre completo"
+        password: "Contraseña"
       vehiculo:
         brand: "Marca"
         model: "Modelo"
