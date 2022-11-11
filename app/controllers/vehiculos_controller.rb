@@ -17,9 +17,12 @@ class VehiculosController < ApplicationController
   def update
     @vehiculo = Vehiculo.find(params[:id])
 
+    copy = @vehiculo.dup
+    copy.image.attach(@vehiculo.image.blob)
     if @vehiculo.update(vehicle_params)
       redirect_to vehiculos_path, notice: "El vehiculo fue actualizado"
     else
+      @vehiculo.image.attach(copy.image.blob)
       render :edit
     end
   end
