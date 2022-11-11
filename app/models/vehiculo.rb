@@ -1,5 +1,6 @@
 class Vehiculo < ApplicationRecord
-    validates :brand, :model, :color, :fuel_type, :transmission, presence: true, format: { with: /\A[a-z A-Zñ]+\z/,
+  validates :brand, :model, presence:true
+    validates :color, :fuel_type, :transmission, presence: true, format: { with: /\A[a-z A-Zñ]+\z/,
       message: "solo admite letras" }
     validates :capacity, presence: true
 
