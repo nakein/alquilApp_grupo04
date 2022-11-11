@@ -2,9 +2,11 @@
     <%= form_for @vehiculo, url: vehiculo_path(@vehiculo), html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
 
         <h2 class="mb-4">Detalles del vehículo</h2>
+        <%= render "devise/shared/error_messages", resource: @vehiculo %>
 
         <div class="field">
             <%= image_tag @vehiculo.image, class: "img-thumbnail col-12" if @vehiculo.image.attached?%>
+            <%= f.file_field :image, autofocus: true, autocomplete: "image", required: true, class: "form-control mb-2"%>
         </div>
 
         <div class="field">
@@ -36,6 +38,6 @@
             <%= f.label :transmission, "Tipo de transmision" %>
             <%= f.text_field :transmission, class: "form-control mb-2" %>
         </div>
-        <%= f.submit "Confirmar cambios"%>
+        <%= f.submit "Confirmar cambios", class: "btn btn-outline-warning my-4"%>
     <% end %>
 </div>

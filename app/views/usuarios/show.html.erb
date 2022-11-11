@@ -33,7 +33,7 @@
                 <p>Estado de la licencia de conducir: Aceptado</p>
             <% else %>
                 <p>Estado de la licencia de conducir: No aceptado</p>
-                <%= link_to "Aceptar licencia", usuario_path(@usuario), :method => license_validated(@usuario), class: "btn btn-warning"%>
+                <%= link_to "Aceptar licencia", license_validated_usuario_path(@usuario), class: "btn btn-warning"%>
             <% end %>
         </div>
     <% end %>

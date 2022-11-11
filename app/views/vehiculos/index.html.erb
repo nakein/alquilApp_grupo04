@@ -1,4 +1,4 @@
-<% if ((notice == "Vehiculo agregado satisfactoriamente")||(notice == "Vehiculo eliminado satisfactoriamente")) %>
+<% if ((notice == "Vehiculo agregado satisfactoriamente")||(notice == "El vehiculo fue actualizado")||(notice == "Vehiculo eliminado satisfactoriamente")) %>
     <p class="notice alert alert-warning"><%= notice %></p>
 <% end %>
 <div class="p-4">
@@ -17,9 +17,27 @@
                                 <%= link_to "Ver en detalle", vehiculo_path(vehiculo), method: :show, :class => 'btn btn-warning mt-3 mx-auto col-6'  %>
                                 <%= link_to "Editar",  edit_vehiculo_path(vehiculo), :class => 'btn btn-warning mt-3 mx-auto col-4'  %>
                             </div>
-                            <%= button_to "Eliminar", vehiculo_path(vehiculo), method: :delete, :class => 'btn btn-warning mt-3 col-12' %>
+                            <button type="button" class="btn btn-warning mt-3 col-12" data-bs-toggle="modal" data-bs-target="#exampleModal_<%=vehiculo.id%>">Eliminar</button>
                         </div>
                     </div>
-                </div>   
+                </div>  
+
+                <div class="modal fade" id="exampleModal_<%=vehiculo.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar <%= Vehiculo.find(vehiculo.id).brand %> <%= Vehiculo.find(vehiculo.id).model %></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Esta seguro que desea eliminar este vehículo?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <%= button_to "Eliminar", vehiculo_path(Vehiculo.find(vehiculo.id)), method: :delete, :class => 'btn btn-warning' %>
+                        </div>
+                        </div>
+                    </div>
+                </div> 
         <% end %>
  </div>

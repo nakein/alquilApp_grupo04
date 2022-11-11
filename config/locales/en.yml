@@ -42,6 +42,12 @@ en:
         license: "Licencia"
         password_confirmation: "Confirmar contraseña"
         fullname: "Nombre completo"
+        password: "Contraseña"
+      vehiculo:
+        brand: "Marca"
+        model: "Modelo"
+        fuel_type: "Tipo de combustible"
+        transmission: "Tipo de transmision"
   errors:
     format: "%{attribute} %{message}"
     messages:

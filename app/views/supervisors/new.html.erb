@@ -2,6 +2,9 @@
     <%= form_for :usuario, url: supervisors_path, html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
 
         <h2 class="mb-4">Agregar un nuevo supervisor</h2>
+        <% if !@usuario.nil? %>
+            <%= render "devise/shared/error_messages", resource: @usuario %>
+        <% end %>
 
         <div class="field">
             <%= f.label :fullname, "Nombre completo" %>
@@ -10,7 +13,7 @@
 
         <div class="field">
             <%= f.label :dni, "DNI" %>
-            <%= f.text_field :dni, autofocus: true, required: true, class: "form-control mb-2" %>
+            <%= f.text_field :dni, min: 1, max: 80000000, autofocus: true, required: true, class: "form-control mb-2" %>
         </div>
 
         <div class="field">
