@@ -6,7 +6,6 @@
 
         <div class="field">
             <%= image_tag @vehiculo.image, class: "img-thumbnail col-12" if @vehiculo.image.attached?%>
-            <%= f.file_field :image, autofocus: true, autocomplete: "image", required: true, class: "form-control mb-2"%>
         </div>
 
         <div class="field">
