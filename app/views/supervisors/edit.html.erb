@@ -24,6 +24,20 @@
             <%= f.email_field :email, class: "form-control mb-2" %>
         </div>
 
+        <div class="field">
+            <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+            <%= f.password_field :password, autocomplete: "new-password" %>
+            <% if @minimum_password_length %>
+            <br />
+            <em><%= @minimum_password_length %> characters minimum</em>
+            <% end %>
+        </div>
+
+    <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+
         <p class="notice", style="color:#F5BF69;"><%= notice %></p>
 
         <div class="actions">
