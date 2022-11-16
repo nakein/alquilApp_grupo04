@@ -27,6 +27,11 @@
     </div>
 
     <div class="field">
+      <%= f.label :license_expiration_date, "Fecha de vencimiento de la licencia" %>
+      <%= f.date_field :license_expiration_date, selected: Date.today, autofocus: true, autocomplete: "license_expiration_date", required: true, class: "form-control mb-2"%>
+    </div>
+
+    <div class="field">
       <%= f.label :email %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: "form-control mb-2"%>
     </div>

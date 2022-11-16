@@ -33,7 +33,7 @@ class RegistrationsController < Devise::RegistrationsController
     private
 
         def register_params
-            params.require(:usuario).permit(:fullname, :dni, :birthdate, :license, :email, :password, :password_confirmation);
+            params.require(:usuario).permit(:fullname, :dni, :birthdate, :license, :license_expiration_date, :email, :password, :password_confirmation);
         end
 
 end
