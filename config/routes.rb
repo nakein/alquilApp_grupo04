@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :usuarios do
     member do
       get :license_validated
+      get :ban
     end
   end
   resources :vehiculos

@@ -36,5 +36,15 @@
                 <%= link_to "Aceptar licencia", license_validated_usuario_path(@usuario), class: "btn btn-warning"%>
             <% end %>
         </div>
+
+        <div class="mt-4">
+            <% if @usuario.access_locked? %>
+                <p>Estado de la cuenta del usuario: Bloqueada</p>
+                <%= link_to "Desbloquear", ban_usuario_path(@usuario), class: "btn btn-warning"%>
+            <% else %>
+                <p>Estado de la cuenta del usuario: No bloqueada</p>
+                <%= link_to "Bloquear", ban_usuario_path(@usuario), class: "btn btn-warning"%>
+            <% end %>
+        </div>
     <% end %>
 </div>
