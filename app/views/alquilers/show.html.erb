@@ -1,0 +1,40 @@
+<div class="formContainer w-100 p-4 d-flex justify-content-left">
+    <%= form_for :alquiler, url: alquilers_path, html: {class:"col-12 p-5 rounded-2"} do |f| %>
+
+        <h2 class="mb-4">Vehículo a alquilar</h2>
+
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <%= image_tag @vehiculo.image, class: "img-fluid rounded-start" if @vehiculo.image.attached?%>
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Resumen del vehículo</h5>
+                    <div class="row mt-4">
+                        <p class="card-text col-4"><b>Marca: </b><%= @vehiculo.brand %></p>
+                        <p class="card-text col-4"><b>Modelo: </b><%= @vehiculo.model %></p>
+                        <p class="card-text col-4"><b>Patente: </b><%= @vehiculo.license_plate %></p>
+                        <p class="card-text col-4"><b>Color: </b><%= @vehiculo.color %></p>
+                        <p class="card-text col-4"><b>Tipo de combustible: </b><%= @vehiculo.fuel_type %></p>
+                        <p class="card-text col-4"><b>Capacidad: </b><%= @vehiculo.capacity %></p>
+                        <p class="card-text col-4"><b>Tipo de transmision: </b><%= @vehiculo.transmission %></p>
+                        <p class="card-text col-4"><b>Proximidad: </b><%= @vehiculo.proximity %>m</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="col-6">
+            <h5 class="card-title mb-4">Seleccione la cantidad de horas a alquilar (Máximo 24)</h5>
+
+            <%= f.number_field :hours, autofocus: true, value:1, min:1, max:24, autocomplete: "hours", required: true, class: "w-50 form-control mb-2 col-6"%>
+
+            <%= hidden_field_tag(:vehicle_id, @vehiculo.id) %>
+            <%= f.submit "Alquilar", :class => 'btn btn-warning mt-3 col-6' %>
+        </div>
+
+    <% end %>
+</div>

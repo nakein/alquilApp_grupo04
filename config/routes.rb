@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :alquilers
   resources :vehiculos
   get 'perfil/mi_perfil'
   get 'billetera/mi_billetera'
