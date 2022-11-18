@@ -49,7 +49,7 @@ class UsuariosController < ApplicationController
     private
 
         def profile_params
-            params.require(:usuario).permit(:fullname, :dni, :birthdate, :license expiration date, :license, :email);
+            params.require(:usuario).permit(:fullname, :dni, :birthdate, :license_expiration_date, :license, :email);
         end
 
         def supervisor_profile_params
