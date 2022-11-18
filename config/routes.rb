@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :alquilers
   resources :vehiculos
   get 'perfil/mi_perfil'
   #patch 'perfil/edit/:id', to: 'perfil#edit'
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   resources :usuarios do
     member do
       get :license_validated
+      get :ban
     end
   end
 resources :perfil, only: [:edit]

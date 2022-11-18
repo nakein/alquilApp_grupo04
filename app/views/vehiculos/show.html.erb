@@ -18,6 +18,11 @@
         </div>
 
         <div class="field">
+            <%= f.label :license_plate, "Patente" %>
+            <%= f.text_field :license_plate, class: "form-control mb-2", :readonly => true%>
+        </div>
+
+        <div class="field">
             <%= f.label :color, "Color" %>
             <%= f.text_field :color, class: "form-control mb-2", :readonly => true %>
         </div>

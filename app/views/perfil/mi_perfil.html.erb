@@ -26,6 +26,11 @@
         </div>
 
         <div class="field">
+            <%= f.label :license_expiration_date, "Fecha de vencimiento de la licencia" %>
+            <%= f.date_field :license_expiration_date, class: "form-control mb-2", :readonly => true%>
+        </div>
+
+        <div class="field">
             <%= f.label :license, "Licencia de conducir", class: " col-12"%>
             <%= image_tag current_usuario.license, class: "img-thumbnail col-12" if current_usuario.license.attached?%>
      </div>

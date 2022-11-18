@@ -39,10 +39,21 @@ class UsuariosController < ApplicationController
       redirect_to usuario_path(usuario)
     end
 
+    def ban
+      usuario = Usuario.find(params[:id])
+      if(usuario.access_locked?) 
+        usuario.unlock_access!
+      else
+        usuario.lock_access!
+      end
+      usuario.save
+      redirect_to usuario_path(usuario)
+    end
+
     private
 
         def profile_params
-            params.require(:usuario).permit(:fullname, :dni, :birthdate, :license, :email);
+            params.require(:usuario).permit(:fullname, :dni, :birthdate, :license_expiration_date, :license, :email);
         end
 
         def supervisor_profile_params

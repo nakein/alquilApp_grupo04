@@ -88,7 +88,14 @@
                         <h5 class="card-title"><%= vehiculo.brand %> <%= vehiculo.model %></h5>
                         <p class="card-text">Capacidad: <%= vehiculo.capacity %></p>
                         <p class="card-text">Proximidad: <%= vehiculo.proximity %>m</p>
-                        <%= link_to "Ver en detalle", vehiculo_path(vehiculo), :class => 'btn btn-warning'  %>
+                        <div class="row">
+                            <%= link_to "Ver en detalle", vehiculo_path(vehiculo), :class => 'btn btn-warning col-7'  %>
+                            <% if usuario_signed_in? %>
+                                <%= link_to "Alquilar", alquiler_path(vehiculo), :class => 'btn btn-warning col-5'  %>
+                            <% else %>
+                                <%= link_to "Alquilar", new_usuario_session_path, :class => 'btn btn-warning col-5'  %>
+                            <% end %>
+                        </div>
                     </div>
                 </div>
             </div>   
