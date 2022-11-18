@@ -65,15 +65,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_17_182056) do
     t.index ["billetera_id"], name: "index_compras_on_billetera_id"
   end
 
-  create_table "medio_de_pagos", force: :cascade do |t|
-    t.string "nombre"
-    t.string "codigo"
-    t.string "alias"
-    t.string "tipo"
-    t.integer "billetera_id"
+  create_table "products", force: :cascade do |t|
+    t.integer "code"
+    t.string "name"
+    t.string "description"
+    t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["billetera_id"], name: "index_medio_de_pagos_on_billetera_id"
   end
 
   create_table "usuarios", force: :cascade do |t|
