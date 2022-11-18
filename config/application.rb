@@ -11,7 +11,7 @@ module AlquilAppGrupo04
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-    Rails.application.config.hosts << "d92f-190-191-119-247.sa.ngrok.io"
+    Rails.application.config.hosts << "bdef-190-191-119-247.sa.ngrok.io"
     
 
     # Configuration for the application, engines, and railties goes here.

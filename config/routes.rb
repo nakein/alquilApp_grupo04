@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :alquilers
   resources :vehiculos
   get 'perfil/mi_perfil'
+  #patch 'perfil/edit/:id', to: 'perfil#edit'
   get 'billetera/mi_billetera'
   patch 'billetera/cargar_creditos'
   delete 'vehiculos/destroy/:id', to: 'vehiculos#destroy'
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
       get :ban
     end
   end
+resources :perfil, only: [:edit]
+
   resources :vehiculos
   resources :supervisors
   delete '/supervisors/:id', to:'supervisors#destroy'
