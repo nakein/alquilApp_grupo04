@@ -2,6 +2,9 @@
     <%= form_for :alquiler, url: alquilers_path, html: {class:"col-12 p-5 rounded-2"} do |f| %>
 
         <h2 class="mb-4">Vehículo a alquilar</h2>
+        <% if notice == "Fondos insuficientes" %>
+            <p class="notice alert alert-danger mb-3"><%= notice %></p>
+        <% end %>
 
         <div class="card mb-3">
             <div class="row g-0">

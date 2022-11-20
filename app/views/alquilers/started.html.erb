@@ -1,0 +1,32 @@
+<h2>Alquiler en curso</h2>
+<div>Tiempo restante: <span id="time">--:--:--</span></div>
+<%= button_to "Cancelar alquiler", alquiler_path(@alquiler.vehicle_id), method: :delete, class: "btn btn-danger" %>
+<%= link_to "Finalizar alquiler", root_path, :class => 'btn btn-warning mt-3'  %>
+<script>
+    function startTimer(duration, display) {
+        var timer = duration, hours, minutes, seconds;
+        setInterval(function () {
+            hours = parseInt(timer / 60 / 60, 10)
+            minutes = parseInt(timer / 60 % 60 , 10)
+            seconds = parseInt(timer % 60, 10);
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = hours + ":" + minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+            }
+
+
+        }, 1000);
+    }
+
+    window.onload = function () {
+        var timeRemaining = '<%= (@alquiler.created_at + @alquiler.hours.hours) - Time.now %>',
+            display = document.querySelector('#time');
+        startTimer(timeRemaining, display);
+    };
+</script>
