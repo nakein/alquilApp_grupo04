@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_17_182056) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_21_201454) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_17_182056) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "hours"
+    t.integer "status"
   end
 
   create_table "billeteras", force: :cascade do |t|
@@ -65,13 +66,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_17_182056) do
     t.index ["billetera_id"], name: "index_compras_on_billetera_id"
   end
 
-  create_table "products", force: :cascade do |t|
-    t.integer "code"
-    t.string "name"
-    t.string "description"
-    t.integer "price"
+  create_table "medio_de_pagos", force: :cascade do |t|
+    t.string "nombre"
+    t.string "codigo"
+    t.string "alias"
+    t.string "tipo"
+    t.integer "billetera_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["billetera_id"], name: "index_medio_de_pagos_on_billetera_id"
   end
 
   create_table "usuarios", force: :cascade do |t|
