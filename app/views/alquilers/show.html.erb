@@ -33,10 +33,22 @@
         <div class="col-6">
             <h5 class="card-title mb-4">Seleccione la cantidad de horas a alquilar (Máximo 24)</h5>
 
-            <%= f.number_field :hours, autofocus: true, value:1, min:1, max:24, autocomplete: "hours", required: true, class: "w-50 form-control mb-2 col-6"%>
+            <% if (Alquiler.where(user_id: current_usuario.id,status: "cancelado").exists?) %>
 
-            <%= hidden_field_tag(:vehicle_id, @vehiculo.id) %>
-            <%= f.submit "Alquilar", :class => 'btn btn-warning mt-3 col-6' %>
+                <p class="col-8" style="color:red">Debido a una cancelación reciente, no podrá alquilar un vehículo hasta dentro de 3 horas</p>
+                <%= f.number_field :hours, value:1, autocomplete: "hours", class: "w-50 form-control mb-2 col-6", disabled: true %>
+                <%= f.submit "Alquilar", :class => 'btn btn-warning disabled mt-3 col-6' %>
+
+            <% elsif  (Alquiler.where(user_id: current_usuario.id,status: "en_curso").exists?) %>
+                <p class="col-8" style="color:red">Existe un alquiler en curso</p>
+                <%= f.number_field :hours, value:1, autocomplete: "hours", class: "w-50 form-control mb-2 col-6", disabled: true %>
+                <%= f.submit "Alquilar", :class => 'btn btn-warning disabled mt-3 col-6' %>
+            <% else %>
+                <%= f.number_field :hours, autofocus: true, value:1, min:1, max:24, autocomplete: "hours", required: true, class: "w-50 form-control mb-2 col-6"%>
+
+                <%= hidden_field_tag(:vehicle_id, @vehiculo.id) %>
+                <%= f.submit "Alquilar", :class => 'btn btn-warning mt-3 col-6' %>
+            <% end %>
         </div>
 
     <% end %>

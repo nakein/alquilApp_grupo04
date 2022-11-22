@@ -13,7 +13,8 @@ class AlquilersController < ApplicationController
         current_usuario.billetera.saldo = current_usuario.billetera.saldo + 200*@alquiler.hours
         current_usuario.billetera.save
         
-        @alquiler.destroy
+        @alquiler.status = 3
+        @alquiler.save
         redirect_to root_path
     end
 
