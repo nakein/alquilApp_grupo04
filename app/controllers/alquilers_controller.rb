@@ -1,11 +1,22 @@
 class AlquilersController < ApplicationController
 
+    before_action :set_cache_headers
+
     def show
         @vehiculo = Vehiculo.find(params[:id])
     end
 
     def started
         @alquiler = Alquiler.where(user_id: current_usuario.id).last
+        @vehiculo = Vehiculo.find(params[:id])
+    end
+
+    def finished
+        @alquiler = Alquiler.where(user_id: current_usuario.id).last
+        @alquiler.status = 1
+        @alquiler.save
+
+        redirect_to root_path, notice: "Alquiler finalizado con exito"
     end
 
     def destroy
@@ -13,7 +24,8 @@ class AlquilersController < ApplicationController
         current_usuario.billetera.saldo = current_usuario.billetera.saldo + 200*@alquiler.hours
         current_usuario.billetera.save
         
-        @alquiler.update(status: "completado")
+        @alquiler.status = 3
+        @alquiler.save
         redirect_to root_path
     end
 
