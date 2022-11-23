@@ -8,6 +8,7 @@ class AlquilersController < ApplicationController
 
     def started
         @alquiler = Alquiler.where(user_id: current_usuario.id).last
+        @vehiculo = Vehiculo.find(params[:id])
     end
 
     def finished

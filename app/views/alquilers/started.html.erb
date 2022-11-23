@@ -1,8 +1,36 @@
-<h2>Alquiler en curso</h2>
-<div>Tiempo restante: <span id="time">--:--:--</span></div>
-<div><p id="disable_text" style="color:red"></span></div>
-<button id="disable" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Cancelar alquiler</button>
-<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2">Finalizar alquiler</button>
+<div class="p-4">
+    <h2>Alquiler en curso</h2>
+    <div>Tiempo restante: <span id="time">--:--:--</span></div>
+    <div><p id="disable_text" style="color:red"></span></div>
+    <button id="disable" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Cancelar alquiler</button>
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2">Finalizar alquiler</button>
+</div>
+
+<div class="w-100 p-4 d-flex justify-content-left">
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <%= image_tag @vehiculo.image, class: "img-fluid rounded-start" if @vehiculo.image.attached?%>
+            </div>
+            <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">Resumen del vehículo</h5>
+                <div class="row mt-4">
+                    <p class="card-text col-4"><b>Marca: </b><%= @vehiculo.brand %></p>
+                    <p class="card-text col-4"><b>Modelo: </b><%= @vehiculo.model %></p>
+                    <p class="card-text col-4"><b>Patente: </b><%= @vehiculo.license_plate %></p>
+                    <p class="card-text col-4"><b>Color: </b><%= @vehiculo.color %></p>
+                    <p class="card-text col-4"><b>Tipo de combustible: </b><%= @vehiculo.fuel_type %></p>
+                    <p class="card-text col-4"><b>Capacidad: </b><%= @vehiculo.capacity %></p>
+                    <p class="card-text col-4"><b>Tipo de transmision: </b><%= @vehiculo.transmission %></p>
+                    <p class="card-text col-4"><b>Proximidad: </b><%= @vehiculo.proximity %>m</p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
