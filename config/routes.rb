@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :alquilers do
     member do
       get "/started", to: "alquilers#started"
+      get :finished
     end
   end
   resources :vehiculos

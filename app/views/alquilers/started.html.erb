@@ -1,8 +1,46 @@
 <h2>Alquiler en curso</h2>
 <div>Tiempo restante: <span id="time">--:--:--</span></div>
 <div><p id="disable_text" style="color:red"></span></div>
-<%= button_to "Cancelar alquiler", alquiler_path(@alquiler.vehicle_id), method: :delete, class: "btn btn-danger", id:"disable" %>
-<!--<%= link_to "Finalizar alquiler", root_path, :class => 'btn btn-warning mt-3'  %>-->
+<button id="disable" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Cancelar alquiler</button>
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2">Finalizar alquiler</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Está seguro que desea cancelar el alquiler?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Se le devolverá su dinero, pero no podrá alquilar un vehículo hasta dentro de 3 horas.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <%= button_to "Cancelar alquiler", alquiler_path(@alquiler.vehicle_id), method: :delete, class: "btn btn-danger" %>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Está seguro que desea finalizar el alquiler?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Será redirigido a la página principal.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <%= link_to "Finalizar alquiler", finished_alquiler_path, :class => 'btn btn-warning'  %>
+        </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     function startTimer(duration, display, limit) {
         var timer = duration, hours, minutes, seconds;
