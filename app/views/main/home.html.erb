@@ -1,6 +1,12 @@
 <% if ((notice == "Cuenta creada satisfactoriamente")||(notice == "Supervisor creado satisfactoriamente")||(notice == "El supervisor fue eliminado")||(notice == "El supervisor fue actualizado")) %>
     <p class="notice alert alert-warning"><%= notice %></p>
 <% end %>
+
+<% if (notice == "Reporte enviado con éxito") %>
+    <p class="notice alert alert-warning"><%= notice %></p>
+<% end %>
+
+
 <% if usuario_signed_in? && (current_usuario.administrador? || current_usuario.supervisor?) %>
     <% if current_usuario.administrador? %>
         <div class="g-4 p-5">
@@ -93,6 +99,40 @@
                 </div>
             </div>   
         <% end %>
+    </div>
+
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Crear reporte</button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo reporte </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <%= form_for :report, url: reports_path do |f| %>
+          
+                    <div class="modal-body">
+                        
+                        <div class="mb-3">
+                            <%= f.label :subject, "Asunto", class:"col-form-label" %>
+                            <%= f.text_field :subject, required: true, class: "form-control", id:"recipient-name" %>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <%= f.label :messsage, "Mensaje", for:"message-text", class:"col-form-label" %>
+                            <%= f.text_area :message, required: true, class: "form-control", id:"message-text" %>
+                    
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <%= f.submit "Enviar reporte", :class=>"btn btn-outline-warning" %>
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                    
+                <% end %>
+            </div>
+        </div>
     </div>
 <% end %>
 

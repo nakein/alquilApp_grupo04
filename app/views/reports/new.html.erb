@@ -1,0 +1,26 @@
+<div class="formContainer w-100 p-4 d-flex justify-content-left">
+    <%= form_for :report, url: reports_path, html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
+
+        <h2 class="mb-4">Nuevo reporte</h2>
+        <% if !@report.nil? %>
+            <%= render "devise/shared/error_messages", resource: @report %>
+        <% end %>
+        
+        <div class="field">
+            <%= f.label :subject, "Asunto" %>
+            <%= f.text_field :subject, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :message, "Mensaje" %>
+            <%= f.text_area :message, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+        <!--<p class="notice", style="color:#F5BF69;"><%= notice %></p>-->
+
+        <div class="actions">
+            <%= f.submit "Crear reporte", :class=>"btn btn-outline-warning my-4" %>
+            <%= link_to "Cancelar", root_path, :class => 'btn btn-outline-warning my-4 col-6'  %>
+        </div>
+    <% end %>
+</div>

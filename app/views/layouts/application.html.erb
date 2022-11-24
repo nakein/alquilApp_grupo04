@@ -37,12 +37,14 @@
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><%= link_to "Mi perfil", perfil_mi_perfil_path, class: "dropdown-item" %></li>
                         <li><%= link_to "Ver mi billetera", billetera_mi_billetera_path,:class => 'dropdown-item' %></li>
+                        <li><%= link_to "Crear reporte", new_report_path,:class => 'dropdown-item' %></li>
                         <li><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'dropdown-item'  %></li>
                     </ul>
                 </li>
               <% else %>
                 <% if (current_usuario.supervisor?) %>
                   <li class="nav-item"><%= link_to "Vehículos", vehiculos_path, class: "nav-link"  %></li>
+                  <li class="nav-item"><%= link_to "Reportes", reports_path(current_usuario), class: "nav-link"  %></li>
                   <li class="nav-item"><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %></li>
                 <% else %>
                   <li class="nav-item"><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %></li>

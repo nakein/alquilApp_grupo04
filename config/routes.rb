@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   delete '/supervisors/:id', to:'supervisors#destroy'
   get '/supervisors/new', to: 'supervisors#new'
   root "main#home"
+
+  resources :reports
 end

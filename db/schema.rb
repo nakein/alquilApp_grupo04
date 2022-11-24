@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_07_011857) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_22_072313) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,6 +55,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_011857) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["billetera_id"], name: "index_compras_on_billetera_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.string "subject"
+    t.string "message"
+    t.integer "status", default: 0
+    t.integer "usuario_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["usuario_id"], name: "index_reports_on_usuario_id"
   end
 
   create_table "usuarios", force: :cascade do |t|

@@ -1,0 +1,44 @@
+
+<h1>Reportes</h1>
+
+<div class="list-group">
+    <div aria-current= true size=>
+    <% @reports.each do |report| %>
+        
+        <!-- <%= link_to edit_report_path(report), class:"list-group-item list-group-item-action" do %> -->
+        <button type="button" class="list-group-item list-group-item-action", data-bs-toggle="modal", data-bs-target="#exampleModal_<%= report.id%>"> 
+        <!-- <div data-bs-toggle="modal", data-bs-target="#exampleModal" > -->
+        <!-- < button, class:"list-group-item list-group-item-action" > -->
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Asunto: <%= report.subject %></h5>
+                <small>Enviado hace <%= (Date.today - report.created_at.to_date).to_i %> días </small>
+            </div>
+            
+            <p class="mb-1">Enviado por: <%= Usuario.find(report.usuario_id).fullname %></p>
+            <small><span class="badge text-bg-warning"><%= report.status%></span></small>
+
+        </button>
+        <!-- <% end %> -->
+        <!-- </div> -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal_<%= report.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrolleable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Asunto: <%= report.subject %></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p> <%= report.message %> </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <% end %>
+    </div>
+</div>

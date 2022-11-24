@@ -9,7 +9,7 @@ class Usuario < ApplicationRecord
   validates :fullname, presence: true, format: { with: /\A[a-z A-Zñ]+\z/,
     message: "solo admite letras" }
   validate :correct_license_type
-
+  has_many :reports
   has_one_attached :license
   has_one :billetera
 
