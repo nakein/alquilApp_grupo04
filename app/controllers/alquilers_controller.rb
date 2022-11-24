@@ -6,11 +6,6 @@ class AlquilersController < ApplicationController
         @vehiculo = Vehiculo.find(params[:id])
     end
 
-    def started
-        @alquiler = Alquiler.where(user_id: current_usuario.id).last
-        @vehiculo = Vehiculo.find(params[:id])
-    end
-
     def finished
         @alquiler = Alquiler.where(user_id: current_usuario.id).last
         @alquiler.status = 1
@@ -37,7 +32,7 @@ class AlquilersController < ApplicationController
             current_usuario.billetera.saldo = current_usuario.billetera.saldo - 200*@alquiler.hours
             current_usuario.billetera.save
             if @alquiler.save
-                redirect_to started_alquiler_path(@alquiler.vehicle_id)
+                redirect_to estado_mi_estado_path
             end
         else
             redirect_to alquiler_path(@alquiler.vehicle_id), notice: "Fondos insuficientes"
