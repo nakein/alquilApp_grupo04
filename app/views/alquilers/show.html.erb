@@ -33,19 +33,24 @@
         <div class="col-6">
             <h5 class="card-title mb-4">Seleccione la cantidad de horas a alquilar (Máximo 24)</h5>
 
-            <% if (Alquiler.where(user_id: current_usuario.id,status: "cancelado").exists?) %>
-
+            <% if (@status == 3)%>
                 <p class="col-8" style="color:red">Debido a una cancelación reciente, no podrá alquilar un vehículo hasta dentro de 3 horas</p>
                 <%= f.number_field :hours, value:1, autocomplete: "hours", class: "w-50 form-control mb-2 col-6", disabled: true %>
                 <%= f.submit "Alquilar", :class => 'btn btn-warning disabled mt-3 col-6' %>
-
-            <% elsif  (Alquiler.where(user_id: current_usuario.id,status: "en_curso").exists?) %>
+            <% elsif  (@status == 0) %>
                 <p class="col-8" style="color:red">Existe un alquiler en curso</p>
+                <%= f.number_field :hours, value:1, autocomplete: "hours", class: "w-50 form-control mb-2 col-6", disabled: true %>
+                <%= f.submit "Alquilar", :class => 'btn btn-warning disabled mt-3 col-6' %>
+            <% elsif  (@status == 1) && (@vehiculo.id == @alquiler.vehicle_id) %>
+                <p class="col-8" style="color:red">No se puede alquilar el mismo auto consecutivamente por la misma persona </p>
+                <%= f.number_field :hours, value:1, autocomplete: "hours", class: "w-50 form-control mb-2 col-6", disabled: true %>
+                <%= f.submit "Alquilar", :class => 'btn btn-warning disabled mt-3 col-6' %>
+            <% elsif (current_usuario.license_expiration_date < Date.today) || (current_usuario.valid_license == false)%>
+                <p class="col-8" style="color:red">Su licencia de conducir está vencida o aún no fue aceptada por un supervisor</p>
                 <%= f.number_field :hours, value:1, autocomplete: "hours", class: "w-50 form-control mb-2 col-6", disabled: true %>
                 <%= f.submit "Alquilar", :class => 'btn btn-warning disabled mt-3 col-6' %>
             <% else %>
                 <%= f.number_field :hours, autofocus: true, value:1, min:1, max:24, autocomplete: "hours", required: true, class: "w-50 form-control mb-2 col-6"%>
-
                 <%= hidden_field_tag(:vehicle_id, @vehiculo.id) %>
                 <%= f.submit "Alquilar", :class => 'btn btn-warning mt-3 col-6' %>
             <% end %>

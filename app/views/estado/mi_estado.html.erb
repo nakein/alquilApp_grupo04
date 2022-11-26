@@ -1,7 +1,13 @@
 <% if (Alquiler.where(user_id: current_usuario.id,status: "en_curso").exists?) %>
+<% if (notice == "Reporte enviado con éxito") %>
+    <p class="notice alert alert-warning"><%= notice %></p>
+<% end %>
 <div class="p-4">
     <h3>Estado actual: Alquiler en curso</h3>
-    <div>Tiempo restante: <span id="time">--:--:--</span></div>
+    <div class="my-4">
+        <div>Tiempo restante: <span id="time">--:--:--</span></div>
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap">Crear reporte</button>
+    </div>
     <div class="form-check my-2">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
             <label class="form-check-label" for="flexCheckDefault">Cargué gasolina</label>
@@ -69,6 +75,38 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             <%= link_to "Finalizar alquiler", finished_alquiler_path(@alquiler.vehicle_id), :class => 'btn btn-warning'  %>
         </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo reporte </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <%= form_for :report, url: reports_path do |f| %>
+        
+                <div class="modal-body">
+                    
+                    <div class="mb-3">
+                        <%= f.label :subject, "Asunto", class:"col-form-label" %>
+                        <%= f.text_field :subject, required: true, class: "form-control", id:"recipient-name" %>
+                    </div>
+                
+                    <div class="mb-3">
+                        <%= f.label :messsage, "Mensaje", for:"message-text", class:"col-form-label" %>
+                        <%= f.text_area :message, required: true, class: "form-control", id:"message-text" %>
+                
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <%= f.submit "Enviar reporte", :class=>"btn btn-outline-warning" %>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+                
+            <% end %>
         </div>
     </div>
 </div>

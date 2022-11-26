@@ -6,8 +6,15 @@ class UsuariosController < ApplicationController
         copy = @usuario.dup
         copy.license.attach(@usuario.license.blob)
         if @usuario.update(profile_params)
-          if(current_usuario.license.changed?)
-              redirect_to perfil_mi_perfil_path, notice: "La licencia fue actualizada"
+          # Validacion de licencia actualizada
+          if (@usuario.license_expiration_date != copy.license_expiration_date)
+            @usuario = Usuario.find(params[:id]) 
+            @usuario.valid_license = false
+            @usuario.save
+          end
+          # Tipos de mensaje distintos si se cambia la licencia o no
+          if (copy.license.blob != @usuario.license.blob)
+            redirect_to perfil_mi_perfil_path, notice: "La licencia fue actualizada"
           else 
             redirect_to perfil_mi_perfil_path, notice: "Los datos fueron actualizados"
           end

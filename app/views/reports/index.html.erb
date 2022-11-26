@@ -1,0 +1,79 @@
+<% if (notice == "Se ha cambiado el estado del reporte") %>
+    <p class="notice alert alert-warning"><%= notice %></p>
+<% end %>
+
+<style>
+    li a{
+        display: block;
+        width: 100%;
+        padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+        clear: both;
+        font-weight: 400;
+        color: var(--bs-dropdown-link-color);
+        text-align: inherit;
+        text-decoration: none;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+    }
+</style>
+
+<div class="container-md">
+    <h1>Reportes</h1>
+    <div class="dropdown g-4 mb-5">
+        <a class="btn btn-warning dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Ordenar por
+        </a>
+        <ul class="dropdown-menu">
+            <li><%= sortable("usuario_id", "Por usuario")%></li>
+            <li><%= sortable("created_at", "Por fecha de creación")%></li>
+            <li><%= sortable("status", "Por estado") %></li>            
+        </ul>
+    </div>
+
+    <div class="list-group">
+        <div aria-current= true size=>
+        <% @reports.each do |report| %>
+            
+            <button type="button" class="list-group-item list-group-item-action", data-bs-toggle="modal", data-bs-target="#exampleModal_<%= report.id%>"> 
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Asunto: <%= report.subject %></h5>
+                    <small>
+                        <% if report.status == "esperando" %>
+                            <span class="badge text-bg-warning"><%= report.status%></span>
+                        <% else %>
+                            <span class="badge text-bg-success"><%= report.status%></span>
+                        <% end %>
+                    </small>
+                </div>
+                
+                <p class="mb-1">Enviado por: <%= Usuario.find(report.usuario_id).fullname %></p>
+                <small>Enviado hace <%= (Date.today - report.created_at.to_date).to_i + 1  %> días </small>
+
+            </button>
+            
+            <div class="modal fade" id="exampleModal_<%= report.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Asunto: <%= report.subject %></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p> <%= report.message %> </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
+                            <% if report.status == "esperando" %>
+                                <%= button_to "Reporte resuelto", report_path(report), method: :patch, class: "btn btn-outline-warning"%>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <% end %>
+        </div>
+    </div>
+
+</div>

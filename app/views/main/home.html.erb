@@ -1,6 +1,7 @@
 <% if ((notice == "Cuenta creada satisfactoriamente")||(notice == "Supervisor creado satisfactoriamente")||(notice == "El supervisor fue eliminado")||(notice == "El supervisor fue actualizado")||(notice == "Alquiler finalizado con exito")) %>
     <p class="notice alert alert-warning"><%= notice %></p>
 <% end %>
+
 <% if usuario_signed_in? && (current_usuario.administrador? || current_usuario.supervisor?) %>
     <% if current_usuario.administrador? %>
         <div class="g-4 p-5">

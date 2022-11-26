@@ -24,4 +24,6 @@ resources :perfil, only: [:edit]
   delete '/supervisors/:id', to:'supervisors#destroy'
   get '/supervisors/new', to: 'supervisors#new'
   root "main#home"
+
+  resources :reports
 end
