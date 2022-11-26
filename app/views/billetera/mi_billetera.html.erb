@@ -1,15 +1,17 @@
 <div class="w-50 p-4 justify-content-left">
   <h1>Bienvenido a tu billetera </h1>
 
-  <p>Saldo actual: $<%= current_usuario.billetera.saldo %></p>
+
+  <p>Créditos: $<%= current_usuario.billetera.saldo %></p>
 
   <div class="cho-container">
+  <%= button_to "Medios de pago" %>
+
   <%= form_with url: '/billetera/cargar_creditos', method: :patch do |form| %>
-    <%= form.select :medio_de_pago, ["Elegir...", "Mercado Pago", "Uala", "Cuenta DNI"] %>
-    <%= form.text_field :datos_cuenta %>
+    <%= form.select :medio_de_pago, @medios_de_pago_disponibles %>
     <%= form.label :monto, "Cantidad de créditos a cargar:" %>
     <%= form.number_field :monto, value:1, min: 1, max: 500 %>
-    <%= form.submit "Cargar creditos" %>
+    <%= form.submit "Cargar créditos" %>
   <% end %>  
 
   </div>
@@ -31,3 +33,4 @@
 
 
 </div>
+<p class="notice"><%= notice %></p>
