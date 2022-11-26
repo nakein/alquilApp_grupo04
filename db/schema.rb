@@ -66,6 +66,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_072313) do
     t.index ["billetera_id"], name: "index_compras_on_billetera_id"
   end
 
+  create_table "products", force: :cascade do |t|
+    t.integer "code"
+    t.string "name"
+    t.string "description"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reports", force: :cascade do |t|
     t.string "subject"
     t.string "message"
@@ -107,7 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_072313) do
     t.string "transmission"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "proximity", default: 100
+    t.integer "proximity"
     t.string "license_plate"
   end
 

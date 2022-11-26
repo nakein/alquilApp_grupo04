@@ -17,7 +17,7 @@ class ReportsController < ApplicationController
         @report.usuario_id = current_usuario.id
         
         if @report.save
-            redirect_to root_path, notice: "Reporte enviado con éxito"
+            redirect_to estado_mi_estado_path, notice: "Reporte enviado con éxito"
         else
             render 'new'
         end
