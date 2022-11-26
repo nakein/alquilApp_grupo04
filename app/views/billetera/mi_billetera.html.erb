@@ -3,6 +3,7 @@
 
   <p>Saldo actual: $<%= current_usuario.billetera.saldo %></p>
 
+  <div class="cho-container">
   <%= form_with url: '/billetera/cargar_creditos', method: :patch do |form| %>
     <%= form.select :medio_de_pago, ["Elegir...", "Mercado Pago", "Uala", "Cuenta DNI"] %>
     <%= form.text_field :datos_cuenta %>
@@ -11,10 +12,10 @@
     <%= form.submit "Cargar creditos" %>
   <% end %>  
 
-  <div class="cho-container"></div>
+  </div>
   <script src="https://sdk.mercadopago.com/js/v2"></script>
   <script>
-    const mp = new MercadoPago('TEST-c6da8503-082d-4af9-ad1b-d05d892a7fb1');
+    const mp = new MercadoPago('TEST-7a3d0dd0-f726-4c4e-951d-d96c5c23c341');
 
     mp.checkout({
       preference: {

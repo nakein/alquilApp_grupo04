@@ -1,0 +1,143 @@
+<% if (Alquiler.where(user_id: current_usuario.id,status: "en_curso").exists?) %>
+<div class="p-4">
+    <h3>Estado actual: Alquiler en curso</h3>
+    <div>Tiempo restante: <span id="time">--:--:--</span></div>
+    <div class="form-check my-2">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+            <label class="form-check-label" for="flexCheckDefault">Cargué gasolina</label>
+    </div>
+    <div><p id="disable_text" style="color:red"></span></div>
+    <button id="disable" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Cancelar alquiler</button>
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2">Finalizar alquiler</button>
+</div>
+
+<div class="w-100 p-4 d-flex justify-content-left">
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <%= image_tag @vehiculo.image, class: "img-fluid rounded-start" if @vehiculo.image.attached?%>
+            </div>
+            <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">Resumen del vehículo</h5>
+                <div class="row mt-4">
+                    <p class="card-text col-4"><b>Marca: </b><%= @vehiculo.brand %></p>
+                    <p class="card-text col-4"><b>Modelo: </b><%= @vehiculo.model %></p>
+                    <p class="card-text col-4"><b>Patente: </b><%= @vehiculo.license_plate %></p>
+                    <p class="card-text col-4"><b>Color: </b><%= @vehiculo.color %></p>
+                    <p class="card-text col-4"><b>Tipo de combustible: </b><%= @vehiculo.fuel_type %></p>
+                    <p class="card-text col-4"><b>Capacidad: </b><%= @vehiculo.capacity %></p>
+                    <p class="card-text col-4"><b>Tipo de transmision: </b><%= @vehiculo.transmission %></p>
+                    <p class="card-text col-4"><b>Proximidad: </b><%= @vehiculo.proximity %>m</p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Está seguro que desea cancelar el alquiler?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Se le devolverá su dinero, pero no podrá alquilar un vehículo hasta dentro de 3 horas.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <%= button_to "Cancelar alquiler", alquiler_path(@alquiler.vehicle_id), method: :delete, class: "btn btn-danger" %>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Está seguro que desea finalizar el alquiler?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Será redirigido a la página principal.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <%= link_to "Finalizar alquiler", finished_alquiler_path(@alquiler.vehicle_id), :class => 'btn btn-warning'  %>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function startTimer(duration, display, limit) {
+        var timer = duration, hours, minutes, seconds;
+        setInterval(function () {
+            hours = parseInt(timer / 60 / 60, 10)
+            minutes = parseInt(timer / 60 % 60 , 10)
+            seconds = parseInt(timer % 60, 10);
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = hours + ":" + minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = 0;
+            }
+
+            console.log(timer);
+            console.log(limit);
+
+            if (timer < limit){
+                document.querySelector('#disable').disabled = true;
+                document.querySelector('#disable_text').textContent = "No es posible cancelar, han pasado 10 minutos"
+            }
+
+
+        }, 1000);
+    }
+
+    window.onload = function () {
+        var timeRemaining = '<%= (@alquiler.created_at + @alquiler.hours.hours) - Time.now %>',
+            display = document.querySelector('#time'),
+            limit = ('<%= @alquiler.hours %>' * 60 * 60) - 600;
+        startTimer(timeRemaining, display, limit);
+    };
+</script>
+<% else %>
+    <div class="p-4">
+        <h3>Estado actual: Sin alquiler en curso</h3>
+    </div>
+<% end %>
+
+<div class="px-4">
+    <h4>Historial de alquileres</h4>
+</div>
+<div class="row row-cols-1 row-cols-md-4 g-0 p-3 mb-5">
+        <% Alquiler.where(user_id: current_usuario.id).all.reverse_each do |alqui| %> 
+                <div class="col g-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= Vehiculo.where(id: alqui.vehicle_id)[0].brand %> <%= Vehiculo.where(id: alqui.vehicle_id)[0].model %></h5>
+                            <%= image_tag Vehiculo.where(id: alqui.vehicle_id)[0].image, class: "col-12" if Vehiculo.where(id: alqui.vehicle_id)[0].image.attached?%>
+                            <p class="card-text mb-0"><b>Estado del alquiler:</b> <%= alqui.status %> </p>
+                            <p class="card-text my-0"><b>Horas alquiladas:</b> <%= alqui.hours %> </p>
+                            <% if alqui.status == "cancelado" %>
+                                <p class="card-text my-0"><b>Costo del alquiler:</b> $0 </p>
+                            <% else %>
+                                <p class="card-text my-0"><b>Costo del alquiler:</b> $<%= alqui.hours*200 %> </p>
+                            <% end %>
+                            <p class="card-text my-0"><b>Inicio de alquiler:</b> <%= alqui.created_at.time %> </p>
+                            <p class="card-text mt-0"><b>Final de alquiler:</b> <%= alqui.updated_at.time %> </p>
+                        </div>
+                    </div>
+                </div>  
+        <% end %>
+ </div>

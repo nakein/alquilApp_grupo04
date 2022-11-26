@@ -39,6 +39,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_072313) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "alquilers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "vehicle_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "hours"
+    t.integer "status"
+  end
+
   create_table "billeteras", force: :cascade do |t|
     t.float "saldo", default: 0.0, null: false
     t.integer "usuario_id"
@@ -83,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_072313) do
     t.datetime "locked_at"
     t.string "unlock_token"
     t.boolean "valid_license", default: false
+    t.date "license_expiration_date"
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_usuarios_on_unlock_token", unique: true
@@ -98,6 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_072313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "proximity", default: 100
+    t.string "license_plate"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

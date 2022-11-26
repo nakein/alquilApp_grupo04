@@ -6,7 +6,18 @@ class UsuariosController < ApplicationController
         copy = @usuario.dup
         copy.license.attach(@usuario.license.blob)
         if @usuario.update(profile_params)
-          redirect_to perfil_mi_perfil_path, notice: "La licencia fue actualizada"
+          # Validacion de licencia actualizada
+          if (@usuario.license_expiration_date != copy.license_expiration_date)
+            @usuario = Usuario.find(params[:id]) 
+            @usuario.valid_license = false
+            @usuario.save
+          end
+          # Tipos de mensaje distintos si se cambia la licencia o no
+          if (copy.license.blob != @usuario.license.blob)
+            redirect_to perfil_mi_perfil_path, notice: "La licencia fue actualizada"
+          else 
+            redirect_to perfil_mi_perfil_path, notice: "Los datos fueron actualizados"
+          end
         else
           @usuario.license.attach(copy.license.blob)
           render "perfil/mi_perfil"
@@ -35,10 +46,21 @@ class UsuariosController < ApplicationController
       redirect_to usuario_path(usuario)
     end
 
+    def ban
+      usuario = Usuario.find(params[:id])
+      if(usuario.access_locked?) 
+        usuario.unlock_access!
+      else
+        usuario.lock_access!
+      end
+      usuario.save
+      redirect_to usuario_path(usuario)
+    end
+
     private
 
         def profile_params
-            params.require(:usuario).permit(:fullname, :dni, :birthdate, :license, :email);
+            params.require(:usuario).permit(:fullname, :dni, :birthdate, :license_expiration_date, :license, :email);
         end
 
         def supervisor_profile_params

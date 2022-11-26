@@ -5,6 +5,7 @@ class Usuario < ApplicationRecord
          :recoverable, :rememberable, :validatable, :lockable
 
   validates :birthdate, presence: true
+  validates :license_expiration_date, presence: true
   validates :dni, uniqueness: true, presence: true
   validates :fullname, presence: true, format: { with: /\A[a-z A-Zñ]+\z/,
     message: "solo admite letras" }

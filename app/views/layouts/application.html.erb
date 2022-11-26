@@ -37,6 +37,7 @@
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><%= link_to "Mi perfil", perfil_mi_perfil_path, class: "dropdown-item" %></li>
                         <li><%= link_to "Ver mi billetera", billetera_mi_billetera_path,:class => 'dropdown-item' %></li>
+                        <li><%= link_to "Ver mi estado", estado_mi_estado_path,:class => 'dropdown-item' %></li>
                         <li><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'dropdown-item'  %></li>
                     </ul>
                 </li>

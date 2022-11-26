@@ -7,38 +7,40 @@
 
         <div class="field">
             <%= f.label :fullname, "Nombre completo" %>
-            <%= f.text_field :fullname, class: "form-control my-2", :readonly => true %>
+            <%= f.text_field :fullname, class: "form-control my-2", :readonly => false %>
         </div>
 
         <div class="field">
             <%= f.label :dni, "Documento" %>
-            <%= f.number_field :dni, class: "form-control mb-2", :readonly => true%>
+            <%= f.number_field :dni, class: "form-control mb-2", :readonly => false %>
         </div>
 
         <div class="field">
             <%= f.label :birthdate, "Fecha de nacimiento" %>
-            <%= f.date_field :birthdate, class: "form-control mb-2", :readonly => true%>
+            <%= f.date_field :birthdate, class: "form-control mb-2", :readonly => false%>
         </div>
 
         <div class="field">
             <%= f.label :email %>
-            <%= f.email_field :email, class: "form-control mb-2", :readonly => true %>
+            <%= f.email_field :email, class: "form-control mb-2", :readonly => false %>
         </div>
 
         <div class="field">
             <%= f.label :license_expiration_date, "Fecha de vencimiento de la licencia" %>
-            <%= f.date_field :license_expiration_date, class: "form-control mb-2", :readonly => true%>
+            <%= f.date_field :license_expiration_date, class: "form-control mb-2", :readonly => false%>
         </div>
 
         <div class="field">
             <%= f.label :license, "Licencia de conducir", class: " col-12"%>
             <%= image_tag current_usuario.license, class: "img-thumbnail col-12" if current_usuario.license.attached?%>
-     </div>
+            <p>¿Desea actualizar su licencia de conducir?</p>
+            <%= f.file_field :license, autofocus: true, autocomplete: "license", class: "form-control mb-2"%>
+        </div>
 
         <p class="notice", style="color:#F5BF69;"><%= notice %></p>
 
         <div class="actions">
-        <%= link_to "Editar", edit_perfil_path(current_usuario), :class => 'btn btn-warning'   %>
+            <%= f.submit "Guardar cambios", :class=>"btn btn-outline-warning my-4" %>
         </div>
 
     <% end %>
