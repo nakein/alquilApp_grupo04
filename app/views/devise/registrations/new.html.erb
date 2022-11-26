@@ -44,6 +44,11 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control mb-2" %>
     </div>
 
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="form-check-input" required=true>
+      <label class="form-check-label" for="gridCheck">Confirmo que he leído los <a class="link-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> Términos y condiciones</a> </label>
+    </div>
+
     <div class="actions">
       <%= f.submit "Registrarse", :class=>"btn btn-outline-warning my-4"%>
     </div>
@@ -52,4 +57,22 @@
 
   <% end %>
 
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Términos y condiciones</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Texto con las reglas que serán parte de los términos y condiciones
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>
