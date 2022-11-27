@@ -6,27 +6,27 @@
 
         <div class="field">
             <%= f.label :fullname, "Nombre completo" %>
-            <%= f.text_field :fullname, class: "form-control my-2", :readonly => false %>
+            <%= f.text_field :fullname, autocomplete: "fullname", class: "form-control my-2"%>
         </div>
 
         <div class="field">
             <%= f.label :dni, "Documento" %>
-            <%= f.number_field :dni, class: "form-control mb-2", :readonly => false %>
+            <%= f.number_field :dni, autocomplete: "dni", class: "form-control mb-2"%>
         </div>
 
         <div class="field">
             <%= f.label :birthdate, "Fecha de nacimiento" %>
-            <%= f.date_field :birthdate, class: "form-control mb-2", :readonly => false%>
+            <%= f.date_field :birthdate, max: Date.today, min: Date.new(Date.today.year-100, Date.today.month, Date.today.day), autocomplete: "birthdate", class: "form-control mb-2"%>
         </div>
 
         <div class="field">
             <%= f.label :email %>
-            <%= f.email_field :email, class: "form-control mb-2", :readonly => false %>
+            <%= f.email_field :email, autocomplete: "email", class: "form-control mb-2"%>
         </div>
 
         <div class="field">
             <%= f.label :license_expiration_date, "Fecha de vencimiento de la licencia" %>
-            <%= f.date_field :license_expiration_date, class: "form-control mb-2", :readonly => false%>
+            <%= f.date_field :license_expiration_date, autocomplete: "license_expiration_date", class: "form-control mb-2"%>
         </div>
 
         <div class="field">
