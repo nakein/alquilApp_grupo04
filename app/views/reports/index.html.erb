@@ -25,13 +25,13 @@
             Ordenar por
         </a>
         <ul class="dropdown-menu">
-            <li class="dropdown-item"><%= sortable("usuario_id", "Por usuario")%></li>
-            <li class="dropdown-item"><%= sortable("created_at", "Por fecha de creación")%></li>
-            <li class="dropdown-item"><%= sortable("status", "Por estado") %></li>            
+            <li class="dropdown-item"><%= sortable("usuario_id", "Usuario")%></li>
+            <li class="dropdown-item"><%= sortable("created_at", "Fecha de creación")%></li>
+            <li class="dropdown-item"><%= sortable("status", "Estado") %></li>            
         </ul>
     </div>
 
-    <div class="list-group">
+    <div class="list-group mb-5">
         <div aria-current= true size=>
         <% @reports.each do |report| %>
             

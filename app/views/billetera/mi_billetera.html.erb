@@ -10,7 +10,7 @@
   <%= form_with url: '/billetera/cargar_creditos', method: :patch do |form| %>
     <%= form.select :medio_de_pago, @medios_de_pago_disponibles %>
     <%= form.label :monto, "Cantidad de créditos a cargar:" %>
-    <%= form.number_field :monto, value:1, min: 1, max: 500 %>
+    <%= form.number_field :monto, value:1, min: 1 %>
     <%= form.submit "Cargar créditos" %>
   <% end %>  
 
