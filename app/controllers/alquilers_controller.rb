@@ -32,7 +32,7 @@ class AlquilersController < ApplicationController
         
         @alquiler.status = 3
         @alquiler.save
-        redirect_to root_path
+        redirect_to root_path, notice: "Alquiler cancelado. Se le devolverá su dinero"
     end
 
     def create

@@ -19,8 +19,8 @@ class UsuariosController < ApplicationController
             redirect_to perfil_mi_perfil_path, notice: "Los datos fueron actualizados"
           end
         else
-          @usuario.license.attach(copy.license.blob)
-          render "perfil/mi_perfil"
+          current_usuario.license.attach(copy.license.blob)
+          redirect_to edit_perfil_path(resource: current_usuario)
         end
       else
         if(current_usuario.administrador?)
