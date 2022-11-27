@@ -48,7 +48,7 @@
                 </div>
                 
                 <p class="mb-1">Enviado por: <%= Usuario.find(report.usuario_id).fullname %></p>
-                <small>Enviado hace <%= (Date.today - report.created_at.to_date).to_i + 1  %> días </small>
+                <small>Enviado hace <%= (Date.today - report.created_at.to_date).to_i  %> días </small>
 
             </button>
             
