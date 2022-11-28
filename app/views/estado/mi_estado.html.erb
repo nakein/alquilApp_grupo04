@@ -14,7 +14,7 @@
     </div>
     <div><p id="disable_text" style="color:red"></span></div>
     <button id="disable" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Cancelar alquiler</button>
-    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2">Finalizar alquiler</button>
+    <button id="disabledFinished" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2">Finalizar alquiler</button>
 </div>
 
 <div class="w-100 p-4 d-flex justify-content-left">
@@ -130,8 +130,12 @@
                 timer = 0;
             }
 
-            console.log(timer);
-            console.log(limit);
+            check = document.querySelector('#flexCheckDefault')
+            if(check.checked){
+                document.querySelector('#disabledFinished').disabled = false;
+            }else{
+                document.querySelector('#disabledFinished').disabled = true;
+            }
 
             if (timer < limit){
                 document.querySelector('#disable').disabled = true;
