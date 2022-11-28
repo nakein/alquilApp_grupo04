@@ -23,7 +23,7 @@
 
         <div class="field">
             <%= f.label :email, "Email" %>
-            <%= f.text_field :email, autofocus: true, required: true, class: "form-control mb-2" %>
+            <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email", class: "form-control mb-2" %>
         </div>
 
         <div class="field">
