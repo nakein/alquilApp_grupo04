@@ -6,12 +6,14 @@ class AlquilersController < ApplicationController
         @vehiculo = Vehiculo.find(params[:id])
         @status = -1
         @alquiler = Alquiler.where(user_id: current_usuario.id).last
-        if(@alquiler.status == "en_curso")
-            @status = 0
-        elsif (@alquiler.status == "completado")
-            @status = 1
-        elsif (@alquiler.status == "cancelado")
-            @status = 3
+        if(!@alquiler.nil?)
+            if(@alquiler.status == "en_curso")
+                @status = 0
+            elsif (@alquiler.status == "completado")
+                @status = 1
+            elsif (@alquiler.status == "cancelado")
+                @status = 3
+            end
         end
     end
 
@@ -30,7 +32,7 @@ class AlquilersController < ApplicationController
         
         @alquiler.status = 3
         @alquiler.save
-        redirect_to root_path
+        redirect_to root_path, notice: "Alquiler cancelado. Se le devolverá su dinero"
     end
 
     def create

@@ -25,13 +25,13 @@
             Ordenar por
         </a>
         <ul class="dropdown-menu">
-            <li><%= sortable("usuario_id", "Por usuario")%></li>
-            <li><%= sortable("created_at", "Por fecha de creación")%></li>
-            <li><%= sortable("status", "Por estado") %></li>            
+            <li class="dropdown-item"><%= sortable("usuario_id", "Usuario")%></li>
+            <li class="dropdown-item"><%= sortable("created_at", "Fecha de creación")%></li>
+            <li class="dropdown-item"><%= sortable("status", "Estado") %></li>            
         </ul>
     </div>
 
-    <div class="list-group">
+    <div class="list-group mb-5">
         <div aria-current= true size=>
         <% @reports.each do |report| %>
             
@@ -48,7 +48,7 @@
                 </div>
                 
                 <p class="mb-1">Enviado por: <%= Usuario.find(report.usuario_id).fullname %></p>
-                <small>Enviado hace <%= (Date.today - report.created_at.to_date).to_i + 1  %> días </small>
+                <small>Enviado hace <%= (Date.today - report.created_at.to_date).to_i  %> días </small>
 
             </button>
             

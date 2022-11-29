@@ -3,7 +3,7 @@
 
         <h2 class="mb-4">Editar supervisor</h2>
         <%= render "devise/shared/error_messages", resource: @usuario %>
-        <%= f.hidden_field :reset_password_token %>
+        <!--<%= f.hidden_field :reset_password_token %>-->
 
         <div class="field">
             <%= f.label :fullname, "Nombre completo" %>
@@ -25,6 +25,7 @@
             <%= f.email_field :email, class: "form-control mb-2" %>
         </div>
 
+        <!--
         <div class="field">
             <%= f.label :password %> <i>(Deje en blanco si no quiere cambiarlo)</i><br />
            
@@ -38,6 +39,7 @@
             <%= f.label :password_confirmation %><br />
             <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
         </div>
+        -->
 
         <p class="notice", style="color:#F5BF69;"><%= notice %></p>
 
