@@ -110,6 +110,7 @@ GEM
     faraday-net_http (3.0.1)
     ffi (1.15.5)
     ffi (1.15.5-x64-mingw-ucrt)
+    geocoder (1.8.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
     http-accept (1.7.0)
@@ -279,6 +280,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  geocoder
   importmap-rails
   jbuilder
   mercadopago

@@ -69,6 +69,12 @@
     <% end %>
 <%else %>
     <!-- Usuario cliente o invitado -->
+    <div id="map" style="height:400px"></div>
+
+    <script>
+        url = [];
+    </script>
+
     <div class="dropdown g-4 px-5 py-2">
         <a class="btn btn-warning dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Ordenar por
@@ -81,7 +87,14 @@
         </ul>
     </div>
     <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
-        <% @vehiculos.each do |vehiculo| %>     
+        <% @vehiculos.each do |vehiculo| %>   
+        <script>
+            url.push({
+                'latitude':'<%= vehiculo.latitude %>', 
+                'longitude':'<%= vehiculo.longitude %>',
+                'tooltip': 'Hello'
+            })
+        </script>  
             <div class="col">
                 <div class="card h-100">
                     <%= image_tag vehiculo.image, class: "img-thumbnail col-12" if vehiculo.image.attached?%>
@@ -102,6 +115,10 @@
             </div>   
         <% end %>
     </div>
+
+    <script>
+        new Mapkick.Map("map", url);
+    </script>
 <% end %>
 
 
