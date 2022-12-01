@@ -36,6 +36,9 @@ class BilleteraController < ApplicationController
             @preference_id = 1;
     end
 
+    def medios_pago
+    end
+
     def get
     end
 
@@ -103,6 +106,11 @@ class BilleteraController < ApplicationController
 
     def show
         render "mi_billetera"
+    end
+
+    def agregar_tarjeta
+        @tarjeta = Card.new(name:"Tarjeta de prueba");
+        @tarjeta.save;
     end
 
     private

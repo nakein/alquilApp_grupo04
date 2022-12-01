@@ -9,4 +9,5 @@ after_initialize :set_default_card_type, :if => :new_record?
   def set_default_card_type
     self.card_type ||= :debito
   end
+belongs_to: billetera
 end

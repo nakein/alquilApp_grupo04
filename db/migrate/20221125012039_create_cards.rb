@@ -2,7 +2,7 @@ class CreateCards < ActiveRecord::Migration[7.0]
   def change
     create_table :cards do |t|
       t.string :name
-      t.integer :card_type
+      t.integer :card_type, default: 0
       t.string :digits
       t.string :security_code
       t.date :exp_date

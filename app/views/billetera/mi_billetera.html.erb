@@ -5,7 +5,7 @@
   <p>Créditos: $<%= current_usuario.billetera.saldo %></p>
 
   <div class="cho-container">
-  <%= button_to "Medios de pago" %>
+  <%= link_to "Medios de pago", billetera_medios_pago_path, class: "btn btn-primary" %>
 
   <%= form_with url: '/billetera/cargar_creditos', method: :patch do |form| %>
     <%= form.select :medio_de_pago, @medios_de_pago_disponibles %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_25_012039) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_25_221334) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -57,16 +57,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_012039) do
   end
 
   create_table "cards", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "name"
-    t.integer "card_type"
     t.string "digits"
     t.string "security_code"
     t.date "exp_date"
-    t.float "money", default: 0.0, null: false
-    t.integer "billetera_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["billetera_id"], name: "index_cards_on_billetera_id"
+    t.float "money"
   end
 
   create_table "compras", force: :cascade do |t|
@@ -79,24 +76,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_012039) do
     t.index ["billetera_id"], name: "index_compras_on_billetera_id"
   end
 
-  create_table "products", force: :cascade do |t|
-    t.integer "code"
-    t.string "name"
-    t.string "description"
-    t.integer "price"
+  create_table "medio_de_pagos", force: :cascade do |t|
+    t.string "nombre"
+    t.string "codigo"
+    t.string "alias"
+    t.string "tipo"
+    t.integer "billetera_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["billetera_id"], name: "index_medio_de_pagos_on_billetera_id"
-  end
-
-  create_table "reports", force: :cascade do |t|
-    t.string "subject"
-    t.string "message"
-    t.integer "status", default: 0
-    t.integer "usuario_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["usuario_id"], name: "index_reports_on_usuario_id"
   end
 
   create_table "reports", force: :cascade do |t|

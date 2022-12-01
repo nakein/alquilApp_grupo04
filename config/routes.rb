@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :vehiculos
   get 'perfil/mi_perfil'
   get 'billetera/mi_billetera'
+  get 'billetera/medios_pago'
   patch 'billetera/cargar_creditos'
+  patch 'billetera/agregar_tarjeta'
   get 'estado/mi_estado'
   delete 'vehiculos/destroy/:id', to: 'vehiculos#destroy'
   devise_for :usuarios, :controllers => {registrations: 'registrations'}
