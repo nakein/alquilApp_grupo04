@@ -1,5 +1,5 @@
 <% if (Alquiler.where(user_id: current_usuario.id,status: "en_curso").exists?) %>
-<% if (notice == "Reporte enviado con éxito") %>
+<% if (notice == "Reporte enviado con éxito")||(notice == "Tiempo extendido satisfactoriamente")||(notice == "Fondos insuficientes") %>
     <p class="notice alert alert-warning"><%= notice %></p>
 <% end %>
 <div class="p-4">
@@ -7,6 +7,7 @@
     <div class="my-4">
         <div>Tiempo restante: <span id="time">--:--:--</span></div>
         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap">Crear reporte</button>
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal4">Extender tiempo de alquiler</button>
     </div>
     <div class="form-check my-2">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
@@ -106,6 +107,34 @@
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancelar</button>
                 </div>
                 
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Extender tiempo de alquiler</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <%= form_for @alquiler, url: alquiler_path(@alquiler) do |f| %>
+                <div class="modal-body">
+                    <% if (24-@alquiler.hours == 0) %>
+                        <p style="color:red;">Ya no puede extender su tiempo</p>
+                    <% else %>
+                        <p>El precio por hora extendida es de $250</p>
+                        <p>Ingrese la cantidad de horas a extender</p>
+                        <%= f.number_field :hours, autofocus: true, value:1, min:1, max:(24-@alquiler.hours), autocomplete: "hours", required: true, class: "w-50 form-control mb-2 col-6"%>
+                    <% end %>
+                </div>
+                <div class="modal-footer">
+                    <% if !(24-@alquiler.hours == 0) %>
+                        <%= f.submit "Extender tiempo", class: "btn btn-outline-warning my-4"%>
+                    <% end %>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             <% end %>
         </div>
     </div>

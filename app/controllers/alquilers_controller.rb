@@ -17,6 +17,19 @@ class AlquilersController < ApplicationController
         end
     end
 
+    def update
+        @alquiler = Alquiler.where(user_id: current_usuario.id).last
+        if ((current_usuario.billetera.saldo - 250*(params[:alquiler][:hours]).to_i) >= 0)
+            @alquiler.hours = @alquiler.hours + (params[:alquiler][:hours]).to_i
+            @alquiler.save
+            current_usuario.billetera.saldo = current_usuario.billetera.saldo - 250*@alquiler.hours
+            current_usuario.billetera.save
+            redirect_to estado_mi_estado_path, notice: "Tiempo extendido satisfactoriamente"
+        else
+            redirect_to estado_mi_estado_path, notice: "Fondos insuficientes"
+        end
+    end
+
     def finished
         @alquiler = Alquiler.where(user_id: current_usuario.id).last
         @alquiler.status = 1
