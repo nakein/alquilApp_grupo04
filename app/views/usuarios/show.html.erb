@@ -1,4 +1,4 @@
-<div class="formContainer w-100 p-4 d-flex justify-content-left">
+<div class="w-100 p-4 d-flex justify-content-left col-6">
     <%= form_for @usuario, url: usuario_path(@usuario), html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
 
         <h2 class="mb-4">Detalles del usuario</h2>
@@ -52,4 +52,29 @@
             <% end %>
         </div>
     <% end %>
+</div>
+
+<div class="px-4">
+    <h4>Historial de alquileres del usuario</h4>
+</div>
+<div class="row row-cols-1 row-cols-md-4 g-0 p-3 mb-5">
+        <% Alquiler.where(user_id: @usuario.id).all.reverse_each do |alqui| %> 
+                <div class="col g-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= Vehiculo.where(id: alqui.vehicle_id)[0].brand %> <%= Vehiculo.where(id: alqui.vehicle_id)[0].model %></h5>
+                            <%= image_tag Vehiculo.where(id: alqui.vehicle_id)[0].image, class: "col-12" if Vehiculo.where(id: alqui.vehicle_id)[0].image.attached?%>
+                            <p class="card-text mb-0"><b>Estado del alquiler:</b> <%= alqui.status %> </p>
+                            <p class="card-text my-0"><b>Horas alquiladas:</b> <%= alqui.hours %> </p>
+                            <% if alqui.status == "cancelado" %>
+                                <p class="card-text my-0"><b>Costo del alquiler:</b> $0 </p>
+                            <% else %>
+                                <p class="card-text my-0"><b>Costo del alquiler:</b> $<%= alqui.hours*200 %> </p>
+                            <% end %>
+                            <p class="card-text my-0"><b>Inicio de alquiler:</b> <%= alqui.created_at.time %> </p>
+                            <p class="card-text mt-0"><b>Final de alquiler:</b> <%= alqui.updated_at.time %> </p>
+                        </div>
+                    </div>
+                </div>  
+        <% end %>
 </div>

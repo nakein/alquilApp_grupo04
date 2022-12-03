@@ -69,6 +69,17 @@
     <% end %>
 <%else %>
     <!-- Usuario cliente o invitado -->
+
+    <!-- Si hay un alquiler en curso se muestra un alert -->
+    <% if usuario_signed_in? %>
+        <% @alquiler = Alquiler.where(user_id: current_usuario.id).last %>
+        <% if(!@alquiler.nil?) %>
+                <% if(@alquiler.status == "en_curso") %>
+                    <p class="notice alert alert-warning">Actualmente tiene un alquiler en curso. Seleccione "Ver mi estado" en el menú de usuario para más información.</p>
+                <% end %>
+        <% end %>
+    <% end %>
+
     <div id="map" style="height:400px"></div>
 
     <script>
