@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rates
   resources :alquilers do
     member do
       get :finished

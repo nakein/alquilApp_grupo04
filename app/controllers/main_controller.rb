@@ -3,6 +3,7 @@ class MainController < ApplicationController
 
   def home
     @usuarios = Usuario.all
+    @tarifa = Rate.find(1)
     if params[:value] == "less"
       @vehiculos = Vehiculo.order(params[:sort])
     elsif params[:value] == "more"
