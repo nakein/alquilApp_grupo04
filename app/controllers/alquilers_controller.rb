@@ -32,6 +32,14 @@ class AlquilersController < ApplicationController
 
     def finished
         @alquiler = Alquiler.where(user_id: current_usuario.id).last
+
+        timeExtension = Time.now - (@alquiler.created_at + @alquiler.hours.hours)
+        fine = (timeExtension/(15*60)).truncate()
+        if (fine > 0)
+            current_usuario.billetera.saldo = current_usuario.billetera.saldo - 100*fine
+            current_usuario.billetera.save
+        end
+
         @alquiler.status = 1
         @alquiler.save
 

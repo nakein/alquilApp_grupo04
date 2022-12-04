@@ -74,7 +74,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <%= link_to "Finalizar alquiler", finished_alquiler_path(@alquiler.vehicle_id), :class => 'btn btn-warning'  %>
+            <%= link_to "Finalizar alquiler", finished_alquiler_path(@alquiler.vehicle_id), :class => 'btn btn-warning' %>
         </div>
         </div>
     </div>
@@ -175,11 +175,45 @@
         }, 1000);
     }
 
+    function startCounter(duration, display) {
+        var timer = duration, hours, minutes, seconds;
+        setInterval(function () {
+            hours = parseInt(timer / 60 / 60, 10)
+            minutes = parseInt(timer / 60 % 60 , 10)
+            seconds = parseInt(timer % 60, 10);
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = "-" + hours + ":" + minutes + ":" + seconds;
+
+            timer++;
+
+            check = document.querySelector('#flexCheckDefault')
+            if(check.checked){
+                document.querySelector('#disabledFinished').disabled = false;
+            }else{
+                document.querySelector('#disabledFinished').disabled = true;
+            }
+
+        }, 1000);
+    }
+
     window.onload = function () {
         var timeRemaining = '<%= (@alquiler.created_at + @alquiler.hours.hours) - Time.now %>',
             display = document.querySelector('#time'),
             limit = ('<%= @alquiler.hours %>' * 60 * 60) - 600;
-        startTimer(timeRemaining, display, limit);
+        if ('<%= (@alquiler.created_at + @alquiler.hours.hours) - Time.now %>' < 0){
+            timeRemaining = '<%= Time.now - (@alquiler.created_at + @alquiler.hours.hours) %>'
+            display.style.color = 'red';
+            document.querySelector('#disable').disabled = true;
+            document.querySelector('#disable_text').textContent = "Se le descontarán $100 cada 15 minutos si no finaliza el alquiler"
+            startCounter(timeRemaining, display);
+        }else{
+            display.style.color = 'black';
+            startTimer(timeRemaining, display, limit);
+        }
     };
 </script>
 <% else %>
