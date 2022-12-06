@@ -1,4 +1,4 @@
-<% if ((notice == "Cuenta creada satisfactoriamente")||(notice == "Supervisor creado satisfactoriamente")||(notice == "El supervisor fue eliminado")||(notice == "El supervisor fue actualizado")||(notice == "Alquiler cancelado. Se le devolverá su dinero")||(notice == "Alquiler finalizado con exito")) %>
+<% if ((notice == "Cuenta creada satisfactoriamente")||(notice == "Supervisor creado satisfactoriamente")||(notice == "El supervisor fue eliminado")||(notice == "El supervisor fue actualizado")||(notice == "Alquiler cancelado. Se le devolverá su dinero")||(notice == "Los precios fueron actualizados")||(notice == "Alquiler finalizado con exito")) %>
     <p class="notice alert alert-warning"><%= notice %></p>
 <% end %>
 
@@ -142,6 +142,7 @@
                     <p class="notice alert alert-warning">Actualmente tiene un alquiler en curso. Seleccione "Ver mi estado" en el menú de usuario para más información.</p>
                 <% end %>
         <% end %>
+
     <% end %>
 
     <div id="map" style="height:400px"></div>

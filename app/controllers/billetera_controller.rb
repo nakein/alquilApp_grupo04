@@ -109,7 +109,7 @@ class BilleteraController < ApplicationController
         def ejemplos_tarjeta
             tarjeta1 = Card.new(id: 1, name: "Tarjeta Naranja", digits: "01234567890123456789", security_code: "123", exp_date: DateTime.new(2022,12,5), money: 50.0, card_type: "debito");                                    
             tarjeta2 = Card.new(id: 2, name: "Uala", digits: "01234567899876543210", security_code: "234", exp_date: DateTime.new(2022,10,5.5), money: 3200.0, card_type: "visa");
-            tarjeta3 = Card.new(id: 3, name: "Mastercard Black", digits: "11223344556677889900", security_code: "456", exp_date: DateTime.new(2022,11,30), money: 12000.0, card_type: "mastercard");
+            tarjeta3 = Card.new(id: 3, name: "Mastercard Black", digits: "11223344556677889900", security_code: "456", exp_date: DateTime.new(2022,12,30), money: 12000.0, card_type: "mastercard");
             tarjeta1.save;
             tarjeta2.save;
             tarjeta3.save;

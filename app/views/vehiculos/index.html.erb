@@ -50,8 +50,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <% results = Geocoder.search([v.latitude, v.longitude]) %>
-                            <p><b>Dirección:</b> <%= results.first.address %></p>
+                            <!--<% results = Geocoder.search([v.latitude, v.longitude]) %>-->
+                            <p><b>Dirección:</b> <%= v.address %></p>
                             <p><b>Coordenadas:</b> <a href="https://www.google.com/maps/search/?api=1&query=<%= v.latitude %>,<%= v.longitude %>" target="_blank"><%= v.latitude %> <%= v.longitude %></a></p>
                         </div>
                         <div class="modal-footer">
