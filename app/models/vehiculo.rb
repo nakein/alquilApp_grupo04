@@ -1,4 +1,8 @@
 class Vehiculo < ApplicationRecord
+
+  reverse_geocoded_by :latitude, :longitude, :address => :address
+  after_validation :reverse_geocode
+
   validates :brand, :model, presence:true
   validates :color, :fuel_type, :transmission, presence: true, format: { with: /\A[a-z A-Zñ]+\z/,
     message: "solo admite letras" }

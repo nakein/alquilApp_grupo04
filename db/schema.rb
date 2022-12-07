@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_25_012039) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_06_175833) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -79,11 +79,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_012039) do
     t.index ["billetera_id"], name: "index_compras_on_billetera_id"
   end
 
-  create_table "products", force: :cascade do |t|
-    t.integer "code"
-    t.string "name"
-    t.string "description"
-    t.integer "price"
+  create_table "rates", force: :cascade do |t|
+    t.string "rent_name"
+    t.integer "rent_price"
+    t.string "extension_name"
+    t.integer "extension_price"
+    t.string "penalty_name"
+    t.integer "penalty_price"
+    t.string "gas_name"
+    t.integer "gas_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["billetera_id"], name: "index_medio_de_pagos_on_billetera_id"
@@ -126,6 +130,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_012039) do
     t.string "unlock_token"
     t.boolean "valid_license", default: false
     t.date "license_expiration_date"
+    t.float "latitude", default: -34.9213
+    t.float "longitude", default: -57.9545
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_usuarios_on_unlock_token", unique: true
@@ -140,8 +146,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_012039) do
     t.string "transmission"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "proximity"
+    t.float "proximity"
     t.string "license_plate"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

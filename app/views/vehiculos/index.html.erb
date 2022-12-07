@@ -7,7 +7,7 @@
 </div>
 
 <div class="row row-cols-1 row-cols-md-4 g-0 p-2 mb-5">
-        <% Vehiculo.all.each do |vehiculo| %> 
+        <% @vehiculos.each do |vehiculo| %> 
                 <div class="col g-4">
                     <div class="card h-100">
                         <div class="card-body">
@@ -17,12 +17,13 @@
                                 <%= link_to "Ver en detalle", vehiculo_path(vehiculo), method: :show, :class => 'btn btn-warning mt-3 mx-auto col-6'  %>
                                 <%= link_to "Editar",  edit_vehiculo_path(vehiculo), :class => 'btn btn-warning mt-3 mx-auto col-4'  %>
                             </div>
-                            <button type="button" class="btn btn-warning mt-3 col-12" data-bs-toggle="modal" data-bs-target="#exampleModal_<%=vehiculo.id%>">Eliminar</button>
+                            <button type="button" class="btn btn-warning mt-3 col-12" data-bs-toggle="modal" data-bs-target="#exampleModal2_<%= vehiculo.id %>">Geolocalizar</button>
+                            <button type="button" class="btn btn-warning mt-3 col-12" data-bs-toggle="modal" data-bs-target="#exampleModal_<%= vehiculo.id %>">Eliminar</button>
                         </div>
                     </div>
                 </div>  
 
-                <div class="modal fade" id="exampleModal_<%=vehiculo.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModal_<%= vehiculo.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                         <div class="modal-header">
@@ -39,5 +40,26 @@
                         </div>
                     </div>
                 </div> 
+
+                <div class="modal fade" id="exampleModal2_<%= vehiculo.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <% v = Vehiculo.find(vehiculo.id)%>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Geolocalizando <%= v.brand %> <%= v.model %></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!--<% results = Geocoder.search([v.latitude, v.longitude]) %>-->
+                            <p><b>Dirección:</b> <%= v.address %></p>
+                            <p><b>Coordenadas:</b> <a href="https://www.google.com/maps/search/?api=1&query=<%= v.latitude %>,<%= v.longitude %>" target="_blank"><%= v.latitude %> <%= v.longitude %></a></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
         <% end %>
  </div>

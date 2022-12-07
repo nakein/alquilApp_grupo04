@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
+#Agregado geocoder
+gem 'geocoder'
+
 #Agregado bootstrap
 gem 'bootstrap', '~> 5.2.2'
 

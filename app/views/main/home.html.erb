@@ -1,10 +1,38 @@
-<% if ((notice == "Cuenta creada satisfactoriamente")||(notice == "Supervisor creado satisfactoriamente")||(notice == "El supervisor fue eliminado")||(notice == "El supervisor fue actualizado")||(notice == "Alquiler cancelado. Se le devolverá su dinero")||(notice == "Alquiler finalizado con exito")) %>
+<% if ((notice == "Cuenta creada satisfactoriamente")||(notice == "Supervisor creado satisfactoriamente")||(notice == "El supervisor fue eliminado")||(notice == "El supervisor fue actualizado")||(notice == "Alquiler cancelado. Se le devolverá su dinero")||(notice == "Los precios fueron actualizados")||(notice == "Alquiler finalizado con exito")) %>
     <p class="notice alert alert-warning"><%= notice %></p>
 <% end %>
 
 <% if usuario_signed_in? && (current_usuario.administrador? || current_usuario.supervisor?) %>
     <% if current_usuario.administrador? %>
         <div class="g-4 p-5">
+            <h2>Tabla de precios actuales</h2>
+            <button type="button" class="btn btn-warning my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar precios</button>
+            <table class="table table-bordered w-50">
+                 <thead>
+                    <tr>
+                        <th scope="col">Tarifa</th>
+                        <th scope="col">Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="col"><%= @tarifa.rent_name %></th>
+                        <td scope="col">$<%= @tarifa.rent_price %></th>
+                    </tr>
+                    <tr>
+                        <td scope="col"><%= @tarifa.extension_name %></th>
+                        <td scope="col">$<%= @tarifa.extension_price %></th>
+                    </tr>
+                    <tr>
+                        <td scope="col"><%= @tarifa.penalty_name %></th>
+                        <td scope="col">$<%= @tarifa.penalty_price %></th>
+                    </tr>
+                    <tr>
+                        <td scope="col"><%= @tarifa.gas_name %></th>
+                        <td scope="col">$<%= @tarifa.gas_price %></th>
+                    </tr>
+                </tbody>
+            </table>
             <% @supervisors=Usuario.where(role:1) %>
             <h2>Tabla de supervisores</h2>
             <%= link_to "Agregar supervisor", new_supervisor_path, :class => 'btn btn-warning my-3'  %>
@@ -49,6 +77,42 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar precios</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <%= form_for @tarifa, url: rate_path(@tarifa) do |f| %>
+                        <div class="modal-body">
+                            <div class="field">
+                                <%= f.label @tarifa.rent_name %>
+                                <%= f.number_field :rent_price, class: "form-control mb-2" %>
+                            </div>
+                            <div class="mb-3">
+                                <%= f.label @tarifa.extension_name %>
+                                <%= f.number_field :extension_price, class: "form-control mb-2"%>
+                            </div>
+                            <div class="mb-3">
+                                <%= f.label @tarifa.penalty_name %>
+                                <%= f.number_field :penalty_price, class: "form-control mb-2" %>
+                            </div>
+                            <div class="mb-3">
+                                <%= f.label @tarifa.gas_name %>
+                                <%= f.number_field :gas_price, class: "form-control mb-2" %>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <%= f.submit "Guardar cambios", :class=>"btn btn-outline-warning" %>
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                        
+                    <% end %>
+                </div>
+            </div>
+        </div>
     <% else %>
         <!-- Supervisor -->
         <div class="row row-cols-1 row-cols-md-5 g-0 p-2 mb-5">
@@ -69,6 +133,24 @@
     <% end %>
 <%else %>
     <!-- Usuario cliente o invitado -->
+
+    <!-- Si hay un alquiler en curso se muestra un alert -->
+    <% if usuario_signed_in? %>
+        <% @alquiler = Alquiler.where(user_id: current_usuario.id).last %>
+        <% if(!@alquiler.nil?) %>
+                <% if(@alquiler.status == "en_curso") %>
+                    <p class="notice alert alert-warning">Actualmente tiene un alquiler en curso. Seleccione "Ver mi estado" en el menú de usuario para más información.</p>
+                <% end %>
+        <% end %>
+
+    <% end %>
+
+    <div id="map" style="height:400px"></div>
+
+    <script>
+        url = [];
+    </script>
+
     <div class="dropdown g-4 px-5 py-2">
         <a class="btn btn-warning dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Ordenar por
@@ -81,7 +163,14 @@
         </ul>
     </div>
     <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
-        <% @vehiculos.each do |vehiculo| %>     
+        <% @vehiculos.each do |vehiculo| %>   
+        <script>
+            url.push({
+                'latitude':'<%= vehiculo.latitude %>', 
+                'longitude':'<%= vehiculo.longitude %>',
+                'tooltip': '<%= vehiculo.brand %> <%= vehiculo.model %>'
+            })
+        </script>  
             <div class="col">
                 <div class="card h-100">
                     <%= image_tag vehiculo.image, class: "img-thumbnail col-12" if vehiculo.image.attached?%>
@@ -102,6 +191,10 @@
             </div>   
         <% end %>
     </div>
+
+    <script>
+        new Mapkick.Map("map", url);
+    </script>
 <% end %>
 
 
