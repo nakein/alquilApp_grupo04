@@ -2,26 +2,41 @@
   <h1>Medios de pago</h1>
 </div>
 
-<%= form_with url: '/billetera/agregar_tarjeta', method: :patch do |form| %>
-    <%= form.label "Nombre:" %>
-    <%= form.text_field :name %>
-    <%= form.label "Digitos de la tarjeta:" %>
-    <%= form.text_field :digits %>
-    <%= form.submit "Agregar tarjeta" %>
-  <% end %>  
+<p class="notice"><%= notice %></p>
+
+<%= link_to "Nueva tarjeta", billetera_new_card_path, class: "btn btn-primary" %>
+<%= link_to "Nuevo CVU", billetera_new_cvu_path, class: "btn btn-primary" %>
+
 
 <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
-<% Card.all.each do |tarjeta| %>     
+<h3>Tarjetas</h3>
+<% current_usuario.billetera.cards.each do |tarjeta| %>     
     <div class="col">
         <div class="card h-100">
            <div class="card-body">
                 <h5 class="card-title"><%= tarjeta.name %></h5>
                 <p class="card-text">Tipo: <%= tarjeta.card_type %></p>
                 <p class="card-text">Fecha de expiración: <%= tarjeta.exp_date %></p>
+                <%= button_to "Eliminar",billetera_medios_pago_path(Card.find(tarjeta.id)), method: :delete, class: "btn btn-danger" %>
             </div>
         </div>
     </div>   
 <% end %>
 </div>
 
-<p class="notice"><%= notice %></p>
+
+<div class="row row-cols-1 row-cols-md-5 g-4 p-5">
+<h3>Billeteras virtuales</h3>
+<% current_usuario.billetera.cvus.each do |cvu| %>     
+    <div class="col">
+        <div class="card h-100">
+           <div class="card-body">
+                <h5 class="card-title"><%= cvu.name %></h5>
+                <p class="card-text">Tipo: CVU </p>
+                <p class="card-text">Dígitos: <%= cvu.digits %></p>
+                <p class="card-text">Alias: <%= cvu.alias %></p>
+          </div>
+        </div>
+    </div>   
+<% end %>
+</div>

@@ -4,6 +4,7 @@ class Billetera < ApplicationRecord
     belongs_to :usuario
     has_one :compra
     has_many :cards
+    has_many :cvus
 end
     
     

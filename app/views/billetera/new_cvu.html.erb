@@ -1,0 +1,10 @@
+<h1>Agregar nuevo CVU</h1>
+    <%= form_with url: '/billetera/agregar_cvu', method: :patch do |form| %>
+        <%= form.label "Nombre:" %>
+        <%= form.text_field :name, required: true%>
+        <%= form.label "Digitos:" %>
+        <%= form.text_field :digits, required: true%>
+        <%= form.label "Alias:" %>
+        <%= form.text_field :alias, required: true%>
+        <%= form.submit "Agregar CVU" %>
+    <% end %>  

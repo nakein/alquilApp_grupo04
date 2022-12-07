@@ -1,0 +1,15 @@
+
+<h1>Agregar nueva tarjeta</h1>
+    <%= form_with url: '/billetera/agregar_card', method: :patch do |form| %>
+        <%= form.label "Nombre:" %>
+        <%= form.text_field :name, required: true%>
+        <%= form.label "Tipo:" %>
+        <%= form.select :card_type, ["debito","visa","mastercard"], required: true%>
+        <%= form.label "Digitos:" %>
+        <%= form.text_field :digits, required: true%>
+        <%= form.label "Código de seguridad:" %>
+        <%= form.text_field :security_code, required: true%>
+        <%= form.label "Fecha de expiracion:" %>
+        <%= form.date_field :exp_date, selected: Date.today, max: Date.new(Date.today.year+100, Date.today.month, Date.today.day), min: Date.today, autofocus: true, required: true%>
+        <%= form.submit "Agregar tarjeta" %>
+    <% end %>  

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_25_221334) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_05_012541) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -57,13 +57,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_221334) do
   end
 
   create_table "cards", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "name"
+    t.integer "card_type", default: 0
     t.string "digits"
     t.string "security_code"
     t.date "exp_date"
-    t.float "money"
+    t.float "money", default: 0.0, null: false
+    t.integer "billetera_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billetera_id"], name: "index_cards_on_billetera_id"
   end
 
   create_table "compras", force: :cascade do |t|
@@ -74,6 +77,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_221334) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["billetera_id"], name: "index_compras_on_billetera_id"
+  end
+
+  create_table "cvus", force: :cascade do |t|
+    t.string "name"
+    t.string "digits"
+    t.string "alias"
+    t.float "money", default: 0.0, null: false
+    t.integer "billetera_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billetera_id"], name: "index_cvus_on_billetera_id"
   end
 
   create_table "medio_de_pagos", force: :cascade do |t|
