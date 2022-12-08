@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_175833) do
 
   create_table "cards", force: :cascade do |t|
     t.string "name"
-    t.integer "card_type"
+    t.integer "card_type", default: 0
     t.string "digits"
     t.string "security_code"
     t.date "exp_date"
@@ -79,6 +79,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_175833) do
     t.index ["billetera_id"], name: "index_compras_on_billetera_id"
   end
 
+  create_table "cvus", force: :cascade do |t|
+    t.string "name"
+    t.string "digits"
+    t.string "alias"
+    t.float "money", default: 0.0, null: false
+    t.integer "billetera_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billetera_id"], name: "index_cvus_on_billetera_id"
+  end
+
+  create_table "medio_de_pagos", force: :cascade do |t|
+    t.string "nombre"
+    t.string "codigo"
+    t.string "alias"
+    t.string "tipo"
+    t.integer "billetera_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billetera_id"], name: "index_medio_de_pagos_on_billetera_id"
+  end
+
   create_table "rates", force: :cascade do |t|
     t.string "rent_name"
     t.integer "rent_price"
@@ -90,17 +112,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_175833) do
     t.integer "gas_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["billetera_id"], name: "index_medio_de_pagos_on_billetera_id"
-  end
-
-  create_table "reports", force: :cascade do |t|
-    t.string "subject"
-    t.string "message"
-    t.integer "status", default: 0
-    t.integer "usuario_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["usuario_id"], name: "index_reports_on_usuario_id"
   end
 
   create_table "reports", force: :cascade do |t|
