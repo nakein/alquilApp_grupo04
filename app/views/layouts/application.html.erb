@@ -31,7 +31,7 @@
                 <%= link_to "Inicio", root_path, class: "nav-link"  %>
             </li>
             <% if (usuario_signed_in?)%>
-              <% if (current_usuario.cliente?) %>
+              <% if (current_usuario.cliente?) && (current_usuario.validated?)%>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><%=  current_usuario.fullname %></a>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -41,6 +41,13 @@
                         <li><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'dropdown-item'  %></li>
                     </ul>
                 </li>
+              <% elsif ((current_usuario.cliente?) && !(current_usuario.validated?))%>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><%=  current_usuario.fullname %></a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'dropdown-item'  %></li>
+                  </ul>
+                </li>          
               <% else %>
                 <% if (current_usuario.supervisor?) %>
                   <li class="nav-item"><%= link_to "Vehículos", vehiculos_path, class: "nav-link"  %></li>

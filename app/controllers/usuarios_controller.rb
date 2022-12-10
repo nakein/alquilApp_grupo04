@@ -58,6 +58,13 @@ class UsuariosController < ApplicationController
       redirect_to usuario_path(usuario)
     end
 
+    def account_validated
+      usuario = Usuario.find(params.require(:id))
+      usuario.validated = true
+      usuario.save!
+      redirect_to usuario_path(usuario)
+    end
+
     private
 
         def profile_params

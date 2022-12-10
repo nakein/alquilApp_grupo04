@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :usuarios do
     member do
       get :license_validated
+      get :account_validated
       get :ban
     end
   end

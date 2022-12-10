@@ -28,6 +28,7 @@ class SupervisorsController < ApplicationController
     def create
         @usuario = Usuario.new(register_params)
         @usuario.role=1
+        @usuario.validated = true
         @usuario.license_expiration_date = Date.new(2024,12,5)
         
         if @usuario.save

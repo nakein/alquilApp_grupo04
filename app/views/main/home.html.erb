@@ -49,6 +49,10 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="g-4 p-5">
+        <%= link_to "Agregar administrador", new_supervisor_path, :class => 'btn btn-warning my-3'  %>
+        </div>
     <% else %>
         <!-- Supervisor -->
         <div class="row row-cols-1 row-cols-md-5 g-0 p-2 mb-5">
@@ -60,7 +64,7 @@
                                 <h5 class="card-title"><%= usuario.fullname %></h5>
                                 <p class="card-text mb-0">DNI <%= usuario.dni %></p>
                                 <%= link_to "Ver en detalle", usuario_path(usuario), :class => 'btn btn-warning mt-3'  %>
-                            </div>
+                             </div>
                         </div>
                     </div>   
                 <% end %>
@@ -68,6 +72,10 @@
         </div>
     <% end %>
 <%else %>
+    <!-- Usuario cliente no validado -->
+    <% if usuario_signed_in? && !(current_usuario.validated?) %>
+    <h2>Su cuenta está en espera para ser validada, ingrese más tarde</h2>
+    <% else %>
     <!-- Usuario cliente o invitado -->
     <div class="dropdown g-4 px-5 py-2">
         <a class="btn btn-warning dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -102,6 +110,7 @@
             </div>   
         <% end %>
     </div>
+    <% end %>
 <% end %>
 
 

@@ -43,6 +43,16 @@
         </div>
 
         <div class="mt-4">
+            <% if (@usuario.validated?) %>
+                <p>Estado de confirmación de la cuenta: Validada</p>
+            <% else %>
+                <p>Estado de confirmación de la cuenta: Sin Validar</p>
+                <%= link_to "Validar cuenta", account_validated_usuario_path(@usuario), class: "btn btn-warning",params: {id: @usuario.id}%>
+            <% end %>
+        </div>
+
+
+        <div class="mt-4">
             <% if @usuario.access_locked? %>
                 <p>Estado de la cuenta del usuario: Bloqueada</p>
                 <%= link_to "Desbloquear", ban_usuario_path(@usuario), class: "btn btn-warning"%>
