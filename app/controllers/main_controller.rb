@@ -13,8 +13,6 @@ class MainController < ApplicationController
       else
         puts "Sin cambios"
       end
-    else
-      @vehiculos = Vehiculo.all
     end
   end
 
