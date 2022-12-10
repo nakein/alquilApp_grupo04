@@ -122,12 +122,9 @@ class BilleteraController < ApplicationController
         render "mi_billetera"
     end
 
-    def new_card
-    end
-
     def agregar_card
         @tarjeta = Card.new(id: current_usuario.billetera.cards.count+1,name: params.require(:name),digits: params.require(:digits),security_code: params.require(:security_code),exp_date: params.require(:exp_date),money: 1000.0,billetera_id: current_usuario.billetera.id,card_type: params.require(:card_type));
-        if(!card_digits_exists(@tarjeta.digits))
+        if(!card_digits_exists(@tarjeta.digits,@tarjeta.card_type))
             show_info = "No se ha podido encontrar una tarjeta que coincida con los datos ingresados";
         elsif(!is_card_available(@tarjeta.digits))
             show_info = "La tarjeta ingresada se encuentra inhabilitada";
@@ -144,11 +141,11 @@ class BilleteraController < ApplicationController
     end
 
     def destroy_card
-        
+       
         @tarjeta = Card.find(params[:id]);
         @tarjeta.destroy;
 
-        redirect_to '/billetera/medios_pago', notice: "Tarjeta eliminada satisfactoriamente"
+        redirect_to '/billetera/medios_pago', notice: "Tarjeta eliminada satisfactoriamente" and return
     end
 
     def new_cvu
@@ -179,32 +176,32 @@ class BilleteraController < ApplicationController
         @cvu = Cvu.find(params[:id]);
         @cvu.destroy;
 
-        redirect_to '/billetera/medios_pago', notice: "CVU eliminado satisfactoriamente"
+        redirect_to '/billetera/medios_pago', notice: "CVU eliminado satisfactoriamente" and return
     end
 
     private
         def ejemplos_tarjeta
             tarjeta1 = Card.new(id: 1, name: "Tarjeta Naranja", digits: "01234567890123456789", security_code: "123", exp_date: DateTime.new(2022,12,5), money: 50.0, card_type: "debito");                                    
             tarjeta2 = Card.new(id: 2, name: "Uala", digits: "01234567899876543210", security_code: "234", exp_date: DateTime.new(2022,10,5.5), money: 3200.0, card_type: "visa");
-            tarjeta3 = Card.new(id: 3, name: "Mastercard Black", digits: "11223344556677889900", security_code: "456", exp_date: DateTime.new(2022,11,30), money: 12000.0, card_type: "mastercard");
+            tarjeta3 = Card.new(id: 3, name: "Mastercard Black", digits: "11223344556677889900", security_code: "456", exp_date: DateTime.new(2022,12,30), money: 12000.0, card_type: "mastercard");
             tarjeta1.save;
             tarjeta2.save;
             tarjeta3.save;
         end
 
-        def card_digits_exists(digits)
+        def card_digits_exists(digits,card_type)
             i = 0;
             invalid_digits = ["00112233445566778899"];
             while ((i < (invalid_digits.length-1)) && (digits != invalid_digits[i]))
                 i = i+1
             end;
-            return (digits != invalid_digits[i]);
+            return (digits != invalid_digits[i])&&!((card_type == 'visa')&&(digits[0] != '4'))&&!((card_type == 'mastercard')&&(digits[0] != '5'));
         end
 
         def is_card_available(digits)
             i = 0;
             unavailable_digits = ["11223344556677889900"];
-            while ((i < (unavailable_digits.length-1)) && (digits != unavailable_digits[i]))
+            while ((i < (unavailable_digits.length-1)) && (digits == unavailable_digits[i]))
                 i = i+1
             end;
             return (digits != unavailable_digits[i]);
