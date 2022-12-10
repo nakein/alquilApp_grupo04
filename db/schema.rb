@@ -90,6 +90,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_175833) do
     t.integer "gas_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["billetera_id"], name: "index_medio_de_pagos_on_billetera_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.string "subject"
+    t.string "message"
+    t.integer "status", default: 0
+    t.integer "usuario_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["usuario_id"], name: "index_reports_on_usuario_id"
   end
 
   create_table "reports", force: :cascade do |t|
