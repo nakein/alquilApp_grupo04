@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_06_175833) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_10_043005) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -143,6 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_175833) do
     t.date "license_expiration_date"
     t.float "latitude", default: -34.9213
     t.float "longitude", default: -57.9545
+    t.boolean "validated"
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_usuarios_on_unlock_token", unique: true
