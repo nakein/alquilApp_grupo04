@@ -51,7 +51,47 @@
         </div>
 
         <div class="g-4 p-5">
-        <%= link_to "Agregar administrador", new_supervisor_path, :class => 'btn btn-warning my-3'  %>
+        <h2>Tabla de administradores</h2>
+        <%= link_to "Agregar administrador", new_administrador_path, :class => 'btn btn-warning my-3'  %>
+        <% @administradors = Usuario.all.where(role: 2).where.not(id: current_usuario.id) %>
+        <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @administradors.each do |administrador| %>
+                        <tr>
+                            <td><%= administrador.fullname %></td>
+                            <td>
+                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                               <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal_<%=administrador.id%>">Eliminar</button>
+                            </div>
+                            </td>
+                        </tr>
+
+                        <div class="modal fade" id="exampleModal_<%=administrador.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar a <%= Usuario.find(administrador.id).fullname %></h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Esta seguro que desea eliminar este administrador?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <%= button_to "Eliminar",administrador_path(Usuario.find(administrador.id)), method: :delete, class: "btn btn-danger" %>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </tbody>
+            </table>
         </div>
     <% else %>
         <!-- Supervisor -->

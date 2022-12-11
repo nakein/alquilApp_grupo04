@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       get :license_validated
       get :account_validated
       get :ban
+      delete 'usuarios/destroy/:id', to: 'usuarios#destroy'
     end
   end
 resources :perfil, only: [:edit]
@@ -31,6 +32,9 @@ resources :perfil, only: [:edit]
   resources :supervisors
   delete '/supervisors/:id', to:'supervisors#destroy'
   get '/supervisors/new', to: 'supervisors#new'
+  resources :administradors
+  delete '/administradors/:id', to:'administradors#destroy'
+  get '/administradors/new', to: 'administradors#new'
   root "main#home"
 
   resources :reports

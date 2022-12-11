@@ -48,7 +48,8 @@
             <% else %>
                 <p>Estado de confirmación de la cuenta: Sin Validar</p>
                 <%= link_to "Validar cuenta", account_validated_usuario_path(@usuario), class: "btn btn-warning",params: {id: @usuario.id}%>
-            <% end %>
+                <%= button_to "Rechazar cuenta", usuario_path(@usuario), method: :delete, class: "btn btn-warning",params: {id: @usuario.id}%>
+                <% end %>
         </div>
 
 
