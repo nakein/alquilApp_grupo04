@@ -1,0 +1,49 @@
+<div class="w-50 p-4 justify-content-left">
+  <h1>Medios de pago</h1>
+</div>
+
+<p class="notice"><%= notice %></p>
+
+<%= link_to "Nueva tarjeta", billetera_new_card_path, class: "btn btn-outline-warning" %>
+<%= link_to "Nuevo CVU", billetera_new_cvu_path, class: "btn btn-outline-warning" %>
+
+
+<div class="row row-cols-1 row-cols-md-5 g-4 p-5">
+<h3>Tarjetas</h3>
+<% current_usuario.billetera.cards.each do |tarjeta| %>     
+    <div class="col">
+        <div class="card h-100">
+           <div class="card-body">
+                <h5 class="card-title"><%= tarjeta.name %></h5>
+                <p class="card-text">Tipo: <%= tarjeta.card_type %></p>
+                <p class="card-text">Fecha de expiración: <%= tarjeta.exp_date %></p>
+                <%= button_to "Eliminar","destroy_card",params: {id: tarjeta.id}, method: :delete, class: "btn btn-danger" %>
+            </div>
+        </div>
+    </div>   
+<% end %>
+<% if (current_usuario.billetera.cards.length == 0) %>
+<h5>No hay ninguna tarjeta registrada todavía</h5>
+<% end %>
+</div>
+
+
+<div class="row row-cols-1 row-cols-md-5 g-4 p-5">
+<h3>Billeteras virtuales</h3>
+<% current_usuario.billetera.cvus.each do |cvu| %>     
+    <div class="col">
+        <div class="card h-100">
+           <div class="card-body">
+                <h5 class="card-title"><%= cvu.name %></h5>
+                <p class="card-text">Tipo: CVU </p>
+                <p class="card-text">Dígitos: <%= cvu.digits %></p>
+                <p class="card-text">Alias: <%= cvu.alias %></p>
+                <%= button_to "Eliminar","destroy_cvu",params: {id: cvu.id}, method: :delete, class: "btn btn-danger" %>
+          </div>
+        </div>
+    </div>   
+<% end %>
+<% if (current_usuario.billetera.cvus.length == 0) %>
+<h5>No hay ningún CVU registrado todavía</h5>
+<% end %>
+</div>

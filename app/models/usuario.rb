@@ -18,7 +18,8 @@ class Usuario < ApplicationRecord
   after_initialize :set_default_role, :if => :new_record?
   def set_default_role
     self.role ||= :cliente
-    self.billetera ||= Billetera.new
+    self.billetera ||= Billetera.new;
+    self.validated ||= false;
   end
 
   private
