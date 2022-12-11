@@ -1,4 +1,4 @@
-<% if (notice == "Se ha cambiado el estado del reporte") %>
+<% if ((notice == "Se ha cambiado el estado del reporte") || (notice == "Reporte resuelto satisfactoriamente"))%>
     <p class="notice alert alert-warning"><%= notice %></p>
 <% end %>
 
@@ -65,7 +65,9 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
                             <% if report.status == "esperando" %>
-                                <%= button_to "Reporte resuelto", report_path(report), method: :patch, class: "btn btn-outline-warning"%>
+                                <%= link_to "Resolver reporte", new_penalty_path(report.id), :class => 'btn btn-warning'  %> 
+                                <%= button_to "Resolver reporte sin multa", report_path(report), method: :patch, :class=>"btn btn-outline-warning my-4" %>
+
                             <% end %>
                         </div>
                     </div>

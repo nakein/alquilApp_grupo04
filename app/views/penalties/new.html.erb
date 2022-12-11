@@ -1,0 +1,87 @@
+<div class="formContainer w-100 p-4 d-flex justify-content-left">
+    <%= form_for :penalty, url: penalties_path, html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
+
+        <h2 class="mb-4">Penalización</h2>
+        <% if !@penalty.nil? %>
+            <%= render "devise/shared/error_messages", resource: @penalty %>
+        <% end %>
+    
+
+        <div class="field">
+            <%= f.label :usuario_id, "Usuario penalizado" %>
+            <%= f.collection_select( :usuario_id, Usuario.where(role:0), :id, :fullname , {autofocus: true}, { class: "form-control mb-2" }) %>
+        </div>
+        
+
+        <div class="field">
+            <%= f.label :motivo, "Asunto" %>
+            <%= f.text_field :motivo, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :descripcion, "Descripcion" %>
+            <%= f.text_area :descripcion, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :tarifa, "Tarifa" %>
+            <%= f.number_field :tarifa, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Ver tarifas
+</button>
+
+        <!--<p class="notice", style="color:#F5BF69;"><%= notice %></p>-->
+
+        <div class="actions">
+            <%= f.submit "Finalizar multa", :class=>"btn btn-outline-warning my-4" %>
+            <%= link_to "Cancelar", reports_path, :class => 'btn btn-outline-warning my-4 col-6'  %>
+        </div>
+    <% end %>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Tarifas</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            <% @tarifa = Rate.find(1) %>
+            <table class="table table-bordered w-50">
+                <thead>
+                    <tr>
+                        <th scope="col">Tarifa</th>
+                        <th scope="col">Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="col"><%= @tarifa.rent_name %></th>
+                        <td scope="col">$<%= @tarifa.rent_price %></th>
+                    </tr>
+                    <tr>
+                        <td scope="col"><%= @tarifa.extension_name %></th>
+                        <td scope="col">$<%= @tarifa.extension_price %></th>
+                    </tr>
+                    <tr>
+                        <td scope="col"><%= @tarifa.penalty_name %></th>
+                        <td scope="col">$<%= @tarifa.penalty_price %></th>
+                    </tr>
+                    <tr>
+                        <td scope="col"><%= @tarifa.gas_name %></th>
+                        <td scope="col">$<%= @tarifa.gas_price %></th>
+                    </tr>
+                </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

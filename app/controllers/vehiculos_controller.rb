@@ -44,6 +44,21 @@ class VehiculosController < ApplicationController
       redirect_to vehiculos_path, notice: "Vehiculo eliminado satisfactoriamente"
   end
 
+  def updateEnable
+    @vehiculo = Vehiculo.find(params[:id])
+    @vehiculo.enable=true;
+    @vehiculo.save
+    redirect_to vehiculos_path, notice: "El vehiculo fue habilitado"
+  end
+
+  def updateDisable
+    @vehiculo = Vehiculo.find(params[:id])
+    @vehiculo.enable=false;
+    @vehiculo.save;
+    redirect_to vehiculos_path, notice: "El vehiculo fue deshabilitado"
+
+  end
+
   private
 
     def vehicle_params

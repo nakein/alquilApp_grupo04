@@ -21,10 +21,21 @@ Rails.application.routes.draw do
 resources :perfil, only: [:edit]
 
   resources :vehiculos
+  resources :vehiculos do
+    member do
+      patch :updateEnable
+      patch :updateDisable
+    end
+  end
   resources :supervisors
   delete '/supervisors/:id', to:'supervisors#destroy'
   get '/supervisors/new', to: 'supervisors#new'
   root "main#home"
 
   resources :reports
+
+  get 'stats/vehiculos'
+  get 'stats/usuarios'
+
+  resources :penalties
 end

@@ -55,6 +55,8 @@
                   <li class="nav-item"><%= link_to "Reportes", reports_path(current_usuario), class: "nav-link"  %></li>
                   <li class="nav-item"><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %></li>
                 <% else %>
+                  <li class="nav-item"><%= link_to "Uso de autos", stats_vehiculos_path, :class => 'nav-link'  %></li>
+                  <li class="nav-item"><%= link_to "Estadísticas usuarios", stats_usuarios_path, :class => 'nav-link'  %></li>
                   <li class="nav-item"><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'btn btn-warning'  %></li>
                 <% end %>
               <% end %>

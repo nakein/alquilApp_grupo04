@@ -33,6 +33,8 @@
                     </tr>
                 </tbody>
             </table>
+
+            <!-- Tabla de supervisores -->
             <% @supervisors=Usuario.where(role:1) %>
             <h2>Tabla de supervisores</h2>
             <%= link_to "Agregar supervisor", new_supervisor_path, :class => 'btn btn-warning my-3'  %>
@@ -76,6 +78,8 @@
                     <% end %>
                 </tbody>
             </table>
+
+            <!-- Tabla de usuarios -->
         </div>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
@@ -162,32 +166,34 @@
         </ul>
     </div>
     <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
-        <% @vehiculos.each do |vehiculo| %>   
-        <script>
-            url.push({
-                'latitude':'<%= vehiculo.latitude %>', 
-                'longitude':'<%= vehiculo.longitude %>',
-                'tooltip': '<%= vehiculo.brand %> <%= vehiculo.model %>'
-            })
-        </script>  
-            <div class="col">
-                <div class="card h-100">
-                    <%= image_tag vehiculo.image, class: "img-thumbnail col-12" if vehiculo.image.attached?%>
-                    <div class="card-body">
-                        <h5 class="card-title"><%= vehiculo.brand %> <%= vehiculo.model %></h5>
-                        <p class="card-text">Capacidad: <%= vehiculo.capacity %></p>
-                        <p class="card-text">Proximidad: <%= vehiculo.proximity %>m</p>
-                        <div class="row">
-                            <%= link_to "Ver en detalle", vehiculo_path(vehiculo), :class => 'btn btn-warning col-7'  %>
-                            <% if usuario_signed_in? %>
-                                <%= link_to "Alquilar", alquiler_path(vehiculo), :class => 'btn btn-warning col-5'  %>
-                            <% else %>
-                                <%= link_to "Alquilar", new_usuario_session_path, :class => 'btn btn-warning col-5'  %>
-                            <% end %>
+        <% @vehiculos.each do |vehiculo| %>
+            <%if vehiculo.enable %>   
+                <script>
+                    url.push({
+                        'latitude':'<%= vehiculo.latitude %>', 
+                        'longitude':'<%= vehiculo.longitude %>',
+                        'tooltip': '<%= vehiculo.brand %> <%= vehiculo.model %>'
+                    })
+                </script>  
+                    <div class="col">
+                        <div class="card h-100">
+                            <%= image_tag vehiculo.image, class: "img-thumbnail col-12" if vehiculo.image.attached?%>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= vehiculo.brand %> <%= vehiculo.model %></h5>
+                                <p class="card-text">Capacidad: <%= vehiculo.capacity %></p>
+                                <p class="card-text">Proximidad: <%= vehiculo.proximity %>m</p>
+                                <div class="row">
+                                    <%= link_to "Ver en detalle", vehiculo_path(vehiculo), :class => 'btn btn-warning col-7'  %>
+                                    <% if usuario_signed_in? %>
+                                        <%= link_to "Alquilar", alquiler_path(vehiculo), :class => 'btn btn-warning col-5'  %>
+                                    <% else %>
+                                        <%= link_to "Alquilar", new_usuario_session_path, :class => 'btn btn-warning col-5'  %>
+                                    <% end %>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>   
+                    </div>   
+            <% end %>
         <% end %>
     </div>
 

@@ -11,6 +11,7 @@ class Usuario < ApplicationRecord
     message: "solo admite letras" }
   validate :correct_license_type
   has_many :reports
+  has_many :penalties
   has_one_attached :license
   has_one :billetera
 

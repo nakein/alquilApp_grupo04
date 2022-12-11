@@ -1,4 +1,4 @@
-<% if ((notice == "Vehiculo agregado satisfactoriamente")||(notice == "El vehiculo fue actualizado")||(notice == "Vehiculo eliminado satisfactoriamente")) %>
+<% if ((notice == "Vehiculo agregado satisfactoriamente")||(notice == "El vehiculo fue actualizado")||(notice == "Vehiculo eliminado satisfactoriamente")||(notice == "El vehiculo fue habilitado")||(notice == "El vehiculo fue deshabilitado")) %>
     <p class="notice alert alert-warning"><%= notice %></p>
 <% end %>
 <div class="p-4">
@@ -17,6 +17,11 @@
                                 <%= link_to "Ver en detalle", vehiculo_path(vehiculo), method: :show, :class => 'btn btn-warning mt-3 mx-auto col-6'  %>
                                 <%= link_to "Editar",  edit_vehiculo_path(vehiculo), :class => 'btn btn-warning mt-3 mx-auto col-4'  %>
                             </div>
+                            <% if vehiculo.enable %>
+                                <%= button_to "Deshabilitar vehículo", updateDisable_vehiculo_path(vehiculo), method: :patch, class: "btn btn-warning mt-3 col-12"%>
+                            <% else %>
+                                <%= button_to "Habilitar vehículo", updateEnable_vehiculo_path(vehiculo), method: :patch, class: "btn btn-warning mt-3 col-12"%>
+                            <% end %>
                             <button type="button" class="btn btn-warning mt-3 col-12" data-bs-toggle="modal" data-bs-target="#exampleModal2_<%= vehiculo.id %>">Geolocalizar</button>
                             <button type="button" class="btn btn-warning mt-3 col-12" data-bs-toggle="modal" data-bs-target="#exampleModal_<%= vehiculo.id %>">Eliminar</button>
                         </div>

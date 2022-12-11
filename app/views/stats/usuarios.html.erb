@@ -1,0 +1,19 @@
+<h1>Tabla de usuarios y sus stadisticas</h1>
+<table class="table table-bordered w-50">
+<thead>
+    <tr>
+        <th scope="col">Usuarios</th>
+        <th scope="col">Cantidad de multas</th>
+        <th scope="col">Horas utilizadas en el sistema</th>
+    </tr>
+</thead>
+<tbody>
+    <% @usuarios.each do |usuario| %>
+        <tr>
+            <td scope="col"><%= usuario.fullname %></td>
+            <td scope="col"><%= Penalty.where(usuario_id:usuario.id).count %></td>
+            <td scope="col"><%= @horas_total["#{usuario.id}"] %></td>
+        </tr>
+    <% end %>
+</tbody>
+</table>
