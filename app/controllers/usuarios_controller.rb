@@ -68,7 +68,7 @@ class UsuariosController < ApplicationController
     def destroy
       @usuario = Usuario.find(params[:id])
       @usuario.destroy
-      redirect_to root_path, notice: "La solicitud de creación de cuenta fue eliminada"
+      redirect_to root_path, notice: "La solicitud de creación de cuenta fue eliminada exitosamente"
     end
 
     private
