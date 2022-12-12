@@ -1,0 +1,48 @@
+<div class="formContainer w-100 p-4 d-flex justify-content-left">
+    <%= form_for :usuario, url: administradors_path, html: {class:"col-12 col-md-5 p-5 rounded-2"} do |f| %>
+
+        <h2 class="mb-4">Agregar un nuevo administrador</h2>
+        <% if !@usuario.nil? %>
+            <%= render "devise/shared/error_messages", resource: @usuario %>
+        <% end %>
+
+        <div class="field">
+            <%= f.label :fullname, "Nombre completo" %>
+            <%= f.text_field :fullname, autofocus: true, required: true, class: "form-control my-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :dni, "DNI" %>
+            <%= f.text_field :dni, autofocus: true, required: true, class: "form-control mb-2" %>
+        </div>
+
+        <div class="field">
+        <%= f.label :birthdate, "Fecha de nacimiento" %>
+        <%= f.date_field :birthdate, selected: Date.today, max: Date.today, min: Date.new(Date.today.year-100, Date.today.month, Date.today.day), autofocus: true, autocomplete: "birthdate", required: true, class: "form-control mb-2"%>
+        </div>
+
+        <div class="field">
+            <%= f.label :email, "Email" %>
+            <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email", class: "form-control mb-2" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :password, "Contraseña" %>
+            <% if @minimum_password_length %>
+                <em>(Al menos <%= @minimum_password_length %> caracteres)</em>
+            <% end %>
+            <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control mb-2" %>
+      </div>
+  
+      <div class="field">
+        <%= f.label :password_confirmation, "Confirmar contraseña" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control mb-2" %>
+      </div>
+  
+        <!--<p class="notice", style="color:#F5BF69;"><%= notice %></p>-->
+
+        <div class="actions">
+            <%= f.submit "Agregar administrador", :class=>"btn btn-outline-warning my-4" %>
+        </div>
+    <% end %>
+</div>

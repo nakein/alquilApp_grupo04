@@ -58,10 +58,23 @@ class UsuariosController < ApplicationController
       redirect_to usuario_path(usuario)
     end
 
+    def account_validated
+      usuario = Usuario.find(params.require(:id))
+      usuario.validated = true
+      usuario.save!
+      redirect_to usuario_path(usuario)
+    end
+
+    def destroy
+      @usuario = Usuario.find(params[:id])
+      @usuario.destroy
+      redirect_to root_path, notice: "La solicitud de creación de cuenta fue eliminada exitosamente"
+    end
+
     private
 
         def profile_params
-            params.require(:usuario).permit(:fullname, :dni, :birthdate, :license_expiration_date, :license, :email);
+            params.require(:usuario).permit(:fullname, :dni, :birthdate, :license_expiration_date, :license, :email, :latitude, :longitude);
         end
 
         def supervisor_profile_params

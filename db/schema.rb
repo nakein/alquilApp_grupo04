@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_08_225341) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_12_022349) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_225341) do
 
   create_table "cards", force: :cascade do |t|
     t.string "name"
-    t.integer "card_type"
+    t.integer "card_type", default: 0
     t.string "digits"
     t.string "security_code"
     t.date "exp_date"
@@ -77,6 +77,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_225341) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["billetera_id"], name: "index_compras_on_billetera_id"
+  end
+
+  create_table "cvus", force: :cascade do |t|
+    t.string "name"
+    t.string "digits"
+    t.string "alias"
+    t.float "money", default: 0.0, null: false
+    t.integer "billetera_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billetera_id"], name: "index_cvus_on_billetera_id"
+  end
+
+  create_table "medio_de_pagos", force: :cascade do |t|
+    t.string "nombre"
+    t.string "codigo"
+    t.string "alias"
+    t.string "tipo"
+    t.integer "billetera_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billetera_id"], name: "index_medio_de_pagos_on_billetera_id"
   end
 
   create_table "penalties", force: :cascade do |t|
@@ -129,6 +151,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_225341) do
     t.string "unlock_token"
     t.boolean "valid_license", default: false
     t.date "license_expiration_date"
+    t.float "latitude", default: -34.903445
+    t.float "longitude", default: -57.938195
+    t.boolean "validated"
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_usuarios_on_unlock_token", unique: true
@@ -143,10 +168,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_225341) do
     t.string "transmission"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "proximity", default: 100
+    t.float "proximity"
     t.string "license_plate"
     t.float "latitude"
     t.float "longitude"
+    t.string "address"
     t.boolean "enable", default: true
   end
 

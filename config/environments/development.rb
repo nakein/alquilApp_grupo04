@@ -60,7 +60,7 @@ Rails.application.configure do
   config.assets.quiet = true
 
   #Configuracion del host para poseer dominio publico
-  config.hosts << "bdef-190-191-119-247.sa.ngrok.io"
+  config.hosts << "b6ec-190-191-119-247.sa.ngrok.io"
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

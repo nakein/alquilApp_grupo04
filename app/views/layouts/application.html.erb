@@ -13,9 +13,10 @@
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css" rel="stylesheet" />
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js"></script>
     <script>
-      mapboxgl.accessToken = "pk.eyJ1IjoianVhbnJveWUiLCJhIjoiY2xiMmtmMWdoMDVhdzNxbm1hZWN5dGN6aCJ9.gbgNESlW74SvFkK6_qWJ4Q";
+      mapboxgl.accessToken = "pk.eyJ1IjoicGVwZXJvdmEiLCJhIjoiY2xiaDl3cTllMGhoMTNvb2MyMGdsamt5YiJ9.otWc2jvhryTRQoKy0xpY-A";
     </script>
     <script src="https://unpkg.com/mapkick@0.1.1/dist/mapkick.js"></script>
+    
   </head>
 
   <body>
@@ -39,7 +40,7 @@
                 <%= link_to "Inicio", root_path, class: "nav-link"  %>
             </li>
             <% if (usuario_signed_in?)%>
-              <% if (current_usuario.cliente?) %>
+              <% if (current_usuario.cliente?) && (current_usuario.validated?)%>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><%=  current_usuario.fullname %></a>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -49,6 +50,13 @@
                         <li><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'dropdown-item'  %></li>
                     </ul>
                 </li>
+              <% elsif ((current_usuario.cliente?) && !(current_usuario.validated?))%>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><%=  current_usuario.fullname %></a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><%= button_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => 'dropdown-item'  %></li>
+                  </ul>
+                </li>          
               <% else %>
                 <% if (current_usuario.supervisor?) %>
                   <li class="nav-item"><%= link_to "Vehículos", vehiculos_path, class: "nav-link"  %></li>
