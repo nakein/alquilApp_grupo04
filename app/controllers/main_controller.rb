@@ -4,7 +4,7 @@ class MainController < ApplicationController
   def home
     @usuarios = Usuario.all
     @tarifa = Rate.find(1)
-    @vehiculos = Vehiculo.near([-34.9072, -57.9506], 0.5, units: :km)
+    @vehiculos = Vehiculo.near([-34.903445, -57.938195], 0.5, units: :km)
     if(@vehiculos.size >= 1)
       if params[:value] == "less"
         @vehiculos = @vehiculos.order(params[:sort])

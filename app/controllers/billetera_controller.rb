@@ -123,8 +123,18 @@ class BilleteraController < ApplicationController
     end
 
     def agregar_card
-        @tarjeta = Card.new(id: current_usuario.billetera.cards.count+1,name: params.require(:name),digits: params.require(:digits),security_code: params.require(:security_code),exp_date: params.require(:exp_date),money: 1000.0,billetera_id: current_usuario.billetera.id,card_type: params.require(:card_type));
-        if(!card_digits_exists(@tarjeta.digits,@tarjeta.card_type))
+        show_info = ""
+        @tarjeta = Card.new(id: Card.all.count+1,name: params.require(:name),digits: params.require(:digits),security_code: params.require(:security_code),exp_date: params.require(:exp_date),money: 1000.0,billetera_id: current_usuario.billetera.id,card_type: params.require(:card_type));
+        if((@tarjeta.digits.length < 14)||(@tarjeta.digits.length > 20))
+            show_info = "Error al ingresar tarjeta. No puede tener menos de 14 dígitos ni más de 20";
+        end
+        if(@tarjeta.security_code.length != 3)
+            if(show_info.length == 0)
+                show_info = "Error al ingresar tarjeta. El código de seguridad debe ser de 3 dígitos";
+            else
+                show_info += ", y el código de seguridad debe ser de 3 dígitos";      
+            end
+        elsif(!card_digits_exists(@tarjeta.digits,@tarjeta.card_type))
             show_info = "No se ha podido encontrar una tarjeta que coincida con los datos ingresados";
         elsif(!is_card_available(@tarjeta.digits))
             show_info = "La tarjeta ingresada se encuentra inhabilitada";
@@ -152,10 +162,20 @@ class BilleteraController < ApplicationController
     end
 
     def agregar_cvu
+        show_info = ""
+        @cvu = Cvu.new(id: Cvu.all.count+1,name: params.require(:name),digits: params.require(:digits),alias: params.require(:alias),money: 1000.0,billetera_id: current_usuario.billetera.id);
         
-        @cvu = Cvu.new(id: current_usuario.billetera.cvus.count+1,name: params.require(:name),digits: params.require(:digits),alias: params.require(:alias),money: 1000.0,billetera_id: current_usuario.billetera.id);
-        
-        if(!cvu_digits_exists(@cvu.digits))
+        if((@cvu.alias.length < 6)||(@cvu.alias.length > 20))
+            show_info = "Error al ingresar tarjeta. El alias debe ser de entre 6 y 20 caracteres";
+        end;
+
+        if(@cvu.digits.length != 22)
+            if(show_info.length == 0)    
+                show_info = "Error al ingresar tarjeta. Se deben ingresar 22 dígitos";
+            else
+                show_info = ", y se deben ingresar 22 dígitos"
+            end
+        elsif(!cvu_digits_exists(@cvu.digits))
             show_info = "No se ha podido encontrar un CVU que coincida con los datos ingresados";
         elsif(!is_cvu_available(@cvu.digits))
             show_info = "El CVU ingresado se encuentra inhabilitado";
@@ -183,7 +203,7 @@ class BilleteraController < ApplicationController
         def ejemplos_tarjeta
             tarjeta1 = Card.new(id: 1, name: "Tarjeta Naranja", digits: "01234567890123456789", security_code: "123", exp_date: DateTime.new(2022,12,5), money: 50.0, card_type: "debito");                                    
             tarjeta2 = Card.new(id: 2, name: "Uala", digits: "01234567899876543210", security_code: "234", exp_date: DateTime.new(2022,10,5.5), money: 3200.0, card_type: "visa");
-            tarjeta3 = Card.new(id: 3, name: "Mastercard Black", digits: "11223344556677889900", security_code: "456", exp_date: DateTime.new(2022,12,30), money: 12000.0, card_type: "mastercard");
+            tarjeta3 = Card.new(id: 3, name: "Mastercard Black", digits: "512233445577889900", security_code: "456", exp_date: DateTime.new(2022,12,30), money: 12000.0, card_type: "mastercard");
             tarjeta1.save;
             tarjeta2.save;
             tarjeta3.save;
@@ -195,12 +215,13 @@ class BilleteraController < ApplicationController
             while ((i < (invalid_digits.length-1)) && (digits != invalid_digits[i]))
                 i = i+1
             end;
+            #Las tarjetas Visa tiene un digito inicial 4, y las tarjetas mastercard comienzan en 5
             return (digits != invalid_digits[i])&&!((card_type == 'visa')&&(digits[0] != '4'))&&!((card_type == 'mastercard')&&(digits[0] != '5'));
         end
 
         def is_card_available(digits)
             i = 0;
-            unavailable_digits = ["11223344556677889900"];
+            unavailable_digits = ["4122334455667780"];
             while ((i < (unavailable_digits.length-1)) && (digits == unavailable_digits[i]))
                 i = i+1
             end;
@@ -209,7 +230,7 @@ class BilleteraController < ApplicationController
         
         def cvu_digits_exists(digits)
             i = 0;
-            invalid_digits = ["0011223344556677889911"];
+            invalid_digits = ["001122334455889911"];
             while ((i < (invalid_digits.length-1)) && (digits != invalid_digits[i]))
                 i = i+1
             end;
@@ -233,5 +254,4 @@ class BilleteraController < ApplicationController
             end;
             return (alias_cvu != invalid_alias[i]);
         end
-
-    end
+end

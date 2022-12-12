@@ -1,6 +1,6 @@
 class Card < ApplicationRecord
 validates :name, length: { minimum: 4 }
-validates :digits, length: { is: 20 }, format: {with: /\A[+-]?\d+\z/}, uniqueness: true
+validates :digits, length: { minimum: 14, maximum: 20 }, format: {with: /\A[+-]?\d+\z/}, uniqueness: true
 validates :security_code, length: { is: 3 }, format: {with: /\A[+-]?\d+\z/}
 validates :exp_date, presence: true
 validates :money, presence: true
