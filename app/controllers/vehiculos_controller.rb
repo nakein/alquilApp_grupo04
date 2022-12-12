@@ -29,9 +29,9 @@ class VehiculosController < ApplicationController
 
   def create
     @vehiculo = Vehiculo.new(vehicle_params)
-    @vehiculo.latitude = (-34.904 + rand(-0.0059..0.0059)).truncate(4)
-    @vehiculo.longitude = (-57.937 + rand(-0.0059..0.0059)).truncate(4)
-    @vehiculo.proximity = (Geocoder::Calculations.distance_between(@vehiculo,[-34.9213, -57.9545], units: :km)).truncate(1)
+    @vehiculo.latitude = (-34.903445 + rand(-0.0019..0.0019)).truncate(4)
+    @vehiculo.longitude = (-57.938195 + rand(-0.0019..0.0019)).truncate(4)
+    @vehiculo.proximity = (Geocoder::Calculations.distance_between(@vehiculo,[-34.903445, -57.938195], units: :km)).truncate(1)
 
     if @vehiculo.save
       redirect_to vehiculos_path, notice: "Vehiculo agregado satisfactoriamente"

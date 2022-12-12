@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_022349) do
 
   create_table "cards", force: :cascade do |t|
     t.string "name"
-    t.integer "card_type", default: 0
+    t.integer "card_type"
     t.string "digits"
     t.string "security_code"
     t.date "exp_date"
@@ -88,17 +88,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_022349) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["billetera_id"], name: "index_cvus_on_billetera_id"
-  end
-
-  create_table "medio_de_pagos", force: :cascade do |t|
-    t.string "nombre"
-    t.string "codigo"
-    t.string "alias"
-    t.string "tipo"
-    t.integer "billetera_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["billetera_id"], name: "index_medio_de_pagos_on_billetera_id"
   end
 
   create_table "penalties", force: :cascade do |t|
@@ -168,12 +157,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_022349) do
     t.string "transmission"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "proximity"
+    t.float "proximity", default: 100.0
     t.string "license_plate"
     t.float "latitude"
     t.float "longitude"
-    t.string "address"
     t.boolean "enable", default: true
+    t.string "address"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -42,10 +42,11 @@
             <%= f.text_field :transmission, class: "form-control mb-2", :readonly => true %>
         </div>
 
-        <% if current_usuario.supervisor? %>
-             Cantidad de alquileres en total: 
-            <%= Alquiler.where(vehicle_id:@vehiculo.id).count %>
+        <% if usuario_signed_in? %>
+            <% if current_usuario.supervisor? %>
+                Cantidad de alquileres en total: 
+                <%= Alquiler.where(vehicle_id:@vehiculo.id).count %>
+            <% end %>
         <% end %>
-
     <% end %>
 </div>
