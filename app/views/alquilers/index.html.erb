@@ -1,0 +1,101 @@
+<% if ((notice == "Se ha cambiado el estado del reporte") || (notice == "Reporte resuelto satisfactoriamente"))%>
+    <p class="notice alert alert-warning"><%= notice %></p>
+<% end %>
+
+<style>
+    li a{
+        display: block;
+        width: 100%;
+        padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+        clear: both;
+        font-weight: 400;
+        color: var(--bs-dropdown-link-color);
+        text-align: inherit;
+        text-decoration: none;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+    }
+</style>
+
+<div class="container-md">
+    <h1>Alquileres</h1>
+
+    <div class="list-group mb-5">
+        <div aria-current= true size=>
+        <% @alquilers.each do |alqui| %>
+            
+            <button type="button" class="list-group-item list-group-item-action", data-bs-toggle="modal", data-bs-target="#exampleModal_<%= alqui.id%>"> 
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Vehículo: <%= Vehiculo.find(alqui.vehicle_id).brand %> <%= Vehiculo.find(alqui.vehicle_id).model %> </h5>
+                    <br>
+                    <h5 class="mb-1">Patente: <%= Vehiculo.find(alqui.vehicle_id).license_plate %> </h5>
+                    <small>
+                        <% if ((alqui.estado_vehiculo_1.attached?) || (alqui.estado_vehiculo_1.attached?) || (alqui.estado_vehiculo_3.attached?) || (alqui.nafta.attached?)) %>
+                            <span class="badge text-bg-success">Comprobado</span>
+                        <% else %>
+                            <span class="badge text-bg-warning">Sin comprobar estado</span>
+                        <% end %>
+                    </small>
+                </div>
+                
+                <p class="mb-1">Alquilado por: <%= Usuario.find(alqui.user_id).fullname %></p>
+                <small>Fecha de alquiler: <%= alqui.created_at.to_date %> </small>
+                <small>Duración: <%= alqui.hours %> hs </small>
+                <br>
+                <small> Estado del alquiler: <%= alqui.status%> </small>
+
+            </button>
+            
+            <div class="modal fade" id="exampleModal_<%= alqui.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Comprobaciones del estado del vehículo: </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        <% if !((alqui.estado_vehiculo_1.attached?) || (alqui.estado_vehiculo_1.attached?) || (alqui.estado_vehiculo_3.attached?) || (alqui.nafta.attached?)) %>
+                            <p>No se ha enviado ninguna foto respecto al estado del vehículo</p>
+                        <% else %>
+                            <% if alqui.estado_vehiculo_1.attached? %>
+                                <h5> Parte frontal del vehículo </h5>
+                                <div class="field">
+                                    <%= image_tag alqui.estado_vehiculo_1, class: "img-thumbnail col-12" %>
+                                </div>
+                            <% end %>
+
+                            <% if alqui.estado_vehiculo_2.attached? %>
+                                <h5> Parte dorsal del vehículo </h5>
+                                <div class="field">
+                                    <%= image_tag alqui.estado_vehiculo_2, class: "img-thumbnail col-12" %>
+                                </div>
+                            <% end %>
+
+                            <% if alqui.estado_vehiculo_3.attached? %>
+                                <h5> Parte interior del vehículo </h5>
+                                <div class="field">
+                                    <%= image_tag alqui.estado_vehiculo_3, class: "img-thumbnail col-12" %>
+                                </div>
+                            <% end %>
+
+                            <% if alqui.nafta.attached? %>
+                                <h5> Medidor de gasolina </h5>
+                                <div class="field">
+                                    <%= image_tag alqui.nafta, class: "img-thumbnail col-12" %>
+                                </div>
+                            <% end %>
+                        <% end %>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <% end %>
+        </div>
+    </div>
+
+</div>

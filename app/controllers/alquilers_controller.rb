@@ -2,6 +2,10 @@ class AlquilersController < ApplicationController
 
     before_action :set_cache_headers
 
+    def index
+        @alquilers=Alquiler.all
+    end
+
     def show
         @vehiculo = Vehiculo.find(params[:id])
         @status = -1
@@ -41,15 +45,20 @@ class AlquilersController < ApplicationController
         end
 
         #Acá va el código del attached de la imagen
+        @alquiler.estado_vehiculo_1 = params[:alquiler][:estado_vehiculo_1]
+        @alquiler.estado_vehiculo_2 = params[:alquiler][:estado_vehiculo_2]
+        @alquiler.estado_vehiculo_3 = params[:alquiler][:estado_vehiculo_3]
+        @alquiler.nafta = params[:alquiler][:nafta]
         copy = @alquiler.dup
         copy.estado_vehiculo_1.attach(@alquiler.estado_vehiculo_1.blob)
         copy.estado_vehiculo_2.attach(@alquiler.estado_vehiculo_2.blob)
         copy.estado_vehiculo_3.attach(@alquiler.estado_vehiculo_3.blob)
         copy.nafta.attach(@alquiler.nafta.blob)
-        
+
+
         @alquiler.status = 1
         @alquiler.save
-
+        
         redirect_to root_path, notice: "Alquiler finalizado con exito"
     end
 
