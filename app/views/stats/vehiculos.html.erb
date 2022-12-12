@@ -23,8 +23,9 @@
         <tr>
             <td scope="col"><%= vehiculo.brand %> <%= vehiculo.model %></td>
             <td scope="col"><%= vehiculo.license_plate %></td>
-            <td scope="col"><%= @horas_total["#{usuario.id}"] %></td>
-            <td scope="col"><%= @tiempo_dias_total["#{usuario.id}"] %></td>
+            <% @tabla_hash["#{vehiculo.id}"].each do |clave, valor| %>
+                <td scope="col"><%= valor %></td>
+            <% end %>
         </tr>
     <% end %>
 </tbody>
