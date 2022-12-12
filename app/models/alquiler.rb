@@ -5,6 +5,8 @@ class Alquiler < ApplicationRecord
         self.status ||= :en_curso
     end
 
-    has_many_attached :estado_vehiculo
+    has_one_attached :estado_vehiculo_1
+    has_one_attached :estado_vehiculo_2
+    has_one_attached :estado_vehiculo_3
     has_one_attached :nafta
 end

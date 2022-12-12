@@ -1,0 +1,53 @@
+<div class="formContainer w-100 p-4 d-flex justify-content-left">
+    <%= form_for @alquiler, url: finished_alquiler_path(@vehiculo.id), html: {class:"col-12 p-5 rounded-2"} do |f| %>
+
+    <h2 class="mb-4">Revisar vehículo</h2>
+    
+    <div class="field">
+            <%= f.label :estado_vehiculo_1, "Estado del vehículo frente (opcional)", class: " col-12"%>
+            <%= f.file_field :estado_vehiculo_1, autofocus: true, class: "form-control mb-2"%>
+     </div>
+
+    <div class="field">
+            <%= f.label :estado_vehiculo_2, "Estado del vehículo dorsal (opcional)", class: " col-12"%>
+            <%= f.file_field :estado_vehiculo_2, autofocus: true, class: "form-control mb-2"%>
+     </div>
+
+    <div class="field">
+            <%= f.label :estado_vehiculo_3, "Estado del vehículo interior (opcional)", class: " col-12"%>
+            <%= f.file_field :estado_vehiculo_3, autofocus: true, class: "form-control mb-2"%>
+     </div>
+
+     <div class="field">
+            <%= f.label :nafta, "Comprobación de nafta (opcional)", class: " col-12"%>
+            <%= f.file_field :nafta, autofocus: true, class: "form-control mb-2"%>
+     </div>
+
+    <div class="actions">
+            <button id="disabledFinished" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2">Finalizar alquiler</button>
+            <%= link_to "volver", estado_mi_estado_path, :class => 'btn btn-warning' %>
+    </div>
+        <!--<button id="disabledFinished" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2">Finalizar alquiler</button>-->
+
+
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">¿Está seguro que desea finalizar el alquiler?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Será redirigido a la página principal.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <%= f.submit "Finalizar alquiler", :class=>"btn btn-outline-warning my-4" %>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <% end %>
+</div>
+

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :rates
   resources :alquilers do
     member do
-      get :finished
+      patch :finished
       get :comprobar_estado
     end
   end

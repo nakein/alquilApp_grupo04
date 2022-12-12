@@ -15,7 +15,8 @@
     </div>
     <div><p id="disable_text" style="color:red"></span></div>
     <button id="disable" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Cancelar alquiler</button>
-    <%= link_to "comprobar estado y finalizar", comprobar_estado_alquiler_path(Alquiler.find(@vehiculo.id).id), :class => 'btn btn-warning' %>
+    <button id="disabledFinished" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2">Comprobar estado y finalizar alquiler</button>
+    
 </div>
 
 <div class="w-100 p-4 d-flex justify-content-left">
@@ -61,6 +62,24 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Comprobar estado del vehículo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                A continuación podrá agregar imagenes del estado del vehículo y la confirmación de la nafta llena
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <%= link_to "Comprobar estado", comprobar_estado_alquiler_path(Alquiler.find(@vehiculo.id).id), :class => 'btn btn-warning'%>
+            </div>
+            </div>
+        </div>
+    </div>
 
 <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
