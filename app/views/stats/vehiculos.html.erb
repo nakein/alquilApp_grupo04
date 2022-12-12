@@ -1,1 +1,31 @@
-Hola
+<h1>Tabla de horarios de vehículos</h1>
+<table class="table table-bordered w-50">
+<thead>
+    <tr>
+        <th scope="col">Vehículo</th>
+        <th scope="col">Patente</th>
+        <th scope="col">De 08:00 a 09:00</th>
+        <th scope="col">De 09:00 a 10:00</th>
+        <th scope="col">De 10:00 a 11:00</th>
+        <th scope="col">De 11:00 a 12:00</th>
+        <th scope="col">De 12:00 a 13:00</th>
+        <th scope="col">De 13:00 a 14:00</th>
+        <th scope="col">De 14:00 a 15:00</th>
+        <th scope="col">De 15:00 a 16:00</th>
+        <th scope="col">De 16:00 a 17:00</th>
+        <th scope="col">De 17:00 a 18:00</th>
+        <th scope="col">De 18:00 a 19:00</th>
+        <th scope="col">De 19:00 a 20:00</th>
+    </tr>
+</thead>
+<tbody>
+    <% @vehiculos.each do |vehiculo| %>
+        <tr>
+            <td scope="col"><%= vehiculo.brand %> <%= vehiculo.model %></td>
+            <td scope="col"><%= vehiculo.license_plate %></td>
+            <td scope="col"><%= @horas_total["#{usuario.id}"] %></td>
+            <td scope="col"><%= @tiempo_dias_total["#{usuario.id}"] %></td>
+        </tr>
+    <% end %>
+</tbody>
+</table>

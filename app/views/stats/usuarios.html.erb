@@ -5,6 +5,7 @@
         <th scope="col">Usuarios</th>
         <th scope="col">Cantidad de multas</th>
         <th scope="col">Horas utilizadas en el sistema</th>
+        <th scope="col">Tiempo desde la creación de la cuenta (en días)</th>
     </tr>
 </thead>
 <tbody>
@@ -13,6 +14,7 @@
             <td scope="col"><%= usuario.fullname %></td>
             <td scope="col"><%= Penalty.where(usuario_id:usuario.id).count %></td>
             <td scope="col"><%= @horas_total["#{usuario.id}"] %></td>
+            <td scope="col"><%= @tiempo_dias_total["#{usuario.id}"] %></td>
         </tr>
     <% end %>
 </tbody>
