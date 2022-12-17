@@ -163,6 +163,8 @@ GEM
     nokogiri (1.13.9-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pg (1.4.5)
+    pg (1.4.5-x64-mingw-ucrt)
     popper_js (2.11.6)
     public_suffix (5.0.0)
     puma (5.6.5)
@@ -285,6 +287,7 @@ DEPENDENCIES
   jbuilder
   mercadopago
   mercadopago-sdk
+  pg
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
   selenium-webdriver
