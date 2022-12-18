@@ -39,7 +39,7 @@
 
 - Develop the sistem in parts
 
-To do this, we used the agile methodology **scrum** and the framework used was ruby on rails. We did 3 sprints of 2 weeks long, and each member of the team (3) was scrum master once.
+  To do this, we used the agile methodology **scrum** and the framework used was ruby on rails. We did 3 sprints of 2 weeks long, and each member of the team (3) was scrum master once.
 
 - Show the parts to the client and get feedback
 
@@ -47,9 +47,9 @@ To do this, we used the agile methodology **scrum** and the framework used was r
 
 - Analyze the final product
 
-To login as admin
-email: admin@hotmail.com
-password: admin123
+  To login as admin
+  email: admin@hotmail.com
+  password: admin123
 
 Map token expired
 
