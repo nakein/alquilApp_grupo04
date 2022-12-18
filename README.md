@@ -47,6 +47,12 @@ To do this, we used the agile methodology **scrum** and the framework used was r
 
 - Analyze the final product
 
+To login as admin
+email: admin@hotmail.com
+password: admin123
+
+Map token expired
+
 ![image](https://user-images.githubusercontent.com/55964645/208256229-d11d3bc8-2784-42aa-bb16-418c4cf9de33.png)
 
 
